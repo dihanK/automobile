@@ -29,7 +29,8 @@
             max-width: 100%;
         }
 
-        button {
+        button,
+        input {
             font-family: inherit;
         }
 
@@ -129,7 +130,6 @@
             background: rgba(255, 255, 255, .08);
             border-radius: 10px;
             cursor: pointer;
-            position: relative;
         }
 
         .menu-btn span {
@@ -406,7 +406,6 @@
             outline: none;
             font-size: 13px;
             background: #f7f9fa;
-            transition: .25s ease;
         }
 
         .search-box:focus {
@@ -442,7 +441,7 @@
         }
 
         /* =========================
-           BAKERY SLIDER
+           CARD SLIDERS
         ========================= */
 
         .card-slider {
@@ -571,7 +570,7 @@
         }
 
         /* =========================
-           GALLERY
+           NEW PRESENTATION GALLERY
         ========================= */
 
         .gallery {
@@ -583,19 +582,49 @@
             color: rgba(255, 255, 255, .65);
         }
 
-        .gallery-grid {
+        .gallery-groups {
+            margin-top: 55px;
+            display: flex;
+            flex-direction: column;
+            gap: 55px;
+        }
+
+        .gallery-group {
+            background: rgba(255, 255, 255, .045);
+            border: 1px solid rgba(255, 255, 255, .09);
+            border-radius: 20px;
+            padding: 18px;
+            overflow: hidden;
+            transition: .35s ease;
+        }
+
+        .gallery-group:hover {
+            transform: translateY(-4px);
+            background: rgba(255, 255, 255, .06);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, .2);
+        }
+
+        .gallery-images {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(3, 1fr);
             gap: 12px;
-            margin-top: 45px;
+        }
+
+        .gallery-images.two {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .gallery-images.one {
+            grid-template-columns: 1fr;
         }
 
         .gallery-item {
             overflow: hidden;
-            border-radius: 10px;
+            border-radius: 12px;
             cursor: pointer;
-            aspect-ratio: 4 / 3;
+            aspect-ratio: 16 / 10;
             background: #102d3d;
+            position: relative;
         }
 
         .gallery-item img {
@@ -603,11 +632,41 @@
             height: 100%;
             object-fit: cover;
             display: block;
-            transition: transform .5s ease;
+            transition: transform .5s ease, filter .5s ease;
         }
 
         .gallery-item:hover img {
-            transform: scale(1.08);
+            transform: scale(1.06);
+            filter: brightness(1.08);
+        }
+
+        .gallery-description {
+            padding: 25px 12px 12px;
+            text-align: center;
+        }
+
+        .gallery-description h3 {
+            margin: 0 0 9px;
+            color: #f3b52b;
+            font-size: 22px;
+            letter-spacing: -.3px;
+        }
+
+        .gallery-description p {
+            max-width: 800px;
+            margin: auto;
+            color: rgba(255, 255, 255, .72);
+            line-height: 1.75;
+            font-size: 14px;
+        }
+
+        .gallery-number {
+            display: inline-block;
+            margin-bottom: 9px;
+            color: rgba(255, 255, 255, .45);
+            font-size: 10px;
+            font-weight: 900;
+            letter-spacing: 2px;
         }
 
         /* =========================
@@ -847,10 +906,6 @@
                 grid-template-columns: repeat(3, 1fr);
             }
 
-            .gallery-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-
             .overview-grid {
                 grid-template-columns: 1fr;
                 gap: 40px;
@@ -918,10 +973,6 @@
                 background: rgba(255, 255, 255, .07);
             }
 
-            .language-switcher {
-                margin-right: 3px;
-            }
-
             @keyframes menuIn {
                 from {
                     opacity: 0;
@@ -963,11 +1014,19 @@
                 grid-template-columns: repeat(2, 1fr);
             }
 
-            .gallery-grid {
+            .spec-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-images {
                 grid-template-columns: repeat(2, 1fr);
             }
 
-            .spec-grid {
+            .gallery-images.two {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .gallery-images.one {
                 grid-template-columns: 1fr;
             }
         }
@@ -1033,13 +1092,31 @@
                 grid-template-columns: 1fr;
             }
 
-            .gallery-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-
             .spec-item {
                 grid-template-columns: 1fr;
                 gap: 6px;
+            }
+
+            .gallery-group {
+                padding: 10px;
+                border-radius: 15px;
+            }
+
+            .gallery-images,
+            .gallery-images.two {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-description {
+                padding: 20px 8px 12px;
+            }
+
+            .gallery-description h3 {
+                font-size: 19px;
+            }
+
+            .gallery-description p {
+                font-size: 13px;
             }
 
             .modal {
@@ -1118,32 +1195,20 @@
 
             <div class="language-switcher">
 
-                <button
-                    id="langEN"
-                    class="lang-btn active"
-                    type="button">
+                <button id="langEN" class="lang-btn active" type="button">
                     English
                 </button>
 
-                <button
-                    id="langSI"
-                    class="lang-btn"
-                    type="button">
+                <button id="langSI" class="lang-btn" type="button">
                     සිංහල
                 </button>
 
             </div>
 
-            <button
-                class="menu-btn"
-                id="menuBtn"
-                type="button"
-                aria-label="Open navigation">
-
+            <button class="menu-btn" id="menuBtn" type="button">
                 <span></span>
                 <span></span>
                 <span></span>
-
             </button>
 
         </div>
@@ -1157,8 +1222,7 @@
 
     <header class="hero">
 
-        <img
-            class="hero-image"
+        <img class="hero-image"
             src="assets/page_1.jpg"
             alt="Commercial pickup vehicle">
 
@@ -1180,8 +1244,7 @@
                 designed around different business requirements.
             </p>
 
-            <a
-                href="#solutions"
+            <a href="#solutions"
                 class="primary-btn"
                 data-i18n="heroButton">
                 Explore solutions ↓
@@ -1216,9 +1279,7 @@
 
                     </div>
 
-                    <p
-                        class="overview-text"
-                        data-i18n="overviewText">
+                    <p class="overview-text" data-i18n="overviewText">
                         Based on the supplied presentation, the Ape XTRA LDX
                         features a 435 cc diesel engine, a 4-speed constant
                         mesh gearbox and a 5.5 Ft cargo bed. It provides a
@@ -1227,35 +1288,26 @@
 
                 </div>
 
-
                 <div class="stats reveal">
 
                     <div class="stat">
                         <strong>435 cc</strong>
-                        <span data-i18n="stat1">
-                            Displacement
-                        </span>
+                        <span data-i18n="stat1">Displacement</span>
                     </div>
 
                     <div class="stat">
                         <strong>8 HP</strong>
-                        <span data-i18n="stat2">
-                            Maximum power
-                        </span>
+                        <span data-i18n="stat2">Maximum power</span>
                     </div>
 
                     <div class="stat">
                         <strong>55 km/h</strong>
-                        <span data-i18n="stat3">
-                            Maximum speed
-                        </span>
+                        <span data-i18n="stat3">Maximum speed</span>
                     </div>
 
                     <div class="stat">
                         <strong>5.5 Ft</strong>
-                        <span data-i18n="stat4">
-                            Cargo bed length
-                        </span>
+                        <span data-i18n="stat4">Cargo bed length</span>
                     </div>
 
                 </div>
@@ -1271,9 +1323,7 @@
          SPECIFICATIONS
     ========================= -->
 
-    <section
-        class="specifications"
-        id="specifications">
+    <section class="specifications" id="specifications">
 
         <div class="section-inner">
 
@@ -1288,19 +1338,15 @@
                 </h2>
 
                 <p data-i18n="specText">
-                    Technical specifications taken from the supplied
-                    presentation.
+                    Technical specifications taken from the supplied presentation.
                 </p>
 
             </div>
 
-
             <div class="spec-grid reveal">
 
                 <div class="spec-item">
-                    <div class="spec-name" data-i18n="s1">
-                        Engine Type
-                    </div>
+                    <div class="spec-name" data-i18n="s1">Engine Type</div>
                     <div class="spec-value">
                         BSIII Single cylinder, naturally aspirated,
                         air-cooled, direct injection, 4-stroke
@@ -1308,111 +1354,67 @@
                 </div>
 
                 <div class="spec-item">
-                    <div class="spec-name" data-i18n="s2">
-                        Displacement
-                    </div>
-                    <div class="spec-value">
-                        435 cc
-                    </div>
+                    <div class="spec-name" data-i18n="s2">Displacement</div>
+                    <div class="spec-value">435 cc</div>
                 </div>
 
                 <div class="spec-item">
-                    <div class="spec-name" data-i18n="s3">
-                        Maximum Power
-                    </div>
-                    <div class="spec-value">
-                        8 HP @ 3600±50 RPM
-                    </div>
+                    <div class="spec-name" data-i18n="s3">Maximum Power</div>
+                    <div class="spec-value">8 HP @ 3600±50 RPM</div>
                 </div>
 
                 <div class="spec-item">
-                    <div class="spec-name" data-i18n="s4">
-                        Maximum Torque
-                    </div>
-                    <div class="spec-value">
-                        18 Nm @ 2200 to 2400 RPM
-                    </div>
+                    <div class="spec-name" data-i18n="s4">Maximum Torque</div>
+                    <div class="spec-value">18 Nm @ 2200 to 2400 RPM</div>
                 </div>
 
                 <div class="spec-item">
-                    <div class="spec-name" data-i18n="s5">
-                        Fuel Type
-                    </div>
-                    <div class="spec-value">
-                        High-speed diesel
-                    </div>
+                    <div class="spec-name" data-i18n="s5">Fuel Type</div>
+                    <div class="spec-value">High-speed diesel</div>
                 </div>
 
                 <div class="spec-item">
-                    <div class="spec-name" data-i18n="s6">
-                        Cooling System
-                    </div>
-                    <div class="spec-value">
-                        Forced air-cooled
-                    </div>
+                    <div class="spec-name" data-i18n="s6">Cooling System</div>
+                    <div class="spec-value">Forced air-cooled</div>
                 </div>
 
                 <div class="spec-item">
-                    <div class="spec-name" data-i18n="s7">
-                        Clutch
-                    </div>
-                    <div class="spec-value">
-                        Wet, multi-disc
-                    </div>
+                    <div class="spec-name" data-i18n="s7">Clutch</div>
+                    <div class="spec-value">Wet, multi-disc</div>
                 </div>
 
                 <div class="spec-item">
-                    <div class="spec-name" data-i18n="s8">
-                        Transmission
-                    </div>
-                    <div class="spec-value">
-                        4-speed, constant mesh gearbox
-                    </div>
+                    <div class="spec-name" data-i18n="s8">Transmission</div>
+                    <div class="spec-value">4-speed, constant mesh gearbox</div>
                 </div>
 
                 <div class="spec-item">
-                    <div class="spec-name" data-i18n="s9">
-                        Maximum Speed
-                    </div>
-                    <div class="spec-value">
-                        55 Kms / hr
-                    </div>
+                    <div class="spec-name" data-i18n="s9">Maximum Speed</div>
+                    <div class="spec-value">55 Kms / hr</div>
                 </div>
 
                 <div class="spec-item">
-                    <div class="spec-name" data-i18n="s10">
-                        Fuel Consumption*
-                    </div>
-                    <div class="spec-value">
-                        36 + 4 Kms / ltr
-                    </div>
+                    <div class="spec-name" data-i18n="s10">Fuel Consumption*</div>
+                    <div class="spec-value">36 + 4 Kms / ltr</div>
                 </div>
 
                 <div class="spec-item">
-                    <div class="spec-name" data-i18n="s11">
-                        Fuel Tank Capacity
-                    </div>
-                    <div class="spec-value">
-                        10.5 Liters
-                    </div>
+                    <div class="spec-name" data-i18n="s11">Fuel Tank Capacity</div>
+                    <div class="spec-value">10.5 Liters</div>
                 </div>
 
                 <div class="spec-item">
                     <div class="spec-name" data-i18n="s12">
                         Max Gross Vehicle Weight (GVW)
                     </div>
-                    <div class="spec-value">
-                        975 Kgs
-                    </div>
+                    <div class="spec-value">975 Kgs</div>
                 </div>
 
                 <div class="spec-item">
                     <div class="spec-name" data-i18n="s13">
                         Unladen Weight
                     </div>
-                    <div class="spec-value">
-                        438 Kgs
-                    </div>
+                    <div class="spec-value">438 Kgs</div>
                 </div>
 
                 <div class="spec-item">
@@ -1428,36 +1430,28 @@
                     <div class="spec-name" data-i18n="s15">
                         Wheel Base
                     </div>
-                    <div class="spec-value">
-                        2100 mm
-                    </div>
+                    <div class="spec-value">2100 mm</div>
                 </div>
 
                 <div class="spec-item">
                     <div class="spec-name" data-i18n="s16">
                         Ground Clearance
                     </div>
-                    <div class="spec-value">
-                        240 mm
-                    </div>
+                    <div class="spec-value">240 mm</div>
                 </div>
 
                 <div class="spec-item">
                     <div class="spec-name" data-i18n="s17">
                         Max Gradeability (Climbing)
                     </div>
-                    <div class="spec-value">
-                        22.16%
-                    </div>
+                    <div class="spec-value">22.16%</div>
                 </div>
 
                 <div class="spec-item">
                     <div class="spec-name" data-i18n="s18">
                         Cargo Bed Length
                     </div>
-                    <div class="spec-value">
-                        5.5 Ft
-                    </div>
+                    <div class="spec-value">5.5 Ft</div>
                 </div>
 
             </div>
@@ -1469,12 +1463,9 @@
 
     <!-- =========================
          SOLUTIONS
-         HYDRAULIC HOPPER REMOVED
     ========================= -->
 
-    <section
-        class="solutions"
-        id="solutions">
+    <section class="solutions" id="solutions">
 
         <div class="section-inner">
 
@@ -1482,9 +1473,7 @@
 
                 <div class="section-title reveal">
 
-                    <span
-                        class="eyebrow"
-                        data-i18n="solutionsEyebrow">
+                    <span class="eyebrow" data-i18n="solutionsEyebrow">
                         COMMERCIAL APPLICATIONS
                     </span>
 
@@ -1493,15 +1482,12 @@
                     </h2>
 
                     <p data-i18n="solutionsText">
-                        Explore the commercial body and utility solutions
-                        shown in the presentation.
+                        Explore the commercial body and utility solutions shown in the presentation.
                     </p>
 
                 </div>
 
-
-                <input
-                    type="search"
+                <input type="search"
                     class="search-box"
                     id="searchInput"
                     data-i18n-placeholder="search"
@@ -1510,27 +1496,20 @@
             </div>
 
 
-            <div
-                class="cards"
-                id="cardsContainer">
+            <div class="cards" id="cardsContainer">
 
+                <!-- VEGETABLE -->
 
-                <!-- 1 VEGETABLE -->
-
-                <article
-                    class="card reveal"
+                <article class="card reveal"
                     data-title="vegetable shop vehicle">
 
-                    <img
-                        class="card-image"
+                    <img class="card-image"
                         src="assets/page_5.jpg"
                         alt="Vegetable Shop Vehicle">
 
                     <div class="card-body">
 
-                        <span
-                            class="tag"
-                            data-i18n="application">
+                        <span class="tag" data-i18n="application">
                             APPLICATION
                         </span>
 
@@ -1542,8 +1521,7 @@
                             Fresh produce delivered efficiently
                         </p>
 
-                        <button
-                            type="button"
+                        <button type="button"
                             onclick="openModal(0)"
                             data-i18n="view">
                             View solution →
@@ -1554,22 +1532,18 @@
                 </article>
 
 
-                <!-- 2 FISH -->
+                <!-- FISH -->
 
-                <article
-                    class="card reveal"
+                <article class="card reveal"
                     data-title="fish delivery vehicle">
 
-                    <img
-                        class="card-image"
+                    <img class="card-image"
                         src="assets/page_15.jpg"
                         alt="Fish Delivery Vehicle">
 
                     <div class="card-body">
 
-                        <span
-                            class="tag"
-                            data-i18n="application">
+                        <span class="tag" data-i18n="application">
                             APPLICATION
                         </span>
 
@@ -1581,8 +1555,7 @@
                             Fresh seafood, delivered and displayed on the move
                         </p>
 
-                        <button
-                            type="button"
+                        <button type="button"
                             onclick="openModal(1)"
                             data-i18n="view">
                             View solution →
@@ -1593,49 +1566,41 @@
                 </article>
 
 
-                <!-- 3 BAKERY -->
+                <!-- BAKERY -->
 
-                <article
-                    class="card reveal"
+                <article class="card reveal"
                     data-title="bakery mobile unit">
 
                     <div class="card-slider">
 
-                        <img
-                            id="bakeryImage"
+                        <img id="bakeryImage"
                             src="assets/page_6.jpg"
                             alt="Bakery Mobile Unit">
 
-                        <button
-                            class="slider-arrow prev"
+                        <button class="slider-arrow prev"
                             type="button"
                             aria-label="Previous bakery image"
-                            onclick="event.stopPropagation(); changeBakeryImage(-1)">
+                            onclick="changeBakeryImage(-1)">
                             ‹
                         </button>
 
-                        <button
-                            class="slider-arrow next"
+                        <button class="slider-arrow next"
                             type="button"
                             aria-label="Next bakery image"
-                            onclick="event.stopPropagation(); changeBakeryImage(1)">
+                            onclick="changeBakeryImage(1)">
                             ›
                         </button>
 
-                        <div
-                            class="slider-counter"
+                        <div class="slider-counter"
                             id="bakeryCounter">
                             1 / 2
                         </div>
 
                     </div>
 
-
                     <div class="card-body">
 
-                        <span
-                            class="tag"
-                            data-i18n="application">
+                        <span class="tag" data-i18n="application">
                             APPLICATION
                         </span>
 
@@ -1647,8 +1612,7 @@
                             Freshness Delivered Anywhere
                         </p>
 
-                        <button
-                            type="button"
+                        <button type="button"
                             onclick="openModal(2)"
                             data-i18n="view">
                             View solution →
@@ -1659,22 +1623,18 @@
                 </article>
 
 
-                <!-- 4 GAS -->
+                <!-- GAS -->
 
-                <article
-                    class="card reveal"
+                <article class="card reveal"
                     data-title="gas cylinder carrier">
 
-                    <img
-                        class="card-image"
+                    <img class="card-image"
                         src="assets/page_7.jpg"
                         alt="Gas Cylinder Carrier">
 
                     <div class="card-body">
 
-                        <span
-                            class="tag"
-                            data-i18n="application">
+                        <span class="tag" data-i18n="application">
                             APPLICATION
                         </span>
 
@@ -1686,8 +1646,7 @@
                             Built for strength and safety
                         </p>
 
-                        <button
-                            type="button"
+                        <button type="button"
                             onclick="openModal(3)"
                             data-i18n="view">
                             View solution →
@@ -1698,22 +1657,18 @@
                 </article>
 
 
-                <!-- 5 MILK -->
+                <!-- MILK -->
 
-                <article
-                    class="card reveal"
+                <article class="card reveal"
                     data-title="milk tankers">
 
-                    <img
-                        class="card-image"
+                    <img class="card-image"
                         src="assets/page_8.jpg"
                         alt="Milk Tankers">
 
                     <div class="card-body">
 
-                        <span
-                            class="tag"
-                            data-i18n="application">
+                        <span class="tag" data-i18n="application">
                             APPLICATION
                         </span>
 
@@ -1725,8 +1680,7 @@
                             Food-grade insulated transport
                         </p>
 
-                        <button
-                            type="button"
+                        <button type="button"
                             onclick="openModal(4)"
                             data-i18n="view">
                             View solution →
@@ -1737,37 +1691,30 @@
                 </article>
 
 
-                <!-- 6 EGG -->
+                <!-- EGG -->
 
-                <article
-                    class="card reveal"
+                <article class="card reveal"
                     data-title="egg transport solution">
 
                     <div class="card-slider">
 
-                        <img
-                            id="eggImage"
+                        <img id="eggImage"
                             src="assets/page_21.jpg"
                             alt="Egg Transport Solution">
 
-                        <button
-                            class="slider-arrow prev"
+                        <button class="slider-arrow prev"
                             type="button"
-                            aria-label="Previous egg image"
                             id="eggPrev">
                             ‹
                         </button>
 
-                        <button
-                            class="slider-arrow next"
+                        <button class="slider-arrow next"
                             type="button"
-                            aria-label="Next egg image"
                             id="eggNext">
                             ›
                         </button>
 
-                        <div
-                            class="slider-counter"
+                        <div class="slider-counter"
                             id="eggCounter">
                             1 / 3
                         </div>
@@ -1776,9 +1723,7 @@
 
                     <div class="card-body">
 
-                        <span
-                            class="tag"
-                            data-i18n="application">
+                        <span class="tag" data-i18n="application">
                             APPLICATION
                         </span>
 
@@ -1790,8 +1735,7 @@
                             Safe delivery for delicate products
                         </p>
 
-                        <button
-                            type="button"
+                        <button type="button"
                             onclick="openModal(5)"
                             data-i18n="view">
                             View solution →
@@ -1802,22 +1746,18 @@
                 </article>
 
 
-                <!-- 7 ICE CREAM -->
+                <!-- ICE CREAM -->
 
-                <article
-                    class="card reveal"
+                <article class="card reveal"
                     data-title="ice cream sales vehicle">
 
-                    <img
-                        class="card-image"
+                    <img class="card-image"
                         src="assets/page_10.jpg"
                         alt="Ice Cream Sales Vehicle">
 
                     <div class="card-body">
 
-                        <span
-                            class="tag"
-                            data-i18n="application">
+                        <span class="tag" data-i18n="application">
                             APPLICATION
                         </span>
 
@@ -1829,8 +1769,7 @@
                             Cool treats, anywhere you go
                         </p>
 
-                        <button
-                            type="button"
+                        <button type="button"
                             onclick="openModal(6)"
                             data-i18n="view">
                             View solution →
@@ -1841,22 +1780,18 @@
                 </article>
 
 
-                <!-- 8 DELIVERY -->
+                <!-- DELIVERY -->
 
-                <article
-                    class="card reveal"
+                <article class="card reveal"
                     data-title="delivery transport solution">
 
-                    <img
-                        class="card-image"
+                    <img class="card-image"
                         src="assets/page_17.jpg"
                         alt="Delivery Transport Solution">
 
                     <div class="card-body">
 
-                        <span
-                            class="tag"
-                            data-i18n="application">
+                        <span class="tag" data-i18n="application">
                             APPLICATION
                         </span>
 
@@ -1868,8 +1803,7 @@
                             Smart delivery solution for growing businesses
                         </p>
 
-                        <button
-                            type="button"
+                        <button type="button"
                             onclick="openModal(7)"
                             data-i18n="view">
                             View solution →
@@ -1880,22 +1814,18 @@
                 </article>
 
 
-                <!-- 9 VACUUM EMPTIER -->
+                <!-- VACUUM -->
 
-                <article
-                    class="card reveal"
+                <article class="card reveal"
                     data-title="vacuum emptier">
 
-                    <img
-                        class="card-image"
+                    <img class="card-image"
                         src="assets/page_18.jpg"
                         alt="Vacuum Emptier">
 
                     <div class="card-body">
 
-                        <span
-                            class="tag"
-                            data-i18n="application">
+                        <span class="tag" data-i18n="application">
                             APPLICATION
                         </span>
 
@@ -1907,8 +1837,7 @@
                             Efficient vacuum and sludge handling
                         </p>
 
-                        <button
-                            type="button"
+                        <button type="button"
                             onclick="openModal(8)"
                             data-i18n="view">
                             View solution →
@@ -1919,22 +1848,18 @@
                 </article>
 
 
-                <!-- 10 REXINE -->
+                <!-- REXINE -->
 
-                <article
-                    class="card reveal"
+                <article class="card reveal"
                     data-title="rexine canopy delivery truck">
 
-                    <img
-                        class="card-image"
+                    <img class="card-image"
                         src="assets/page_11.jpg"
                         alt="Rexine Canopy Delivery Truck">
 
                     <div class="card-body">
 
-                        <span
-                            class="tag"
-                            data-i18n="application">
+                        <span class="tag" data-i18n="application">
                             APPLICATION
                         </span>
 
@@ -1946,8 +1871,7 @@
                             Smart delivery solution for growing businesses
                         </p>
 
-                        <button
-                            type="button"
+                        <button type="button"
                             onclick="openModal(9)"
                             data-i18n="view">
                             View solution →
@@ -1958,22 +1882,18 @@
                 </article>
 
 
-                <!-- 11 POULTRY -->
+                <!-- POULTRY -->
 
-                <article
-                    class="card reveal"
+                <article class="card reveal"
                     data-title="poultry transport unit">
 
-                    <img
-                        class="card-image"
+                    <img class="card-image"
                         src="assets/page_12.jpg"
                         alt="Poultry Transport Unit">
 
                     <div class="card-body">
 
-                        <span
-                            class="tag"
-                            data-i18n="application">
+                        <span class="tag" data-i18n="application">
                             APPLICATION
                         </span>
 
@@ -1985,8 +1905,7 @@
                             Comfortable and efficient livestock movement
                         </p>
 
-                        <button
-                            type="button"
+                        <button type="button"
                             onclick="openModal(10)"
                             data-i18n="view">
                             View solution →
@@ -1997,22 +1916,18 @@
                 </article>
 
 
-                <!-- 12 GARBAGE -->
+                <!-- GARBAGE -->
 
-                <article
-                    class="card reveal"
+                <article class="card reveal"
                     data-title="garbage collection vehicle">
 
-                    <img
-                        class="card-image"
+                    <img class="card-image"
                         src="assets/page_19.jpg"
                         alt="Garbage Collection Vehicle">
 
                     <div class="card-body">
 
-                        <span
-                            class="tag"
-                            data-i18n="application">
+                        <span class="tag" data-i18n="application">
                             APPLICATION
                         </span>
 
@@ -2024,8 +1939,7 @@
                             Efficient waste management solution
                         </p>
 
-                        <button
-                            type="button"
+                        <button type="button"
                             onclick="openModal(11)"
                             data-i18n="view">
                             View solution →
@@ -2036,22 +1950,18 @@
                 </article>
 
 
-                <!-- 13 MOBILE GROCERY -->
+                <!-- MOBILE GROCERY -->
 
-                <article
-                    class="card reveal"
+                <article class="card reveal"
                     data-title="mobile grocery shop">
 
-                    <img
-                        class="card-image"
+                    <img class="card-image"
                         src="assets/page_13.jpg"
                         alt="Mobile Grocery Shop">
 
                     <div class="card-body">
 
-                        <span
-                            class="tag"
-                            data-i18n="application">
+                        <span class="tag" data-i18n="application">
                             APPLICATION
                         </span>
 
@@ -2063,8 +1973,7 @@
                             Efficient and accessible mobile retail solutions
                         </p>
 
-                        <button
-                            type="button"
+                        <button type="button"
                             onclick="openModal(12)"
                             data-i18n="view">
                             View solution →
@@ -2075,22 +1984,18 @@
                 </article>
 
 
-                <!-- 14 FOOD VAN -->
+                <!-- FOOD VAN -->
 
-                <article
-                    class="card reveal"
+                <article class="card reveal"
                     data-title="food van">
 
-                    <img
-                        class="card-image"
+                    <img class="card-image"
                         src="assets/page_20.jpg"
                         alt="Food Van">
 
                     <div class="card-body">
 
-                        <span
-                            class="tag"
-                            data-i18n="application">
+                        <span class="tag" data-i18n="application">
                             APPLICATION
                         </span>
 
@@ -2102,8 +2007,7 @@
                             Ideal for street food operations
                         </p>
 
-                        <button
-                            type="button"
+                        <button type="button"
                             onclick="openModal(13)"
                             data-i18n="view">
                             View solution →
@@ -2114,22 +2018,18 @@
                 </article>
 
 
-                <!-- 15 SOFT DRINK -->
+                <!-- SOFT DRINK -->
 
-                <article
-                    class="card reveal"
+                <article class="card reveal"
                     data-title="soft drink carrier">
 
-                    <img
-                        class="card-image"
+                    <img class="card-image"
                         src="assets/page_14.jpg"
                         alt="Soft Drink Carrier">
 
                     <div class="card-body">
 
-                        <span
-                            class="tag"
-                            data-i18n="application">
+                        <span class="tag" data-i18n="application">
                             APPLICATION
                         </span>
 
@@ -2141,8 +2041,7 @@
                             Secure and optimized beverage crate distribution
                         </p>
 
-                        <button
-                            type="button"
+                        <button type="button"
                             onclick="openModal(14)"
                             data-i18n="view">
                             View solution →
@@ -2154,10 +2053,7 @@
 
             </div>
 
-
-            <div
-                class="no-results"
-                id="noResults">
+            <div class="no-results" id="noResults">
                 No solutions found.
             </div>
 
@@ -2167,20 +2063,16 @@
 
 
     <!-- =========================
-         GALLERY
+         PRESENTATION GALLERY
     ========================= -->
 
-    <section
-        class="gallery"
-        id="gallery">
+    <section class="gallery" id="gallery">
 
         <div class="section-inner">
 
             <div class="section-title reveal">
 
-                <span
-                    class="eyebrow"
-                    data-i18n="galleryEyebrow">
+                <span class="eyebrow" data-i18n="galleryEyebrow">
                     VISUAL PRESENTATION
                 </span>
 
@@ -2189,97 +2081,370 @@
                 </h2>
 
                 <p data-i18n="galleryText">
-                    The supplied presentation pages are used as a visual
-                    gallery.
+                    Explore the vehicle solutions through grouped presentation images.
                 </p>
 
             </div>
 
 
-            <div class="gallery-grid reveal">
+            <div class="gallery-groups reveal">
 
-                <div class="gallery-item">
-                    <img
-                        src="assets/page_3.jpg"
-                        alt="Commercial vehicle">
+
+                <!-- =========================
+                     GROUP 1
+                ========================= -->
+
+                <div class="gallery-group">
+
+                    <div class="gallery-images">
+
+                        <div class="gallery-item">
+                            <img src="assets/page_25.jpg"
+                                alt="Commercial vehicle concept">
+                        </div>
+
+                        <div class="gallery-item">
+                            <img src="assets/page_26.jpg"
+                                alt="Commercial pickup concept">
+                        </div>
+
+                        <div class="gallery-item">
+                            <img src="assets/page_24.jpg"
+                                alt="Vegetable Shop Vehicle">
+                        </div>
+
+                    </div>
+
+                    <div class="gallery-description">
+
+                        <span class="gallery-number">
+                            SOLUTION 01
+                        </span>
+
+                        <h3 data-gallery-en="Vegetable Shop Vehicle"
+                            data-gallery-si="එළවළු වෙළඳසැල් වාහනය">
+                            Vegetable Shop Vehicle
+                        </h3>
+
+                        <p data-gallery-en="A practical mobile retail solution designed for fresh produce transportation, display and direct customer selling."
+                            data-gallery-si="නැවුම් එළවළු ප්‍රවාහනය, ප්‍රදර්ශනය සහ පාරිභෝගිකයන් වෙත සෘජු අලෙවිය සඳහා නිර්මාණය කළ ප්‍රායෝගික ජංගම වෙළඳ විසඳුමකි.">
+                            A practical mobile retail solution designed for fresh produce transportation, display and direct customer selling.
+                        </p>
+
+                    </div>
+
                 </div>
 
-                <div class="gallery-item">
-                    <img
-                        src="assets/page_4.jpg"
-                        alt="Commercial vehicle">
+
+                <!-- =========================
+                     GROUP 2
+                ========================= -->
+
+                <div class="gallery-group">
+
+                    <div class="gallery-images two">
+
+                        <div class="gallery-item">
+                            <img src="assets/page_27.jpg"
+                                alt="Bakery Mobile Unit">
+                        </div>
+
+                        <div class="gallery-item">
+                            <img src="assets/page_28.jpg"
+                                alt="Bakery Mobile Unit">
+                        </div>
+
+                    </div>
+
+                    <div class="gallery-description">
+
+                        <span class="gallery-number">
+                            SOLUTION 02
+                        </span>
+
+                        <h3 data-gallery-en="Bakery Mobile Unit"
+                            data-gallery-si="බේකරි ජංගම ඒකකය">
+                            Bakery Mobile Unit
+                        </h3>
+
+                        <p data-gallery-en="A mobile bakery concept featuring product visibility, weather protection, smart storage and customer-friendly display space."
+                            data-gallery-si="නිෂ්පාදන පැහැදිලිව පෙන්වීම, කාලගුණ ආරක්ෂාව, smart storage සහ පාරිභෝගික හිතකාමී display පහසුකම් සහිත ජංගම බේකරි විසඳුමකි.">
+                            A mobile bakery concept featuring product visibility, weather protection, smart storage and customer-friendly display space.
+                        </p>
+
+                    </div>
+
                 </div>
 
-                <div class="gallery-item">
-                    <img
-                        src="assets/page_5.jpg"
-                        alt="Vegetable vehicle">
+
+                <!-- =========================
+                     GROUP 3
+                ========================= -->
+
+                <div class="gallery-group">
+
+                    <div class="gallery-images">
+
+                        <div class="gallery-item">
+                            <img src="assets/page_29.jpg"
+                                alt="Gas Cylinder Carrier">
+                        </div>
+
+                        <div class="gallery-item">
+                            <img src="assets/page_30.jpg"
+                                alt="Milk Tankers">
+                        </div>
+
+                        <div class="gallery-item">
+                            <img src="assets/page_31.jpg"
+                                alt="Egg Transport Solution">
+                        </div>
+
+                    </div>
+
+                    <div class="gallery-description">
+
+                        <span class="gallery-number">
+                            SOLUTIONS 03–05
+                        </span>
+
+                        <h3 data-gallery-en="Specialized Transport Solutions"
+                            data-gallery-si="විශේෂිත ප්‍රවාහන විසඳුම්">
+                            Specialized Transport Solutions
+                        </h3>
+
+                        <p data-gallery-en="Purpose-built commercial bodies for gas cylinder transportation, milk distribution and safe transportation of delicate egg products."
+                            data-gallery-si="ගෑස් සිලින්ඩර් ප්‍රවාහනය, කිරි බෙදාහැරීම සහ සංවේදී බිත්තර නිෂ්පාදන ආරක්ෂිතව ප්‍රවාහනය කිරීම සඳහා නිර්මාණය කළ විශේෂිත වාණිජ body විසඳුම්.">
+                            Purpose-built commercial bodies for gas cylinder transportation, milk distribution and safe transportation of delicate egg products.
+                        </p>
+
+                    </div>
+
                 </div>
 
-                <div class="gallery-item">
-                    <img
-                        src="assets/page_6.jpg"
-                        alt="Bakery vehicle">
+
+                <!-- =========================
+                     GROUP 4 EGG
+                ========================= -->
+
+                <div class="gallery-group">
+
+                    <div class="gallery-images">
+
+                        <div class="gallery-item">
+                            <img src="assets/page_21.jpg"
+                                alt="Egg Transport Solution">
+                        </div>
+
+                        <div class="gallery-item">
+                            <img src="assets/page_22.jpg"
+                                alt="Egg Transport Solution">
+                        </div>
+
+                        <div class="gallery-item">
+                            <img src="assets/page_23.jpg"
+                                alt="Egg Transport Solution">
+                        </div>
+
+                    </div>
+
+                    <div class="gallery-description">
+
+                        <span class="gallery-number">
+                            SOLUTION 06
+                        </span>
+
+                        <h3 data-gallery-en="Egg Transport Solution"
+                            data-gallery-si="බිත්තර ප්‍රවාහන විසඳුම">
+                            Egg Transport Solution
+                        </h3>
+
+                        <p data-gallery-en="A specialized transportation body designed to keep egg products organized, stable and protected during commercial transportation."
+                            data-gallery-si="වාණිජ ප්‍රවාහනයේදී බිත්තර නිෂ්පාදන පිළිවෙළට, ස්ථාවරව සහ ආරක්ෂිතව තබා ගැනීම සඳහා නිර්මාණය කළ විශේෂිත ප්‍රවාහන body විසඳුමකි.">
+                            A specialized transportation body designed to keep egg products organized, stable and protected during commercial transportation.
+                        </p>
+
+                    </div>
+
                 </div>
 
-                <div class="gallery-item">
-                    <img
-                        src="assets/page_7.jpg"
-                        alt="Gas carrier">
+
+                <!-- =========================
+                     GROUP 5
+                ========================= -->
+
+                <div class="gallery-group">
+
+                    <div class="gallery-images">
+
+                        <div class="gallery-item">
+                            <img src="assets/page_10.jpg"
+                                alt="Ice Cream Sales Vehicle">
+                        </div>
+
+                        <div class="gallery-item">
+                            <img src="assets/page_17.jpg"
+                                alt="Delivery Transport Solution">
+                        </div>
+
+                        <div class="gallery-item">
+                            <img src="assets/page_18.jpg"
+                                alt="Vacuum Emptier">
+                        </div>
+
+                    </div>
+
+                    <div class="gallery-description">
+
+                        <span class="gallery-number">
+                            SOLUTIONS 07–09
+                        </span>
+
+                        <h3 data-gallery-en="Mobile Sales & Utility Solutions"
+                            data-gallery-si="ජංගම අලෙවි සහ utility විසඳුම්">
+                            Mobile Sales & Utility Solutions
+                        </h3>
+
+                        <p data-gallery-en="Flexible vehicle concepts covering mobile ice cream sales, commercial delivery operations and specialized vacuum utility applications."
+                            data-gallery-si="ජංගම අයිස්ක්‍රීම් අලෙවිය, වාණිජ බෙදාහැරීම් මෙහෙයුම් සහ විශේෂිත vacuum utility යෙදුම් සඳහා නම්‍යශීලී වාහන විසඳුම්.">
+                            Flexible vehicle concepts covering mobile ice cream sales, commercial delivery operations and specialized vacuum utility applications.
+                        </p>
+
+                    </div>
+
                 </div>
 
-                <div class="gallery-item">
-                    <img
-                        src="assets/page_8.jpg"
-                        alt="Milk tanker">
+
+                <!-- =========================
+                     GROUP 6
+                ========================= -->
+
+                <div class="gallery-group">
+
+                    <div class="gallery-images">
+
+                        <div class="gallery-item">
+                            <img src="assets/page_11.jpg"
+                                alt="Rexine Canopy Delivery Truck">
+                        </div>
+
+                        <div class="gallery-item">
+                            <img src="assets/page_12.jpg"
+                                alt="Poultry Transport Unit">
+                        </div>
+
+                        <div class="gallery-item">
+                            <img src="assets/page_19.jpg"
+                                alt="Garbage Collection Vehicle">
+                        </div>
+
+                    </div>
+
+                    <div class="gallery-description">
+
+                        <span class="gallery-number">
+                            SOLUTIONS 10–12
+                        </span>
+
+                        <h3 data-gallery-en="Commercial Utility Solutions"
+                            data-gallery-si="වාණිජ utility විසඳුම්">
+                            Commercial Utility Solutions
+                        </h3>
+
+                        <p data-gallery-en="Commercial body concepts for protected delivery, poultry transportation and practical waste collection operations."
+                            data-gallery-si="ආරක්ෂිත බෙදාහැරීම්, කුකුළු ප්‍රවාහනය සහ කාර්යක්ෂම කසළ එකතු කිරීමේ මෙහෙයුම් සඳහා වාණිජ body විසඳුම්.">
+                            Commercial body concepts for protected delivery, poultry transportation and practical waste collection operations.
+                        </p>
+
+                    </div>
+
                 </div>
 
-                <div class="gallery-item">
-                    <img
-                        src="assets/page_21.jpg"
-                        alt="Egg transport">
+
+                <!-- =========================
+                     GROUP 7
+                ========================= -->
+
+                <div class="gallery-group">
+
+                    <div class="gallery-images">
+
+                        <div class="gallery-item">
+                            <img src="assets/page_13.jpg"
+                                alt="Mobile Grocery Shop">
+                        </div>
+
+                        <div class="gallery-item">
+                            <img src="assets/page_20.jpg"
+                                alt="Food Van">
+                        </div>
+
+                        <div class="gallery-item">
+                            <img src="assets/page_14.jpg"
+                                alt="Soft Drink Carrier">
+                        </div>
+
+                    </div>
+
+                    <div class="gallery-description">
+
+                        <span class="gallery-number">
+                            SOLUTIONS 13–15
+                        </span>
+
+                        <h3 data-gallery-en="Mobile Retail & Food Solutions"
+                            data-gallery-si="ජංගම සිල්ලර සහ ආහාර විසඳුම්">
+                            Mobile Retail & Food Solutions
+                        </h3>
+
+                        <p data-gallery-en="Versatile pickup modifications for mobile grocery retail, food service operations and organized beverage distribution."
+                            data-gallery-si="ජංගම grocery අලෙවිය, ආහාර සේවා මෙහෙයුම් සහ පිළිවෙළට සිසිල් බීම බෙදාහැරීම සඳහා බහුකාර්ය pickup නවීකරණ විසඳුම්.">
+                            Versatile pickup modifications for mobile grocery retail, food service operations and organized beverage distribution.
+                        </p>
+
+                    </div>
+
                 </div>
 
-                <div class="gallery-item">
-                    <img
-                        src="assets/page_10.jpg"
-                        alt="Commercial solution">
-                </div>
 
-                <div class="gallery-item">
-                    <img
-                        src="assets/page_18.jpg"
-                        alt="Vacuum Emptier">
-                </div>
+                <!-- =========================
+                     GROUP 8
+                ========================= -->
 
-                <div class="gallery-item">
-                    <img
-                        src="assets/page_12.jpg"
-                        alt="Commercial solution">
-                </div>
+                <div class="gallery-group">
 
-                <div class="gallery-item">
-                    <img
-                        src="assets/page_13.jpg"
-                        alt="Mobile shop">
-                </div>
+                    <div class="gallery-images two">
 
-                <div class="gallery-item">
-                    <img
-                        src="assets/page_14.jpg"
-                        alt="Soft drink carrier">
-                </div>
+                        <div class="gallery-item">
+                            <img src="assets/page_15.jpg"
+                                alt="Fish Delivery Vehicle">
+                        </div>
 
-                <div class="gallery-item">
-                    <img
-                        src="assets/page_15.jpg"
-                        alt="Fish delivery">
-                </div>
+                        <div class="gallery-item">
+                            <img src="assets/page_4.jpg"
+                                alt="Commercial Pickup">
+                        </div>
 
-                <div class="gallery-item">
-                    <img
-                        src="assets/page_16.jpg"
-                        alt="Bakery vehicle">
+                    </div>
+
+                    <div class="gallery-description">
+
+                        <span class="gallery-number">
+                            COMMERCIAL SHOWCASE
+                        </span>
+
+                        <h3 data-gallery-en="Commercial Pickup Showcase"
+                            data-gallery-si="වාණිජ Pickup ප්‍රදර්ශනය">
+                            Commercial Pickup Showcase
+                        </h3>
+
+                        <p data-gallery-en="A visual showcase of practical pickup body concepts developed for different commercial transportation and business applications."
+                            data-gallery-si="විවිධ වාණිජ ප්‍රවාහන සහ ව්‍යාපාරික යෙදුම් සඳහා නිර්මාණය කළ pickup body සංකල්පවල දෘශ්‍ය ප්‍රදර්ශනයක්.">
+                            A visual showcase of practical pickup body concepts developed for different commercial transportation and business applications.
+                        </p>
+
+                    </div>
+
                 </div>
 
             </div>
@@ -2306,8 +2471,7 @@
                 presentation-style website. It also works offline.
             </p>
 
-            <a
-                href="#solutions"
+            <a href="#solutions"
                 class="primary-btn"
                 data-i18n="ctaButton">
                 Explore applications
@@ -2331,51 +2495,41 @@
          MODAL
     ========================= -->
 
-    <div
-        class="modal"
-        id="solutionModal">
+    <div class="modal" id="solutionModal">
 
         <div class="modal-content">
 
-            <button
-                class="modal-close"
+            <button class="modal-close"
                 id="modalClose"
-                type="button"
-                aria-label="Close">
+                type="button">
                 ×
             </button>
 
-
             <div class="modal-image-wrapper">
 
-                <img
-                    id="modalImage"
+                <img id="modalImage"
                     class="modal-image"
                     src=""
                     alt="">
 
-                <button
-                    class="modal-arrow prev"
+                <button class="modal-arrow prev"
                     id="modalPrev"
                     type="button">
                     ‹
                 </button>
 
-                <button
-                    class="modal-arrow next"
+                <button class="modal-arrow next"
                     id="modalNext"
                     type="button">
                     ›
                 </button>
 
-                <div
-                    class="modal-image-counter"
+                <div class="modal-image-counter"
                     id="modalCounter">
                     1 / 1
                 </div>
 
             </div>
-
 
             <div class="modal-body">
 
@@ -2413,20 +2567,16 @@
                 navSolutions: "Solutions",
                 navGallery: "Gallery",
 
-                heroEyebrow:
-                    "SMART MODIFICATION SOLUTIONS",
+                heroEyebrow: "SMART MODIFICATION SOLUTIONS",
 
-                heroTitle:
-                    "Customized Commercial Pickup Solutions",
+                heroTitle: "Customized Commercial Pickup Solutions",
 
                 heroText:
                     "From cargo transportation to mobile shops and specialized utility vehicles, explore smart modification solutions designed around different business requirements.",
 
-                heroButton:
-                    "Explore solutions ↓",
+                heroButton: "Explore solutions ↓",
 
-                overviewEyebrow:
-                    "APE XTRA LDX",
+                overviewEyebrow: "APE XTRA LDX",
 
                 overviewTitle:
                     "A compact vehicle platform built for business.",
@@ -2439,11 +2589,8 @@
                 stat3: "Maximum speed",
                 stat4: "Cargo bed length",
 
-                specEyebrow:
-                    "TECHNICAL DETAILS",
-
-                specTitle:
-                    "Technical Specifications",
+                specEyebrow: "TECHNICAL DETAILS",
+                specTitle: "Technical Specifications",
 
                 specText:
                     "Technical specifications taken from the supplied presentation.",
@@ -2467,8 +2614,7 @@
                 s17: "Max Gradeability (Climbing)",
                 s18: "Cargo Bed Length",
 
-                solutionsEyebrow:
-                    "COMMERCIAL APPLICATIONS",
+                solutionsEyebrow: "COMMERCIAL APPLICATIONS",
 
                 solutionsTitle:
                     "One Pickup. Many Business Needs.",
@@ -2476,23 +2622,19 @@
                 solutionsText:
                     "Explore the commercial body and utility solutions shown in the presentation.",
 
-                application:
-                    "APPLICATION",
+                application: "APPLICATION",
 
-                view:
-                    "View solution →",
+                view: "View solution →",
 
-                search:
-                    "Search solutions…",
+                search: "Search solutions…",
 
-                galleryEyebrow:
-                    "VISUAL PRESENTATION",
+                galleryEyebrow: "VISUAL PRESENTATION",
 
                 galleryTitle:
                     "Vehicle body concepts at a glance",
 
                 galleryText:
-                    "The supplied presentation pages are used as a visual gallery.",
+                    "Explore the vehicle solutions through grouped presentation images.",
 
                 ctaTitle:
                     "Ready to present your Pickup solutions?",
@@ -2500,8 +2642,7 @@
                 ctaText:
                     "This page can be used as a digital showroom or presentation-style website. It also works offline.",
 
-                ctaButton:
-                    "Explore applications",
+                ctaButton: "Explore applications",
 
                 footer:
                     "Commercial Pickup Solutions • Digital Presentation Website",
@@ -2550,26 +2691,16 @@
 
                 c15: "Soft Drink Carrier",
                 p15: "Secure and optimized beverage crate distribution"
-
             },
-
 
             si: {
 
-                brand:
-                    "වාණිජ PICKUP විසඳුම්",
+                brand: "වාණිජ PICKUP විසඳුම්",
 
-                navOverview:
-                    "දළ විශ්ලේෂණය",
-
-                navSpecs:
-                    "තාක්ෂණික විස්තර",
-
-                navSolutions:
-                    "විසඳුම්",
-
-                navGallery:
-                    "ගැලරිය",
+                navOverview: "දළ විශ්ලේෂණය",
+                navSpecs: "තාක්ෂණික විස්තර",
+                navSolutions: "විසඳුම්",
+                navGallery: "ගැලරිය",
 
                 heroEyebrow:
                     "බුද්ධිමත් නවීකරණ විසඳුම්",
@@ -2592,17 +2723,10 @@
                 overviewText:
                     "සපයා ඇති ඉදිරිපත් කිරීම අනුව Ape XTRA LDX රථය 435 cc ඩීසල් එන්ජිමක්, 4-speed constant mesh gearbox එකක් සහ අඩි 5.5 ක cargo bed එකකින් සමන්විත වේ. එය විවිධ වාණිජ අවශ්‍යතා සඳහා භාවිත කළ හැකි වේදිකාවක් සපයයි.",
 
-                stat1:
-                    "එන්ජින් ධාරිතාව",
-
-                stat2:
-                    "උපරිම බලය",
-
-                stat3:
-                    "උපරිම වේගය",
-
-                stat4:
-                    "භාණ්ඩ තට්ටුවේ දිග",
+                stat1: "එන්ජින් ධාරිතාව",
+                stat2: "උපරිම බලය",
+                stat3: "උපරිම වේගය",
+                stat4: "භාණ්ඩ තට්ටුවේ දිග",
 
                 specEyebrow:
                     "තාක්ෂණික විස්තර",
@@ -2613,59 +2737,24 @@
                 specText:
                     "සපයා ඇති ඉදිරිපත් කිරීමෙන් ලබාගත් තාක්ෂණික පිරිවිතර.",
 
-                s1:
-                    "එන්ජින් වර්ගය",
-
-                s2:
-                    "එන්ජින් ධාරිතාව",
-
-                s3:
-                    "උපරිම බලය",
-
-                s4:
-                    "උපරිම ව්‍යවර්ථය",
-
-                s5:
-                    "ඉන්ධන වර්ගය",
-
-                s6:
-                    "සිසිලන පද්ධතිය",
-
-                s7:
-                    "ක්ලච්",
-
-                s8:
-                    "ගියර් පද්ධතිය",
-
-                s9:
-                    "උපරිම වේගය",
-
-                s10:
-                    "ඉන්ධන පරිභෝජනය*",
-
-                s11:
-                    "ඉන්ධන ටැංකි ධාරිතාව",
-
-                s12:
-                    "උපරිම දළ වාහන බර (GVW)",
-
-                s13:
-                    "හිස් වාහන බර",
-
-                s14:
-                    "මානයන් (දිග × පළල × උස)",
-
-                s15:
-                    "රෝද අතර දුර",
-
-                s16:
-                    "බිම් නිෂ්කාශනය",
-
-                s17:
-                    "උපරිම කඳු නැගීමේ හැකියාව",
-
-                s18:
-                    "භාණ්ඩ තට්ටුවේ දිග",
+                s1: "එන්ජින් වර්ගය",
+                s2: "එන්ජින් ධාරිතාව",
+                s3: "උපරිම බලය",
+                s4: "උපරිම ව්‍යවර්ථය",
+                s5: "ඉන්ධන වර්ගය",
+                s6: "සිසිලන පද්ධතිය",
+                s7: "ක්ලච්",
+                s8: "ගියර් පද්ධතිය",
+                s9: "උපරිම වේගය",
+                s10: "ඉන්ධන පරිභෝජනය*",
+                s11: "ඉන්ධන ටැංකි ධාරිතාව",
+                s12: "උපරිම දළ වාහන බර (GVW)",
+                s13: "හිස් වාහන බර",
+                s14: "මානයන් (දිග × පළල × උස)",
+                s15: "රෝද අතර දුර",
+                s16: "බිම් නිෂ්කාශනය",
+                s17: "උපරිම කඳු නැගීමේ හැකියාව",
+                s18: "භාණ්ඩ තට්ටුවේ දිග",
 
                 solutionsEyebrow:
                     "භාණ්ඩ ප්‍රවාහන යෙදුම්",
@@ -2692,7 +2781,7 @@
                     "වාහන body සංකල්ප එකවර බලන්න",
 
                 galleryText:
-                    "සපයා ඇති ඉදිරිපත් කිරීමේ පිටු දෘශ්‍ය ගැලරිය ලෙස භාවිත කර ඇත.",
+                    "කාණ්ඩගත ඉදිරිපත් කිරීමේ ඡායාරූප හරහා වාහන විසඳුම් බලන්න.",
 
                 ctaTitle:
                     "ඔබගේ Pickup විසඳුම් ඉදිරිපත් කිරීමට සූදානම්ද?",
@@ -2716,7 +2805,7 @@
                     "මාළු බෙදාහැරීමේ වාහනය",
 
                 p2:
-                    "නැවුම් මුහුදු ආහාර ප්‍රවාහනය සහ ගමන් අතරතුර ප්‍රදර්ශනය",
+                    "නැවුම් මුහුදු ආහාර ප්‍රවාහනය සහ ප්‍රදර්ශනය",
 
                 c3:
                     "බේකරි ජංගම ඒකකය",
@@ -2795,9 +2884,7 @@
 
                 p15:
                     "බීම පෙට්ටි ආරක්ෂිතව සහ කාර්යක්ෂමව බෙදාහැරීම"
-
             }
-
         };
 
 
@@ -2938,218 +3025,112 @@
 
 
         /* =========================
-           EGG SLIDER - FIX
-        ========================= */
-
-        const eggImages = [
-            "page_21.jpg",
-            "page_22.jpg",
-            "page_23.jpg"
-        ];
-
-        let eggImageIndex = 0;
-
-        function changeEggImage(direction) {
-            const eggImage = document.getElementById("eggImage");
-            const eggCounter = document.getElementById("eggCounter");
-
-            if (!eggImage || !eggCounter) return;
-
-            eggImageIndex += direction;
-
-            if (eggImageIndex < 0) {
-                eggImageIndex = eggImages.length - 1;
-            }
-
-            if (eggImageIndex >= eggImages.length) {
-                eggImageIndex = 0;
-            }
-
-            eggImage.src = "assets/" + eggImages[eggImageIndex];
-            eggCounter.textContent =
-                (eggImageIndex + 1) + " / " + eggImages.length;
-        }
-
-        document.getElementById("eggPrev").addEventListener("click", function(event) {
-            event.preventDefault();
-            event.stopPropagation();
-            changeEggImage(-1);
-        });
-
-        document.getElementById("eggNext").addEventListener("click", function(event) {
-            event.preventDefault();
-            event.stopPropagation();
-            changeEggImage(1);
-        });
-
-
-        /* =========================
            SINHALA SOLUTION DATA
         ========================= */
 
         const solutionSinhala = [
 
             {
-                title:
-                    "එළවළු වෙළඳසැල් වාහනය",
-
-                subtitle:
-                    "නැවුම් එළවළු කාර්යක්ෂමව බෙදාහැරීම",
-
+                title: "එළවළු වෙළඳසැල් වාහනය",
+                subtitle: "නැවුම් එළවළු කාර්යක්ෂමව බෙදාහැරීම",
                 details:
                     "නැවුම් එළවළු ප්‍රවාහනය සහ ජංගම අලෙවිය සඳහා නිර්මාණය කර ඇත. පාරිභෝගිකයන් වෙත පහසුවෙන් නිෂ්පාදන ගෙන යාමට සහ විවිධ ස්ථානවල අලෙවි කිරීමට පහසුකම් සපයයි."
             },
 
             {
-                title:
-                    "මාළු බෙදාහැරීමේ වාහනය",
-
-                subtitle:
-                    "නැවුම් මුහුදු ආහාර ප්‍රවාහනය සහ ප්‍රදර්ශනය",
-
+                title: "මාළු බෙදාහැරීමේ වාහනය",
+                subtitle: "නැවුම් මුහුදු ආහාර ප්‍රවාහනය සහ ප්‍රදර්ශනය",
                 details:
                     "නැවුම් මුහුදු ආහාර ප්‍රවාහනය සහ ගමන් අතරතුර නිෂ්පාදන ප්‍රදර්ශනය සඳහා ප්‍රායෝගික body layout එකක් සහිත විසඳුමකි."
             },
 
             {
-                title:
-                    "බේකරි ජංගම ඒකකය",
-
-                subtitle:
-                    "නැවුම් බව ඕනෑම ස්ථානයකට",
-
+                title: "බේකරි ජංගම ඒකකය",
+                subtitle: "නැවුම් බව ඕනෑම ස්ථානයකට",
                 details:
-                    "නිෂ්පාදන වඩාත් පැහැදිලිව පෙන්වීමට පැහැදිලි වීදුරු display එකක්; හිරු සහ වැසි වලින් නිෂ්පාදන ආරක්ෂා කරන ශක්තිමත් body එකක්; පටු මාර්ග සහ කාර්යබහුල ප්‍රදේශවල පහසුවෙන් ධාවනය කළ හැක; පාරිභෝගික අවධානය ලබාගැනීමට ආකර්ෂණීය branding design එකක්; smart storage සහ පාරිභෝගික හිතකාමී display සමඟ ජංගම බේකරි මෙහෙයුම් සඳහා නිර්මාණය කර ඇත."
+                    "නිෂ්පාදන වඩාත් පැහැදිලිව පෙන්වීමට පැහැදිලි වීදුරු display එකක්; හිරු සහ වැසි වලින් නිෂ්පාදන ආරක්ෂා කරන ශක්තිමත් body එකක්; smart storage සහ පාරිභෝගික හිතකාමී display සමඟ ජංගම බේකරි මෙහෙයුම් සඳහා නිර්මාණය කර ඇත."
             },
 
             {
-                title:
-                    "ගෑස් සිලින්ඩර් ප්‍රවාහකය",
-
-                subtitle:
-                    "ශක්තිය සහ ආරක්ෂාව සඳහා නිර්මාණය කර ඇත",
-
+                title: "ගෑස් සිලින්ඩර් ප්‍රවාහකය",
+                subtitle: "ශක්තිය සහ ආරක්ෂාව සඳහා නිර්මාණය කර ඇත",
                 details:
                     "ගෑස් සිලින්ඩර් වඩාත් ආරක්ෂිතව සහ පිළිවෙළට ප්‍රවාහනය කිරීම සඳහා ශක්තිමත් වාණිජ body විසඳුමකි."
             },
 
             {
-                title:
-                    "කිරි ටැංකි",
-
-                subtitle:
-                    "ආහාර මට්ටමේ පරිවරණය කළ ප්‍රවාහනය",
-
+                title: "කිරි ටැංකි",
+                subtitle: "ආහාර මට්ටමේ පරිවරණය කළ ප්‍රවාහනය",
                 details:
                     "වාණිජ කිරි බෙදාහැරීම සඳහා සුදුසු පරිවරණය කළ tanker body එකක් සහිත ප්‍රායෝගික ප්‍රවාහන විසඳුමකි."
             },
 
             {
-                title:
-                    "බිත්තර ප්‍රවාහන විසඳුම",
-
-                subtitle:
-                    "සංවේදී නිෂ්පාදන සඳහා ආරක්ෂිත බෙදාහැරීම",
-
+                title: "බිත්තර ප්‍රවාහන විසඳුම",
+                subtitle: "සංවේදී නිෂ්පාදන සඳහා ආරක්ෂිත බෙදාහැරීම",
                 details:
                     "ප්‍රවාහනයේදී නිෂ්පාදන චලනය අඩු කරමින් බිත්තර වඩාත් ආරක්ෂිතව බෙදාහැරීමට නිර්මාණය කර ඇත."
             },
 
             {
-                title:
-                    "අයිස්ක්‍රීම් අලෙවි වාහනය",
-
-                subtitle:
-                    "ඔබ යන ඕනෑම තැනකට සිසිල් රසකැවිලි",
-
+                title: "අයිස්ක්‍රීම් අලෙවි වාහනය",
+                subtitle: "ඔබ යන ඕනෑම තැනකට සිසිල් රසකැවිලි",
                 details:
                     "අයිස්ක්‍රීම් බෙදාහැරීම සහ පාරිභෝගිකයන්ට පහසු අලෙවි පහසුකම් සැපයීම සඳහා නිර්මාණය කර ඇත."
             },
 
             {
-                title:
-                    "බෙදාහැරීමේ ප්‍රවාහන විසඳුම",
-
-                subtitle:
-                    "වර්ධනය වන ව්‍යාපාර සඳහා බුද්ධිමත් බෙදාහැරීමේ විසඳුම",
-
+                title: "බෙදාහැරීමේ ප්‍රවාහන විසඳුම",
+                subtitle: "වර්ධනය වන ව්‍යාපාර සඳහා බුද්ධිමත් බෙදාහැරීමේ විසඳුම",
                 details:
                     "වර්ධනය වන බෙදාහැරීමේ ව්‍යාපාර සඳහා සහාය වන නම්‍යශීලී වාණිජ ප්‍රවාහන body විසඳුමකි."
             },
 
             {
-                title:
-                    "වැකුම් එම්ප්ටියර්",
-
-                subtitle:
-                    "කාර්යක්ෂම වැකුම් සහ මඩ ඉවත් කිරීමේ විසඳුම",
-
+                title: "වැකුම් එම්ප්ටියර්",
+                subtitle: "කාර්යක්ෂම වැකුම් සහ මඩ ඉවත් කිරීමේ විසඳුම",
                 details:
                     "කාර්යක්ෂම වැකුම් මෙහෙයුම් සහ මඩ ඉවත් කිරීම සඳහා නිර්මාණය කළ විශේෂිත utility විසඳුමකි."
             },
 
             {
-                title:
-                    "රෙක්සින් කැනපි බෙදාහැරීමේ රථය",
-
-                subtitle:
-                    "වර්ධනය වන ව්‍යාපාර සඳහා බුද්ධිමත් බෙදාහැරීමේ විසඳුම",
-
+                title: "රෙක්සින් කැනපි බෙදාහැරීමේ රථය",
+                subtitle: "වර්ධනය වන ව්‍යාපාර සඳහා බුද්ධිමත් බෙදාහැරීමේ විසඳුම",
                 details:
                     "ප්‍රවාහනයේදී භාණ්ඩ වැසි සහ හිරු එළියෙන් ආරක්ෂා කිරීමට උපකාරී වන ප්‍රායෝගික canopy විසඳුමකි."
             },
 
             {
-                title:
-                    "කුකුළු ප්‍රවාහන ඒකකය",
-
-                subtitle:
-                    "සුවපහසු සහ කාර්යක්ෂම සත්ව ප්‍රවාහනය",
-
+                title: "කුකුළු ප්‍රවාහන ඒකකය",
+                subtitle: "සුවපහසු සහ කාර්යක්ෂම සත්ව ප්‍රවාහනය",
                 details:
                     "කුකුළු ප්‍රවාහනය වඩාත් පිළිවෙළට සහ කාර්යක්ෂමව සිදු කිරීම සඳහා නිර්මාණය කර ඇත."
             },
 
             {
-                title:
-                    "කසළ එකතු කිරීමේ වාහනය",
-
-                subtitle:
-                    "කාර්යක්ෂම අපද්‍රව්‍ය කළමනාකරණ විසඳුම",
-
+                title: "කසළ එකතු කිරීමේ වාහනය",
+                subtitle: "කාර්යක්ෂම අපද්‍රව්‍ය කළමනාකරණ විසඳුම",
                 details:
                     "කසළ එකතු කිරීම සහ ප්‍රවාහනය වඩාත් කාර්යක්ෂම කිරීමට නිර්මාණය කළ utility body එකකි."
             },
 
             {
-                title:
-                    "ජංගම සිල්ලර වෙළඳසැල",
-
-                subtitle:
-                    "කාර්යක්ෂම සහ පහසු ජංගම සිල්ලර වෙළඳ විසඳුම්",
-
+                title: "ජංගම සිල්ලර වෙළඳසැල",
+                subtitle: "කාර්යක්ෂම සහ පහසු ජංගම සිල්ලර වෙළඳ විසඳුම්",
                 details:
                     "විවිධ ස්ථානවල පාරිභෝගිකයන් වෙත grocery නිෂ්පාදන ගෙන යාම සඳහා නිර්මාණය කළ mobile retail body එකකි."
             },
 
             {
-                title:
-                    "ආහාර වෑන් රථය",
-
-                subtitle:
-                    "වීදි ආහාර ව්‍යාපාර සඳහා සුදුසුයි",
-
+                title: "ආහාර වෑන් රථය",
+                subtitle: "වීදි ආහාර ව්‍යාපාර සඳහා සුදුසුයි",
                 details:
                     "වීදි ආහාර ව්‍යාපාර සහ mobile food operations සඳහා නිර්මාණය කළ සංයුක්ත ආහාර වාහන විසඳුමකි."
             },
 
             {
-                title:
-                    "සිසිල් බීම ප්‍රවාහකය",
-
-                subtitle:
-                    "බීම පෙට්ටි ආරක්ෂිතව සහ කාර්යක්ෂමව බෙදාහැරීම",
-
+                title: "සිසිල් බීම ප්‍රවාහකය",
+                subtitle: "බීම පෙට්ටි ආරක්ෂිතව සහ කාර්යක්ෂමව බෙදාහැරීම",
                 details:
                     "බීම පෙට්ටි පිළිවෙළට සහ කාර්යක්ෂමව ප්‍රවාහනය කිරීම සඳහා නිර්මාණය කළ විශේෂිත carrier එකකි."
             }
@@ -3163,122 +3144,92 @@
 
         let currentLanguage = "en";
 
-
         function changeLanguage(lang) {
 
             currentLanguage = lang;
 
             document.documentElement.lang =
-                lang === "si"
-                    ? "si"
-                    : "en";
+                lang === "si" ? "si" : "en";
 
+            const texts = translations[lang];
 
-            const texts =
-                translations[lang];
-
-
-            document
-                .querySelectorAll("[data-i18n]")
+            document.querySelectorAll("[data-i18n]")
                 .forEach(element => {
 
                     const key =
-                        element.getAttribute(
-                            "data-i18n"
-                        );
+                        element.getAttribute("data-i18n");
 
                     if (texts[key]) {
-                        element.textContent =
-                            texts[key];
+                        element.textContent = texts[key];
                     }
 
                 });
 
-
-            document
-                .querySelectorAll(
-                    "[data-i18n-placeholder]"
-                )
+            document.querySelectorAll("[data-i18n-placeholder]")
                 .forEach(element => {
 
                     const key =
-                        element.getAttribute(
-                            "data-i18n-placeholder"
-                        );
+                        element.getAttribute("data-i18n-placeholder");
 
                     if (texts[key]) {
-                        element.placeholder =
-                            texts[key];
+                        element.placeholder = texts[key];
                     }
 
                 });
 
+            document.getElementById("langEN")
+                .classList.toggle("active", lang === "en");
 
-            document
-                .getElementById("langEN")
-                .classList.toggle(
-                    "active",
-                    lang === "en"
-                );
-
-
-            document
-                .getElementById("langSI")
-                .classList.toggle(
-                    "active",
-                    lang === "si"
-                );
+            document.getElementById("langSI")
+                .classList.toggle("active", lang === "si");
 
 
             const cards =
-                document.querySelectorAll(
-                    ".card"
-                );
+                document.querySelectorAll(".card");
 
+            cards.forEach((card, index) => {
 
-            cards.forEach(
-                (card, index) => {
+                if (!solutions[index]) return;
 
-                    if (!solutions[index]) {
-                        return;
-                    }
+                const title =
+                    card.querySelector("h3");
 
+                const subtitle =
+                    card.querySelector("p");
 
-                    const title =
-                        card.querySelector("h3");
+                if (lang === "si") {
 
-                    const subtitle =
-                        card.querySelector("p");
+                    title.textContent =
+                        solutionSinhala[index].title;
 
+                    subtitle.textContent =
+                        solutionSinhala[index].subtitle;
 
-                    if (lang === "si") {
+                } else {
 
-                        title.textContent =
-                            solutionSinhala[
-                                index
-                            ].title;
+                    title.textContent =
+                        translations.en["c" + (index + 1)];
 
-                        subtitle.textContent =
-                            solutionSinhala[
-                                index
-                            ].subtitle;
-
-                    } else {
-
-                        title.textContent =
-                            translations.en[
-                                "c" + (index + 1)
-                            ];
-
-                        subtitle.textContent =
-                            translations.en[
-                                "p" + (index + 1)
-                            ];
-
-                    }
+                    subtitle.textContent =
+                        translations.en["p" + (index + 1)];
 
                 }
-            );
+
+            });
+
+
+            /* UPDATE GALLERY */
+
+            document.querySelectorAll(
+                "[data-gallery-en]"
+            ).forEach(element => {
+
+                element.textContent =
+                    lang === "si"
+                        ? element.dataset.gallerySi
+                        : element.dataset.galleryEn;
+
+            });
 
 
             filterCards();
@@ -3286,16 +3237,13 @@
         }
 
 
-        document
-            .getElementById("langEN")
+        document.getElementById("langEN")
             .addEventListener(
                 "click",
                 () => changeLanguage("en")
             );
 
-
-        document
-            .getElementById("langSI")
+        document.getElementById("langSI")
             .addEventListener(
                 "click",
                 () => changeLanguage("si")
@@ -3307,47 +3255,33 @@
         ========================= */
 
         const menuBtn =
-            document.getElementById(
-                "menuBtn"
-            );
+            document.getElementById("menuBtn");
 
         const navLinks =
-            document.getElementById(
-                "navLinks"
-            );
-
+            document.getElementById("navLinks");
 
         menuBtn.addEventListener(
             "click",
             () => {
 
-                menuBtn.classList.toggle(
-                    "active"
-                );
+                menuBtn.classList.toggle("active");
 
-                navLinks.classList.toggle(
-                    "active"
-                );
+                navLinks.classList.toggle("active");
 
             }
         );
 
 
-        navLinks
-            .querySelectorAll("a")
+        navLinks.querySelectorAll("a")
             .forEach(link => {
 
                 link.addEventListener(
                     "click",
                     () => {
 
-                        menuBtn.classList.remove(
-                            "active"
-                        );
+                        menuBtn.classList.remove("active");
 
-                        navLinks.classList.remove(
-                            "active"
-                        );
+                        navLinks.classList.remove("active");
 
                     }
                 );
@@ -3364,70 +3298,119 @@
 
         let bakeryImageIndex = 0;
 
+        function changeBakeryImage(direction) {
 
-        function changeBakeryImage(
-            direction
-        ) {
+            bakeryImageIndex += direction;
 
-            bakeryImageIndex +=
-                direction;
-
-
-            if (
-                bakeryImageIndex < 0
-            ) {
-
+            if (bakeryImageIndex < 0) {
                 bakeryImageIndex =
                     bakeryImages.length - 1;
-
             }
 
-
-            if (
-                bakeryImageIndex >=
-                bakeryImages.length
-            ) {
-
+            if (bakeryImageIndex >= bakeryImages.length) {
                 bakeryImageIndex = 0;
-
             }
-
 
             const bakeryImage =
-                document.getElementById(
-                    "bakeryImage"
-                );
+                document.getElementById("bakeryImage");
 
             const bakeryCounter =
-                document.getElementById(
-                    "bakeryCounter"
-                );
+                document.getElementById("bakeryCounter");
 
+            bakeryImage.style.opacity = "0";
 
-            bakeryImage.style.opacity =
-                "0";
+            setTimeout(() => {
 
+                bakeryImage.src =
+                    "assets/" +
+                    bakeryImages[bakeryImageIndex];
 
-            setTimeout(
-                () => {
+                bakeryImage.style.opacity = "1";
 
-                    bakeryImage.src =
-                        "assets/" +
-                        bakeryImages[
-                            bakeryImageIndex
-                        ];
+                bakeryCounter.textContent =
+                    `${bakeryImageIndex + 1} / ${bakeryImages.length}`;
 
-                    bakeryImage.style.opacity =
-                        "1";
-
-                    bakeryCounter.textContent =
-                        `${bakeryImageIndex + 1} / ${bakeryImages.length}`;
-
-                },
-                120
-            );
+            }, 120);
 
         }
+
+
+        /* =========================
+           EGG SLIDER
+        ========================= */
+
+        const eggImages = [
+            "page_21.jpg",
+            "page_22.jpg",
+            "page_23.jpg"
+        ];
+
+        let eggImageIndex = 0;
+
+        function changeEggImage(direction) {
+
+            eggImageIndex += direction;
+
+            if (eggImageIndex < 0) {
+                eggImageIndex =
+                    eggImages.length - 1;
+            }
+
+            if (eggImageIndex >= eggImages.length) {
+                eggImageIndex = 0;
+            }
+
+            const eggImage =
+                document.getElementById("eggImage");
+
+            const eggCounter =
+                document.getElementById("eggCounter");
+
+            if (!eggImage || !eggCounter) return;
+
+            eggImage.style.opacity = "0";
+
+            setTimeout(() => {
+
+                eggImage.src =
+                    "assets/" +
+                    eggImages[eggImageIndex];
+
+                eggImage.style.opacity = "1";
+
+                eggCounter.textContent =
+                    `${eggImageIndex + 1} / ${eggImages.length}`;
+
+            }, 120);
+
+        }
+
+
+        document.getElementById("eggPrev")
+            .addEventListener(
+                "click",
+                event => {
+
+                    event.preventDefault();
+                    event.stopPropagation();
+
+                    changeEggImage(-1);
+
+                }
+            );
+
+        document.getElementById("eggNext")
+            .addEventListener(
+                "click",
+                event => {
+
+                    event.preventDefault();
+                    event.stopPropagation();
+
+                    changeEggImage(1);
+
+                }
+            );
 
 
         /* =========================
@@ -3435,49 +3418,31 @@
         ========================= */
 
         const modal =
-            document.getElementById(
-                "solutionModal"
-            );
+            document.getElementById("solutionModal");
 
         const modalClose =
-            document.getElementById(
-                "modalClose"
-            );
+            document.getElementById("modalClose");
 
         const modalImage =
-            document.getElementById(
-                "modalImage"
-            );
+            document.getElementById("modalImage");
 
         const modalTitle =
-            document.getElementById(
-                "modalTitle"
-            );
+            document.getElementById("modalTitle");
 
         const modalSubtitle =
-            document.getElementById(
-                "modalSubtitle"
-            );
+            document.getElementById("modalSubtitle");
 
         const modalDetails =
-            document.getElementById(
-                "modalDetails"
-            );
+            document.getElementById("modalDetails");
 
         const modalPrev =
-            document.getElementById(
-                "modalPrev"
-            );
+            document.getElementById("modalPrev");
 
         const modalNext =
-            document.getElementById(
-                "modalNext"
-            );
+            document.getElementById("modalNext");
 
         const modalCounter =
-            document.getElementById(
-                "modalCounter"
-            );
+            document.getElementById("modalCounter");
 
 
         let currentModalIndex = 0;
@@ -3491,45 +3456,33 @@
 
             currentModalIndex = index;
 
-
             const solution =
                 solutions[index];
-
 
             const languageSolution =
                 currentLanguage === "si"
                     ? solutionSinhala[index]
                     : solution;
 
-
             currentModalImages =
                 solution.images
                     ? solution.images
                     : [solution.image];
 
-
             currentModalImageIndex = 0;
-
 
             modalTitle.textContent =
                 languageSolution.title;
 
-
             modalSubtitle.textContent =
                 languageSolution.subtitle;
-
 
             modalDetails.textContent =
                 languageSolution.details;
 
-
             updateModalImage();
 
-
-            modal.classList.add(
-                "active"
-            );
-
+            modal.classList.add("active");
 
             document.body.style.overflow =
                 "hidden";
@@ -3541,87 +3494,50 @@
 
             modalImage.src =
                 "assets/" +
-                currentModalImages[
-                    currentModalImageIndex
-                ];
-
+                currentModalImages[currentModalImageIndex];
 
             modalImage.alt =
                 currentLanguage === "si"
-                    ? solutionSinhala[
-                        currentModalIndex
-                    ].title
-                    : solutions[
-                        currentModalIndex
-                    ].title;
+                    ? solutionSinhala[currentModalIndex].title
+                    : solutions[currentModalIndex].title;
 
 
-            if (
-                currentModalImages.length > 1
-            ) {
+            if (currentModalImages.length > 1) {
 
-                modalPrev.style.display =
-                    "flex";
-
-                modalNext.style.display =
-                    "flex";
-
-                modalCounter.style.display =
-                    "block";
+                modalPrev.style.display = "flex";
+                modalNext.style.display = "flex";
+                modalCounter.style.display = "block";
 
                 modalCounter.textContent =
                     `${currentModalImageIndex + 1} / ${currentModalImages.length}`;
 
             } else {
 
-                modalPrev.style.display =
-                    "none";
-
-                modalNext.style.display =
-                    "none";
-
-                modalCounter.style.display =
-                    "none";
+                modalPrev.style.display = "none";
+                modalNext.style.display = "none";
+                modalCounter.style.display = "none";
 
             }
 
         }
 
 
-        function changeModalImage(
-            direction
-        ) {
+        function changeModalImage(direction) {
 
-            if (
-                currentModalImages.length <= 1
-            ) {
+            if (currentModalImages.length <= 1) {
                 return;
             }
 
+            currentModalImageIndex += direction;
 
-            currentModalImageIndex +=
-                direction;
-
-
-            if (
-                currentModalImageIndex < 0
-            ) {
-
+            if (currentModalImageIndex < 0) {
                 currentModalImageIndex =
                     currentModalImages.length - 1;
-
             }
 
-
-            if (
-                currentModalImageIndex >=
-                currentModalImages.length
-            ) {
-
+            if (currentModalImageIndex >= currentModalImages.length) {
                 currentModalImageIndex = 0;
-
             }
-
 
             updateModalImage();
 
@@ -3633,7 +3549,6 @@
             () => changeModalImage(-1)
         );
 
-
         modalNext.addEventListener(
             "click",
             () => changeModalImage(1)
@@ -3642,12 +3557,9 @@
 
         function closeModal() {
 
-            modal.classList.remove(
-                "active"
-            );
+            modal.classList.remove("active");
 
-            document.body.style.overflow =
-                "";
+            document.body.style.overflow = "";
 
         }
 
@@ -3662,12 +3574,8 @@
             "click",
             event => {
 
-                if (
-                    event.target === modal
-                ) {
-
+                if (event.target === modal) {
                     closeModal();
-
                 }
 
             }
@@ -3680,41 +3588,23 @@
 
                 if (
                     event.key === "Escape" &&
-                    modal.classList.contains(
-                        "active"
-                    )
+                    modal.classList.contains("active")
                 ) {
 
                     closeModal();
 
                 }
 
-
                 if (
-                    modal.classList.contains(
-                        "active"
-                    )
+                    modal.classList.contains("active")
                 ) {
 
-                    if (
-                        event.key === "ArrowLeft"
-                    ) {
-
-                        changeModalImage(
-                            -1
-                        );
-
+                    if (event.key === "ArrowLeft") {
+                        changeModalImage(-1);
                     }
 
-
-                    if (
-                        event.key === "ArrowRight"
-                    ) {
-
-                        changeModalImage(
-                            1
-                        );
-
+                    if (event.key === "ArrowRight") {
+                        changeModalImage(1);
                     }
 
                 }
@@ -3728,14 +3618,10 @@
         ========================= */
 
         const searchInput =
-            document.getElementById(
-                "searchInput"
-            );
+            document.getElementById("searchInput");
 
         const noResults =
-            document.getElementById(
-                "noResults"
-            );
+            document.getElementById("noResults");
 
 
         function filterCards() {
@@ -3745,54 +3631,39 @@
                     .toLowerCase()
                     .trim();
 
-
             const cards =
-                document.querySelectorAll(
-                    ".card"
-                );
-
+                document.querySelectorAll(".card");
 
             let visibleCount = 0;
 
+            cards.forEach(card => {
 
-            cards.forEach(
-                card => {
+                const title =
+                    card.querySelector("h3")
+                        .textContent
+                        .toLowerCase();
 
-                    const title =
-                        card
-                            .querySelector("h3")
-                            .textContent
-                            .toLowerCase();
+                const dataTitle =
+                    card.dataset.title
+                        .toLowerCase();
 
+                const matches =
+                    !query ||
+                    title.includes(query) ||
+                    dataTitle.includes(query);
 
-                    const dataTitle =
-                        card.dataset.title
-                            .toLowerCase();
+                if (matches) {
 
+                    card.style.display = "";
+                    visibleCount++;
 
-                    const matches =
-                        !query ||
-                        title.includes(query) ||
-                        dataTitle.includes(query);
+                } else {
 
-
-                    if (matches) {
-
-                        card.style.display =
-                            "";
-
-                        visibleCount++;
-
-                    } else {
-
-                        card.style.display =
-                            "none";
-
-                    }
+                    card.style.display = "none";
 
                 }
-            );
 
+            });
 
             noResults.style.display =
                 visibleCount === 0
@@ -3809,38 +3680,68 @@
 
 
         /* =========================
+           GALLERY IMAGE CLICK
+        ========================= */
+
+        document.querySelectorAll(
+            ".gallery-item img"
+        ).forEach(img => {
+
+            img.addEventListener(
+                "click",
+                () => {
+
+                    modalImage.src = img.src;
+
+                    modalImage.alt = img.alt;
+
+                    modalTitle.textContent =
+                        img.alt;
+
+                    modalSubtitle.textContent = "";
+
+                    modalDetails.textContent = "";
+
+                    modalPrev.style.display = "none";
+
+                    modalNext.style.display = "none";
+
+                    modalCounter.style.display = "none";
+
+                    modal.classList.add("active");
+
+                    document.body.style.overflow = "hidden";
+
+                }
+            );
+
+        });
+
+
+        /* =========================
            SCROLL REVEAL
         ========================= */
 
         const revealElements =
-            document.querySelectorAll(
-                ".reveal"
-            );
-
+            document.querySelectorAll(".reveal");
 
         const observer =
             new IntersectionObserver(
                 entries => {
 
-                    entries.forEach(
-                        entry => {
+                    entries.forEach(entry => {
 
-                            if (
-                                entry.isIntersecting
-                            ) {
+                        if (entry.isIntersecting) {
 
-                                entry.target.classList.add(
-                                    "visible"
-                                );
+                            entry.target.classList.add("visible");
 
-                                observer.unobserve(
-                                    entry.target
-                                );
-
-                            }
+                            observer.unobserve(
+                                entry.target
+                            );
 
                         }
-                    );
+
+                    });
 
                 },
                 {
@@ -3849,66 +3750,9 @@
             );
 
 
-        revealElements.forEach(
-            element => {
-
-                observer.observe(element);
-
-            }
-        );
-
-
-        /* =========================
-           GALLERY IMAGE CLICK
-        ========================= */
-
-        document
-            .querySelectorAll(
-                ".gallery-item img"
-            )
-            .forEach(
-                img => {
-
-                    img.addEventListener(
-                        "click",
-                        () => {
-
-                            modalImage.src =
-                                img.src;
-
-                            modalImage.alt =
-                                img.alt;
-
-                            modalTitle.textContent =
-                                img.alt;
-
-                            modalSubtitle.textContent =
-                                "";
-
-                            modalDetails.textContent =
-                                "";
-
-                            modalPrev.style.display =
-                                "none";
-
-                            modalNext.style.display =
-                                "none";
-
-                            modalCounter.style.display =
-                                "none";
-
-                            modal.classList.add(
-                                "active"
-                            );
-
-                            document.body.style.overflow =
-                                "hidden";
-
-                        }
-                    );
-
-                }
-            );
+        revealElements.forEach(element => {
+            observer.observe(element);
+        });
 
 
         /* =========================
