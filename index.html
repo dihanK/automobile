@@ -170,6 +170,7 @@
 
         /* =========================
            HERO
+           PAGE 1 AS BACKGROUND
         ========================= */
 
         .hero {
@@ -177,23 +178,30 @@
             padding: 120px 7% 60px;
 
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1fr;
             align-items: center;
-            gap: 50px;
 
             position: relative;
 
             background:
-                radial-gradient(circle at 80% 30%,
-                    rgba(0, 122, 255, 0.15),
-                    transparent 35%),
-                radial-gradient(circle at 20% 80%,
-                    rgba(255, 140, 0, 0.08),
-                    transparent 35%);
+                linear-gradient(
+                    90deg,
+                    rgba(7, 11, 18, 0.88) 0%,
+                    rgba(7, 11, 18, 0.60) 50%,
+                    rgba(7, 11, 18, 0.30) 100%
+                ),
+                url("assets/page_1.jpg");
+
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
         }
 
         .hero-content {
+            max-width: 750px;
             animation: slideLeft 1s ease both;
+            position: relative;
+            z-index: 2;
         }
 
         .eyebrow {
@@ -241,23 +249,6 @@
         .primary-btn:hover {
             transform: translateY(-3px);
             box-shadow: 0 15px 40px rgba(255, 255, 255, 0.12);
-        }
-
-        .hero-image {
-            min-width: 0;
-            animation: slideRight 1s ease both;
-        }
-
-        .hero-image img {
-            width: 100%;
-            height: auto;
-            max-height: 600px;
-
-            object-fit: contain;
-
-            filter: drop-shadow(0 30px 50px rgba(0, 0, 0, 0.5));
-
-            animation: floating 5s ease-in-out infinite;
         }
 
         /* =========================
@@ -813,14 +804,13 @@
                 text-align: center;
             }
 
+            .hero-content {
+                margin: auto;
+            }
+
             .hero p {
                 margin-left: auto;
                 margin-right: auto;
-            }
-
-            .hero-image {
-                max-width: 750px;
-                margin: auto;
             }
 
             .overview-grid {
@@ -920,9 +910,15 @@
             .hero {
                 padding: 110px 20px 50px;
 
-                min-height: auto;
+                min-height: 100vh;
 
                 gap: 30px;
+
+                background-position: center center;
+            }
+
+            .hero-content {
+                max-width: 100%;
             }
 
             .hero h1 {
@@ -932,10 +928,6 @@
 
             .hero p {
                 font-size: 15px;
-            }
-
-            .hero-image img {
-                max-height: 400px;
             }
 
             section {
@@ -1110,14 +1102,6 @@
                     data-i18n="heroButton">
                     Explore Solutions ↓
                 </a>
-
-            </div>
-
-            <div class="hero-image">
-
-                <img
-                    src="assets/page_1.jpg"
-                    alt="Commercial Pickup">
 
             </div>
 
@@ -2212,8 +2196,6 @@
 
             document.documentElement.lang = language;
 
-            /* Translate normal text */
-
             document
                 .querySelectorAll("[data-i18n]")
                 .forEach(element => {
@@ -2230,8 +2212,6 @@
 
                 });
 
-
-            /* Translate placeholders */
 
             document
                 .querySelectorAll("[data-i18n-placeholder]")
@@ -2252,8 +2232,6 @@
                 });
 
 
-            /* Update buttons */
-
             document
                 .querySelectorAll(".lang-btn")
                 .forEach(button => {
@@ -2265,8 +2243,6 @@
 
                 });
 
-
-            /* Save selected language */
 
             try {
 
@@ -2283,8 +2259,6 @@
 
             }
 
-
-            /* Re-render solution cards */
 
             renderSolutions();
 
@@ -2739,4 +2713,4 @@
 
 </body>
 
-</html>
+</html> 
