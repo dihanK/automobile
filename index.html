@@ -3,12 +3,13 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <title>Customized Commercial Pickup Solutions</title>
 
     <style>
         * {
-            box-sizing: border-box
+            box-sizing: border-box;
         }
 
         html {
@@ -18,9 +19,9 @@
 
         body {
             margin: 0;
-            font-family: Inter, system-ui, Arial;
-            color: #09283b;
-            background: #f6f8fa;
+            font-family: Inter, Arial, Helvetica, sans-serif;
+            background: #f4f7f9;
+            color: #102b3b;
             overflow-x: hidden;
         }
 
@@ -28,345 +29,545 @@
             max-width: 100%;
         }
 
-        a {
-            color: inherit;
-            text-decoration: none
+        button {
+            font-family: inherit;
         }
 
         /* =========================
            NAVIGATION
         ========================= */
 
-        .nav {
+        .navbar {
             position: fixed;
-            z-index: 20;
             top: 0;
             left: 0;
-            right: 0;
-            background: #071e2def;
-            color: white;
+            width: 100%;
+            height: 78px;
+            z-index: 1000;
+
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 14px 5vw
+
+            padding: 0 5%;
+
+            background: rgba(5, 24, 36, .92);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+
+            border-bottom: 1px solid rgba(255, 255, 255, .08);
         }
 
         .brand {
-            font-weight: 900;
-            letter-spacing: .08em;
-            font-size: 14px
-        }
-
-        .navlinks {
-            display: flex;
-            gap: 24px;
-            font-size: 13px;
-            font-weight: 700
-        }
-
-        .navlinks a {
-            transition: color .2s ease, transform .2s ease;
-        }
-
-        .navlinks a:hover {
-            color: #f3b52b;
-            transform: translateY(-1px);
-        }
-
-        .menu-btn {
-            display: none;
-            background: transparent;
-            border: 0;
             color: white;
-            font-size: 28px;
-            line-height: 1;
-            cursor: pointer;
-            padding: 4px 8px;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 900;
+            letter-spacing: 1.5px;
+            white-space: nowrap;
         }
 
-        /* LANGUAGE BUTTON */
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+
+        .nav-links a {
+            color: rgba(255, 255, 255, .82);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 700;
+            transition: .25s ease;
+        }
+
+        .nav-links a:hover {
+            color: #f3b52b;
+        }
+
+        /* LANGUAGE */
 
         .language-switcher {
             display: flex;
+            align-items: center;
             gap: 5px;
-            margin-left: auto;
-            margin-right: 18px;
+            padding: 4px;
+            background: rgba(255, 255, 255, .08);
+            border-radius: 30px;
         }
 
         .lang-btn {
-            border: 1px solid #ffffff55;
+            border: none;
             background: transparent;
-            color: white;
+            color: rgba(255, 255, 255, .7);
             padding: 7px 11px;
-            border-radius: 8px;
+            border-radius: 20px;
+            cursor: pointer;
             font-size: 11px;
             font-weight: 800;
-            cursor: pointer;
-            transition: .2s ease;
+            transition: .25s ease;
         }
 
-        .lang-btn:hover,
         .lang-btn.active {
             background: #f3b52b;
             color: #09283b;
-            border-color: #f3b52b;
+        }
+
+        /* MOBILE MENU */
+
+        .menu-btn {
+            display: none;
+            width: 43px;
+            height: 43px;
+            border: 1px solid rgba(255, 255, 255, .18);
+            background: rgba(255, 255, 255, .08);
+            border-radius: 10px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .menu-btn span {
+            display: block;
+            width: 21px;
+            height: 2px;
+            background: white;
+            margin: 4px auto;
+            transition: .3s ease;
+        }
+
+        .menu-btn.active span:nth-child(1) {
+            transform: translateY(6px) rotate(45deg);
+        }
+
+        .menu-btn.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-btn.active span:nth-child(3) {
+            transform: translateY(-6px) rotate(-45deg);
         }
 
         /* =========================
-           HERO / IMAGE BACKGROUND
+           HERO
         ========================= */
 
         .hero {
             min-height: 100vh;
-            min-height: 100svh;
-            display: grid;
-            place-items: center;
             position: relative;
+            display: flex;
+            align-items: center;
             overflow: hidden;
-            background: #071d2a;
+            background: #071e2d;
         }
 
-        /*
-         * PAGE 1 IS NOW A TRUE BACKGROUND
-         * The image fills the entire hero area.
-         */
-
-        .hero img {
+        .hero-image {
             position: absolute;
-            z-index: 0;
             inset: 0;
             width: 100%;
             height: 100%;
-
-            /* IMPORTANT */
             object-fit: cover;
-            object-position: center center;
-
+            object-position: center;
             opacity: .55;
-
-            animation: heroZoom 16s ease-in-out infinite alternate;
-
-            pointer-events: none;
+            animation: heroZoom 15s ease-in-out infinite alternate;
         }
 
-        /*
-         * DARK OVERLAY ABOVE IMAGE
-         * BUT BELOW THE TEXT
-         */
-
-        .hero:after {
-            content: "";
+        .hero-overlay {
             position: absolute;
-            z-index: 1;
             inset: 0;
-
             background:
-                linear-gradient(
-                    90deg,
-                    rgba(4, 22, 32, .92) 0%,
-                    rgba(4, 22, 32, .65) 45%,
-                    rgba(4, 22, 32, .35) 100%
-                );
+                linear-gradient(90deg,
+                    rgba(5, 24, 36, .9) 0%,
+                    rgba(5, 24, 36, .65) 45%,
+                    rgba(5, 24, 36, .25) 100%);
         }
 
         .hero-content {
             position: relative;
             z-index: 2;
-            color: white;
-            width: min(1100px, 90%);
+            width: min(1150px, 90%);
+            margin: auto;
             padding-top: 70px;
+            animation: heroContentIn 1s ease forwards;
         }
 
         .eyebrow {
+            display: inline-block;
             color: #f3b52b;
+            font-size: 12px;
             font-weight: 900;
-            letter-spacing: .18em;
-            font-size: 12px
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 16px;
         }
 
-        h1 {
-            font-size: clamp(44px, 7vw, 86px);
-            line-height: .95;
-            max-width: 800px;
-            margin: 18px 0
+        .hero h1 {
+            color: white;
+            font-size: clamp(42px, 6vw, 82px);
+            line-height: .98;
+            max-width: 850px;
+            margin: 0 0 25px;
+            letter-spacing: -3px;
         }
 
         .hero p {
-            font-size: clamp(17px, 2vw, 23px);
             max-width: 650px;
-            color: #dce8ee
+            color: rgba(255, 255, 255, .82);
+            font-size: 18px;
+            line-height: 1.7;
+            margin: 0 0 35px;
         }
 
-        .btn {
+        .primary-btn {
             display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 15px 25px;
+            border: none;
+            border-radius: 8px;
+
             background: #f3b52b;
             color: #09283b;
-            padding: 14px 20px;
-            border-radius: 999px;
+
+            font-size: 13px;
             font-weight: 900;
-            margin-top: 16px
+
+            cursor: pointer;
+            text-decoration: none;
+
+            transition: .3s ease;
+        }
+
+        .primary-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, .25);
         }
 
         /* =========================
            SECTIONS
         ========================= */
 
-        .section {
-            padding: 90px 5vw
+        section {
+            padding: 100px 5%;
         }
 
-        .section-head {
-            max-width: 850px;
-            margin-bottom: 34px
+        .section-inner {
+            width: min(1150px, 100%);
+            margin: auto;
         }
 
-        .section-head h2 {
+        .section-title {
+            max-width: 750px;
+        }
+
+        .section-title h2 {
             font-size: clamp(32px, 4vw, 52px);
-            margin: 8px 0
+            line-height: 1.05;
+            margin: 0 0 20px;
+            letter-spacing: -1.5px;
         }
 
-        .section-head p {
-            color: #61717d;
-            font-size: 17px;
-            line-height: 1.6
+        .section-title p {
+            color: #637582;
+            line-height: 1.7;
+            font-size: 16px;
+            margin: 0;
+        }
+
+        /* =========================
+           OVERVIEW
+        ========================= */
+
+        .overview {
+            background: white;
+        }
+
+        .overview-grid {
+            display: grid;
+            grid-template-columns: 1.15fr .85fr;
+            gap: 70px;
+            align-items: center;
+        }
+
+        .overview-text {
+            color: #637582;
+            font-size: 16px;
+            line-height: 1.8;
+            margin-top: 25px;
         }
 
         .stats {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 14px
-        }
-
-        .stat,
-        .card,
-        .spec {
-            background: white;
-            border: 1px solid #e0e7eb;
-            box-shadow: 0 10px 30px #08283d10
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
         }
 
         .stat {
-            border-radius: 18px;
-            padding: 22px
+            padding: 28px 20px;
+            background: #f4f7f9;
+            border-radius: 14px;
+            border: 1px solid #e3eaee;
+            transition: .3s ease;
         }
 
-        .stat b {
-            font-size: 27px;
+        .stat:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(8, 35, 52, .08);
+        }
+
+        .stat strong {
             display: block;
-            color: #07558a
+            color: #0b3045;
+            font-size: 29px;
+            margin-bottom: 8px;
         }
 
         .stat span {
-            color: #61717d;
-            font-size: 13px
+            color: #758591;
+            font-size: 12px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: .7px;
         }
 
         /* =========================
            SPECIFICATIONS
         ========================= */
 
-        .specs {
+        .specifications {
+            background: #edf2f5;
+        }
+
+        .spec-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 50px;
         }
 
-        .spec {
-            padding: 18px 20px;
-            border-radius: 12px;
-            display: flex;
-            justify-content: space-between;
-            gap: 20px
+        .spec-item {
+            background: white;
+            padding: 21px 24px;
+            border-radius: 10px;
+            border: 1px solid #e0e7eb;
+            display: grid;
+            grid-template-columns: 42% 58%;
+            gap: 10px;
+            transition: .25s ease;
         }
 
-        .spec span {
-            color: #61717d
+        .spec-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(8, 35, 52, .06);
         }
 
-        .spec strong {
-            text-align: right
+        .spec-name {
+            color: #71818b;
+            font-size: 12px;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+
+        .spec-value {
+            color: #173b50;
+            font-size: 14px;
+            font-weight: 700;
+            line-height: 1.5;
         }
 
         /* =========================
            SOLUTIONS
         ========================= */
 
-        .toolbar {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-            margin-bottom: 24px
-        }
-
-        .search {
-            flex: 1;
-            min-width: 230px;
-            padding: 14px 18px;
-            border-radius: 12px;
-            border: 1px solid #d5dfe5;
-            font: inherit
-        }
-
-        .filter {
-            padding: 12px 16px;
-            border: 1px solid #d5dfe5;
+        .solutions {
             background: white;
-            border-radius: 12px;
-            font-weight: 700
         }
 
-        .grid {
+        .solution-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+            gap: 30px;
+            margin-bottom: 35px;
+        }
+
+        .search-box {
+            width: 300px;
+            max-width: 100%;
+            padding: 14px 17px;
+            border: 1px solid #dce5ea;
+            border-radius: 10px;
+            outline: none;
+            font-size: 13px;
+            background: #f7f9fa;
+            transition: .25s ease;
+        }
+
+        .search-box:focus {
+            border-color: #f3b52b;
+            box-shadow: 0 0 0 3px rgba(243, 181, 43, .12);
+        }
+
+        .cards {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
         }
 
         .card {
-            border-radius: 20px;
+            background: white;
+            border: 1px solid #e1e8ec;
+            border-radius: 15px;
             overflow: hidden;
-            transition: .25s
+            transition: .35s ease;
+            box-shadow: 0 5px 20px rgba(5, 30, 45, .04);
         }
 
         .card:hover {
-            transform: translateY(-5px)
+            transform: translateY(-8px);
+            box-shadow: 0 18px 40px rgba(5, 30, 45, .12);
         }
 
-        .card img {
+        .card-image {
             width: 100%;
-            aspect-ratio: 16/10;
+            aspect-ratio: 16 / 10;
             object-fit: cover;
-            display: block
+            display: block;
+        }
+
+        /* =========================
+           BAKERY SLIDER
+        ========================= */
+
+        .card-slider {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .card-slider img {
+            width: 100%;
+            aspect-ratio: 16 / 10;
+            object-fit: cover;
+            display: block;
+            transition: opacity .18s ease;
+        }
+
+        .slider-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+
+            width: 40px;
+            height: 40px;
+
+            border: 0;
+            border-radius: 50%;
+
+            background: rgba(7, 30, 45, .78);
+            color: white;
+
+            font-size: 30px;
+            line-height: 1;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            cursor: pointer;
+            z-index: 5;
+
+            padding: 0;
+            transition: .25s ease;
+        }
+
+        .slider-arrow:hover {
+            background: #f3b52b;
+            color: #09283b;
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .slider-arrow.prev {
+            left: 12px;
+        }
+
+        .slider-arrow.next {
+            right: 12px;
+        }
+
+        .slider-counter {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+
+            background: rgba(7, 30, 45, .78);
+            color: white;
+
+            padding: 5px 11px;
+            border-radius: 20px;
+
+            font-size: 11px;
+            font-weight: 800;
+
+            z-index: 5;
         }
 
         .card-body {
-            padding: 20px
+            padding: 20px;
         }
 
         .tag {
-            font-size: 10px;
-            letter-spacing: .16em;
+            display: inline-block;
+            color: #c38a00;
+            background: #fff6d9;
+            padding: 5px 8px;
+            border-radius: 5px;
+            font-size: 9px;
             font-weight: 900;
-            color: #07558a
+            letter-spacing: .7px;
+            margin-bottom: 11px;
         }
 
         .card h3 {
-            font-size: 22px;
-            margin: 7px 0
+            margin: 0 0 8px;
+            font-size: 17px;
+            color: #14384c;
         }
 
         .card p {
-            color: #61717d;
+            color: #778690;
+            font-size: 13px;
             line-height: 1.5;
-            min-height: 48px
+            min-height: 39px;
+            margin: 0 0 18px;
         }
 
         .card button {
-            border: 0;
+            border: none;
             background: none;
-            color: #07558a;
-            font-weight: 900;
+            color: #0a4968;
             padding: 0;
-            cursor: pointer
+            font-size: 12px;
+            font-weight: 900;
+            cursor: pointer;
+        }
+
+        .card button:hover {
+            color: #c38a00;
+        }
+
+        .no-results {
+            display: none;
+            padding: 50px;
+            text-align: center;
+            color: #788891;
         }
 
         /* =========================
@@ -374,22 +575,39 @@
         ========================= */
 
         .gallery {
-            display: grid;
-            grid-template-columns: 1.3fr .7fr;
-            gap: 16px
+            background: #071e2d;
+            color: white;
         }
 
-        .gallery img {
+        .gallery .section-title p {
+            color: rgba(255, 255, 255, .65);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-top: 45px;
+        }
+
+        .gallery-item {
+            overflow: hidden;
+            border-radius: 10px;
+            cursor: pointer;
+            aspect-ratio: 4 / 3;
+            background: #102d3d;
+        }
+
+        .gallery-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            border-radius: 18px
+            display: block;
+            transition: transform .5s ease;
         }
 
-        .gallery .small {
-            display: grid;
-            gap: 16px;
-            grid-template-rows: 1fr 1fr
+        .gallery-item:hover img {
+            transform: scale(1.08);
         }
 
         /* =========================
@@ -397,27 +615,40 @@
         ========================= */
 
         .cta {
-            background: #09283b;
-            color: white;
+            background: #f3b52b;
             text-align: center;
-            padding: 80px 5vw
         }
 
         .cta h2 {
-            font-size: clamp(32px, 4vw, 55px);
-            margin: 0 0 12px
+            margin: 0 auto 15px;
+            max-width: 750px;
+            font-size: clamp(30px, 4vw, 48px);
+            line-height: 1.05;
+            color: #09283b;
         }
 
         .cta p {
-            color: #bfd0da
+            max-width: 650px;
+            margin: 0 auto 28px;
+            color: rgba(9, 40, 59, .75);
+            line-height: 1.7;
         }
 
+        .cta .primary-btn {
+            background: #09283b;
+            color: white;
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
         footer {
-            padding: 24px 5vw;
-            background: #041720;
-            color: #8fa4af;
+            background: #041620;
+            color: rgba(255, 255, 255, .55);
+            text-align: center;
+            padding: 30px 20px;
             font-size: 12px;
-            text-align: center
         }
 
         /* =========================
@@ -427,67 +658,134 @@
         .modal {
             position: fixed;
             inset: 0;
-            background: #000c;
-            z-index: 50;
+            background: rgba(2, 15, 23, .86);
+            backdrop-filter: blur(8px);
+            z-index: 2000;
+
             display: none;
             align-items: center;
             justify-content: center;
-            padding: 20px
+
+            padding: 25px;
         }
 
-        .modal.open {
-            display: flex
+        .modal.active {
+            display: flex;
         }
 
-        .modal-box {
-            background: white;
-            max-width: 1050px;
-            width: 100%;
+        .modal-content {
+            width: min(950px, 100%);
             max-height: 90vh;
-            overflow: auto;
-            border-radius: 24px;
-            position: relative;
-            display: grid;
-            grid-template-columns: 1fr 1fr
-        }
-
-        .modal-box img {
-            width: 100%;
-            height: 100%;
-            min-height: 420px;
-            object-fit: cover
-        }
-
-        .modal-info {
-            padding: 40px
-        }
-
-        .close {
-            position: absolute;
-            right: 14px;
-            top: 14px;
-            border: 0;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
+            overflow-y: auto;
             background: white;
-            font-size: 22px;
-            cursor: pointer
+            border-radius: 18px;
+            position: relative;
+            animation: modalIn .35s ease;
         }
 
-        .modal-info h2 {
-            font-size: 36px;
-            margin: 10px 0
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+
+            width: 42px;
+            height: 42px;
+
+            border: none;
+            border-radius: 50%;
+
+            background: rgba(5, 24, 36, .82);
+            color: white;
+
+            font-size: 24px;
+            cursor: pointer;
+
+            z-index: 10;
         }
 
-        .modal-info p {
-            color: #61717d;
-            line-height: 1.7
+        .modal-image-wrapper {
+            position: relative;
+            background: #071e2d;
         }
 
-        .modal-info li {
-            margin: 10px 0;
-            color: #42545f
+        .modal-image {
+            width: 100%;
+            max-height: 550px;
+            object-fit: contain;
+            display: block;
+        }
+
+        .modal-body {
+            padding: 30px;
+        }
+
+        .modal-body h2 {
+            margin: 0 0 8px;
+            color: #14384c;
+        }
+
+        .modal-body h4 {
+            margin: 0 0 20px;
+            color: #c38a00;
+        }
+
+        .modal-body p {
+            color: #657681;
+            line-height: 1.8;
+            white-space: pre-line;
+        }
+
+        .modal-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+
+            width: 45px;
+            height: 45px;
+
+            border: none;
+            border-radius: 50%;
+
+            background: rgba(7, 30, 45, .8);
+            color: white;
+
+            font-size: 30px;
+            cursor: pointer;
+
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-arrow:hover {
+            background: #f3b52b;
+            color: #09283b;
+        }
+
+        .modal-arrow.prev {
+            left: 15px;
+        }
+
+        .modal-arrow.next {
+            right: 15px;
+        }
+
+        .modal-image-counter {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+
+            background: rgba(7, 30, 45, .8);
+            color: white;
+
+            padding: 6px 12px;
+            border-radius: 20px;
+
+            font-size: 11px;
+            font-weight: 800;
+
+            display: none;
         }
 
         /* =========================
@@ -500,7 +798,7 @@
             }
 
             to {
-                transform: scale(1.06);
+                transform: scale(1.08);
             }
         }
 
@@ -516,96 +814,16 @@
             }
         }
 
-        @keyframes navIn {
+        @keyframes modalIn {
             from {
                 opacity: 0;
-                transform: translateY(-100%);
+                transform: scale(.94) translateY(15px);
             }
 
             to {
                 opacity: 1;
-                transform: translateY(0);
+                transform: scale(1) translateY(0);
             }
-        }
-
-        @keyframes floatButton {
-
-            0%,
-            100% {
-                transform: translateY(0);
-            }
-
-            50% {
-                transform: translateY(-5px);
-            }
-        }
-
-        @keyframes menuIn {
-            from {
-                opacity: 0;
-                transform: translateY(-8px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .nav {
-            animation: navIn .7s ease both;
-        }
-
-        .hero-content {
-            animation: heroContentIn 1s .2s ease both;
-        }
-
-        .hero-content .eyebrow {
-            animation: heroContentIn .8s .35s ease both;
-        }
-
-        .hero-content h1 {
-            animation: heroContentIn .9s .5s ease both;
-        }
-
-        .hero-content p {
-            animation: heroContentIn .9s .65s ease both;
-        }
-
-        .hero-content .btn {
-            animation:
-                heroContentIn .9s .8s ease both,
-                floatButton 3s 2s ease-in-out infinite;
-        }
-
-        .stat {
-            transition: transform .25s ease, box-shadow .25s ease;
-        }
-
-        .stat:hover {
-            transform: translateY(-7px);
-            box-shadow: 0 18px 38px #08283d20;
-        }
-
-        .card {
-            transition: transform .3s ease, box-shadow .3s ease;
-        }
-
-        .card img {
-            transition: transform .5s ease;
-        }
-
-        .card:hover img {
-            transform: scale(1.045);
-        }
-
-        .gallery img {
-            transition: transform .5s ease, filter .5s ease;
-        }
-
-        .gallery img:hover {
-            transform: scale(1.025);
-            filter: brightness(1.04);
         }
 
         .reveal {
@@ -619,12 +837,232 @@
             transform: translateY(0);
         }
 
-        .card.reveal {
-            transition-delay: var(--delay, 0s);
+        /* =========================
+           TABLET
+        ========================= */
+
+        @media (max-width: 1000px) {
+
+            .cards {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .overview-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
         }
 
         /* =========================
-           TABLET / MOBILE
+           MOBILE
+        ========================= */
+
+        @media (max-width: 800px) {
+
+            .navbar {
+                height: 70px;
+                padding: 0 18px;
+            }
+
+            .brand {
+                font-size: 11px;
+                letter-spacing: 1px;
+            }
+
+            .menu-btn {
+                display: block;
+            }
+
+            .nav-right {
+                gap: 10px;
+            }
+
+            .nav-links {
+                position: absolute;
+                top: 70px;
+                left: 12px;
+                right: 12px;
+
+                display: none;
+                flex-direction: column;
+                align-items: stretch;
+
+                gap: 0;
+
+                padding: 10px;
+
+                background: rgba(5, 24, 36, .97);
+                backdrop-filter: blur(15px);
+
+                border-radius: 14px;
+                border: 1px solid rgba(255, 255, 255, .1);
+
+                box-shadow: 0 20px 40px rgba(0, 0, 0, .25);
+            }
+
+            .nav-links.active {
+                display: flex;
+                animation: menuIn .25s ease;
+            }
+
+            .nav-links a {
+                padding: 15px;
+                border-radius: 8px;
+            }
+
+            .nav-links a:hover {
+                background: rgba(255, 255, 255, .07);
+            }
+
+            .language-switcher {
+                margin-right: 3px;
+            }
+
+            @keyframes menuIn {
+                from {
+                    opacity: 0;
+                    transform: translateY(-8px);
+                }
+
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            section {
+                padding: 75px 20px;
+            }
+
+            .hero-content {
+                padding-top: 60px;
+            }
+
+            .hero h1 {
+                letter-spacing: -1.5px;
+            }
+
+            .hero p {
+                font-size: 15px;
+            }
+
+            .solution-top {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .search-box {
+                width: 100%;
+            }
+
+            .cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .spec-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* =========================
+           SMALL MOBILE
+        ========================= */
+
+        @media (max-width: 520px) {
+
+            .brand {
+                max-width: 170px;
+                white-space: normal;
+                line-height: 1.2;
+            }
+
+            .language-switcher {
+                gap: 2px;
+            }
+
+            .lang-btn {
+                padding: 6px 8px;
+                font-size: 10px;
+            }
+
+            .hero {
+                min-height: 100svh;
+            }
+
+            .hero-overlay {
+                background:
+                    linear-gradient(180deg,
+                        rgba(5, 24, 36, .7),
+                        rgba(5, 24, 36, .9));
+            }
+
+            .hero h1 {
+                font-size: 43px;
+            }
+
+            .hero p {
+                font-size: 14px;
+                line-height: 1.65;
+            }
+
+            .stats {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .stat {
+                padding: 20px 14px;
+            }
+
+            .stat strong {
+                font-size: 23px;
+            }
+
+            .stat span {
+                font-size: 9px;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .spec-item {
+                grid-template-columns: 1fr;
+                gap: 6px;
+            }
+
+            .modal {
+                padding: 10px;
+            }
+
+            .modal-body {
+                padding: 22px;
+            }
+
+            .modal-body h2 {
+                font-size: 24px;
+            }
+
+            .slider-arrow {
+                width: 36px;
+                height: 36px;
+                font-size: 25px;
+            }
+        }
+
+        /* =========================
+           REDUCED MOTION
         ========================= */
 
         @media (prefers-reduced-motion: reduce) {
@@ -640,265 +1078,6 @@
                 animation-iteration-count: 1 !important;
                 transition-duration: .01ms !important;
             }
-
-            .reveal {
-                opacity: 1;
-                transform: none;
-            }
-        }
-
-        @media(max-width:800px) {
-
-            .nav {
-                padding: 13px 5vw;
-                min-height: 58px;
-            }
-
-            .brand {
-                font-size: 11px;
-                max-width: calc(100% - 160px);
-                overflow: hidden;
-                text-overflow: ellipsis;
-                white-space: nowrap;
-            }
-
-            .menu-btn {
-                display: block;
-            }
-
-            .language-switcher {
-                margin-left: auto;
-                margin-right: 8px;
-            }
-
-            .lang-btn {
-                padding: 6px 8px;
-                font-size: 10px;
-            }
-
-            .navlinks {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                background: #071e2d;
-                flex-direction: column;
-                align-items: stretch;
-                gap: 0;
-                padding: 8px 5vw 18px;
-                box-shadow: 0 10px 25px #0004;
-            }
-
-            .navlinks.active {
-                display: flex;
-                animation: menuIn .25s ease both;
-            }
-
-            .navlinks a {
-                width: 100%;
-                padding: 15px 0;
-                border-bottom: 1px solid #ffffff20;
-            }
-
-            .navlinks a:last-child {
-                border-bottom: 0;
-            }
-
-            .hero {
-                min-height: 100svh;
-            }
-
-            /*
-             * Mobile background
-             * keeps the image behind the text
-             */
-
-            .hero img {
-                object-fit: cover;
-                object-position: center center;
-                opacity: .50;
-            }
-
-            .hero:after {
-                background:
-                    linear-gradient(
-                        180deg,
-                        rgba(4, 22, 32, .82) 0%,
-                        rgba(4, 22, 32, .58) 50%,
-                        rgba(4, 22, 32, .88) 100%
-                    );
-            }
-
-            .hero-content {
-                width: 90%;
-                padding-top: 60px;
-            }
-
-            h1 {
-                font-size: clamp(38px, 10vw, 64px);
-                max-width: 100%;
-            }
-
-            .hero p {
-                font-size: 17px;
-                max-width: 100%;
-            }
-
-            .stats,
-            .grid {
-                grid-template-columns: 1fr 1fr
-            }
-
-            .specs {
-                grid-template-columns: 1fr
-            }
-
-            .spec {
-                flex-direction: column;
-                gap: 7px;
-            }
-
-            .spec span,
-            .spec strong {
-                width: 100%;
-                text-align: left;
-            }
-
-            .gallery {
-                grid-template-columns: 1fr;
-                min-height: auto;
-            }
-
-            .gallery>img {
-                height: auto;
-                aspect-ratio: 16 / 10;
-            }
-
-            .gallery .small {
-                grid-template-columns: 1fr 1fr;
-                grid-template-rows: none;
-                min-height: 220px;
-            }
-
-            .modal {
-                padding: 12px;
-            }
-
-            .modal-box {
-                grid-template-columns: 1fr;
-                max-height: 94vh;
-                border-radius: 18px;
-            }
-
-            .modal-box img {
-                min-height: 230px;
-                max-height: 320px
-            }
-
-            .modal-info {
-                padding: 25px;
-            }
-
-            .modal-info h2 {
-                font-size: 30px;
-            }
-        }
-
-        @media(max-width:560px) {
-
-            .nav {
-                padding: 12px 4vw;
-            }
-
-            .brand {
-                font-size: 10px;
-                letter-spacing: .05em;
-                max-width: calc(100% - 145px);
-            }
-
-            .hero-content {
-                width: 90%;
-                padding-top: 55px;
-            }
-
-            .eyebrow {
-                font-size: 10px;
-                letter-spacing: .13em;
-            }
-
-            h1 {
-                font-size: clamp(36px, 11vw, 52px);
-                line-height: .98;
-            }
-
-            .hero p {
-                font-size: 16px;
-                line-height: 1.55;
-            }
-
-            .section {
-                padding: 60px 5vw;
-            }
-
-            .stats,
-            .grid {
-                grid-template-columns: 1fr
-            }
-
-            .search {
-                width: 100%;
-                min-width: 0;
-            }
-
-            .gallery {
-                gap: 12px;
-            }
-
-            .gallery .small {
-                grid-template-columns: 1fr;
-                gap: 12px;
-                min-height: auto;
-            }
-
-            .gallery .small img {
-                aspect-ratio: 16 / 10;
-                height: auto;
-            }
-
-            .cta {
-                padding: 65px 5vw;
-            }
-
-            .modal {
-                padding: 8px;
-            }
-
-            .modal-box {
-                max-height: 96vh;
-                border-radius: 16px;
-            }
-
-            .modal-box img {
-                min-height: 190px;
-                max-height: 260px;
-            }
-
-            .modal-info {
-                padding: 22px;
-            }
-
-            .modal-info h2 {
-                font-size: 27px;
-            }
-
-            .close {
-                width: 36px;
-                height: 36px;
-                font-size: 20px;
-                right: 10px;
-                top: 10px;
-            }
         }
     </style>
 </head>
@@ -906,51 +1085,66 @@
 <body>
 
     <!-- =========================
-         NAVIGATION
+         NAVBAR
     ========================= -->
 
-    <nav class="nav">
+    <nav class="navbar">
 
-        <div class="brand" data-i18n="brand">
+        <a href="#overview" class="brand" data-i18n="brand">
             COMMERCIAL PICKUP SOLUTIONS
-        </div>
+        </a>
 
-        <button class="menu-btn"
-            id="menuBtn"
-            aria-label="Open navigation menu"
-            aria-expanded="false">☰</button>
+        <div class="nav-right">
 
-        <div class="language-switcher">
+            <div class="nav-links" id="navLinks">
 
-            <button id="langEN"
-                class="lang-btn active">
-                English
+                <a href="#overview" data-i18n="navOverview">
+                    Overview
+                </a>
+
+                <a href="#specifications" data-i18n="navSpecs">
+                    Specifications
+                </a>
+
+                <a href="#solutions" data-i18n="navSolutions">
+                    Solutions
+                </a>
+
+                <a href="#gallery" data-i18n="navGallery">
+                    Gallery
+                </a>
+
+            </div>
+
+            <div class="language-switcher">
+
+                <button
+                    id="langEN"
+                    class="lang-btn active"
+                    type="button">
+                    English
+                </button>
+
+                <button
+                    id="langSI"
+                    class="lang-btn"
+                    type="button">
+                    සිංහල
+                </button>
+
+            </div>
+
+            <button
+                class="menu-btn"
+                id="menuBtn"
+                type="button"
+                aria-label="Open navigation">
+
+                <span></span>
+                <span></span>
+                <span></span>
+
             </button>
-
-            <button id="langSI"
-                class="lang-btn">
-                සිංහල
-            </button>
-
-        </div>
-
-        <div class="navlinks" id="navLinks">
-
-            <a href="#overview" data-i18n="navOverview">
-                Overview
-            </a>
-
-            <a href="#specs" data-i18n="navSpecs">
-                Specifications
-            </a>
-
-            <a href="#solutions" data-i18n="navSolutions">
-                Solutions
-            </a>
-
-            <a href="#gallery" data-i18n="navGallery">
-                Gallery
-            </a>
 
         </div>
 
@@ -963,29 +1157,32 @@
 
     <header class="hero">
 
-        <!-- PAGE 1 IS THE BACKGROUND -->
-        <img src="assets/page_1.jpg"
-            alt="Commercial Pickup">
+        <img
+            class="hero-image"
+            src="assets/page_1.jpg"
+            alt="Commercial pickup vehicle">
 
-        <!-- TEXT IS ABOVE IMAGE -->
+        <div class="hero-overlay"></div>
+
         <div class="hero-content">
 
-            <div class="eyebrow"
-                data-i18n="heroEyebrow">
-                INTELLIGENT MODIFICATION FRAMEWORK
-            </div>
+            <span class="eyebrow" data-i18n="heroEyebrow">
+                SMART MODIFICATION SOLUTIONS
+            </span>
 
             <h1 data-i18n="heroTitle">
                 Customized Commercial Pickup Solutions
             </h1>
 
             <p data-i18n="heroText">
-                Smart modifications for every business need — from cargo transport
-                to mobile retail and specialized utility vehicles.
+                From cargo transportation to mobile shops and specialized
+                utility vehicles, explore smart modification solutions
+                designed around different business requirements.
             </p>
 
-            <a class="btn"
+            <a
                 href="#solutions"
+                class="primary-btn"
                 data-i18n="heroButton">
                 Explore solutions ↓
             </a>
@@ -999,47 +1196,70 @@
          OVERVIEW
     ========================= -->
 
-    <section id="overview" class="section">
+    <section class="overview" id="overview">
 
-        <div class="section-head">
+        <div class="section-inner">
 
-            <div class="eyebrow"
-                data-i18n="overviewEyebrow">
-                APE XTRA LDX
-            </div>
+            <div class="overview-grid">
 
-            <h2 data-i18n="overviewTitle">
-                A compact platform built for business.
-            </h2>
+                <div class="reveal">
 
-            <p data-i18n="overviewText">
-                The supplied presentation identifies the Ape XTRA LDX with a
-                435 cc diesel engine, 4-speed constant mesh gearbox and 5.5 Ft
-                cargo bed, providing a base for a wide range of commercial applications.
-            </p>
+                    <span class="eyebrow" data-i18n="overviewEyebrow">
+                        APE XTRA LDX
+                    </span>
 
-        </div>
+                    <div class="section-title">
 
-        <div class="stats">
+                        <h2 data-i18n="overviewTitle">
+                            A compact vehicle platform built for business.
+                        </h2>
 
-            <div class="stat">
-                <b>435 cc</b>
-                <span data-i18n="stat1">Engine Capacity</span>
-            </div>
+                    </div>
 
-            <div class="stat">
-                <b>8 HP</b>
-                <span data-i18n="stat2">Maximum power</span>
-            </div>
+                    <p
+                        class="overview-text"
+                        data-i18n="overviewText">
+                        Based on the supplied presentation, the Ape XTRA LDX
+                        features a 435 cc diesel engine, a 4-speed constant
+                        mesh gearbox and a 5.5 Ft cargo bed. It provides a
+                        practical platform for different commercial needs.
+                    </p>
 
-            <div class="stat">
-                <b>55 km/h</b>
-                <span data-i18n="stat3">Maximum speed</span>
-            </div>
+                </div>
 
-            <div class="stat">
-                <b>5.5 Ft</b>
-                <span data-i18n="stat4">Cargo bed length</span>
+
+                <div class="stats reveal">
+
+                    <div class="stat">
+                        <strong>435 cc</strong>
+                        <span data-i18n="stat1">
+                            Displacement
+                        </span>
+                    </div>
+
+                    <div class="stat">
+                        <strong>8 HP</strong>
+                        <span data-i18n="stat2">
+                            Maximum power
+                        </span>
+                    </div>
+
+                    <div class="stat">
+                        <strong>55 km/h</strong>
+                        <span data-i18n="stat3">
+                            Maximum speed
+                        </span>
+                    </div>
+
+                    <div class="stat">
+                        <strong>5.5 Ft</strong>
+                        <span data-i18n="stat4">
+                            Cargo bed length
+                        </span>
+                    </div>
+
+                </div>
+
             </div>
 
         </div>
@@ -1051,148 +1271,195 @@
          SPECIFICATIONS
     ========================= -->
 
-    <section id="specs"
-        class="section"
-        style="background:#eef3f6">
+    <section
+        class="specifications"
+        id="specifications">
 
-        <div class="section-head">
+        <div class="section-inner">
 
-            <div class="eyebrow"
-                data-i18n="specEyebrow">
-                TECHNICAL DETAILS
-            </div>
+            <div class="section-title reveal">
 
-            <h2 data-i18n="specTitle">
-                A quick specification view
-            </h2>
-
-            <p data-i18n="specText">
-                Specifications reproduced from the supplied presentation.
-            </p>
-
-        </div>
-
-        <div class="specs">
-
-            <div class="spec">
-                <span data-i18n="s1">Engine Type</span>
-                <strong data-i18n="v1">
-                    BSIII Single cylinder, naturally aspirated, air-cooled,
-                    direct injection, 4-stroke
-                </strong>
-            </div>
-
-            <div class="spec">
-                <span data-i18n="s2">Engine Capacity</span>
-                <strong>435 cc</strong>
-            </div>
-
-            <div class="spec">
-                <span data-i18n="s3">Maximum Power</span>
-                <strong>8 HP @ 3600±50 RPM</strong>
-            </div>
-
-            <div class="spec">
-                <span data-i18n="s4">Maximum Torque</span>
-                <strong>18 Nm @ 2200 to 2400 RPM</strong>
-            </div>
-
-            <div class="spec">
-                <span data-i18n="s5">Fuel Type</span>
-                <strong data-i18n="v5">
-                    High-speed diesel
-                </strong>
-            </div>
-
-            <div class="spec">
-                <span data-i18n="s6">Cooling System</span>
-                <strong data-i18n="v6">
-                    Forced air-cooled
-                </strong>
-            </div>
-
-            <div class="spec">
-                <span data-i18n="s7">Clutch</span>
-                <strong data-i18n="v7">
-                    Wet, multi-disc
-                </strong>
-            </div>
-
-            <div class="spec">
-                <span data-i18n="s8">Transmission</span>
-                <strong data-i18n="v8">
-                    4-speed, constant mesh gearbox
-                </strong>
-            </div>
-
-            <div class="spec">
-                <span data-i18n="s9">Maximum Speed</span>
-                <strong>55 Kms / hr</strong>
-            </div>
-
-            <div class="spec">
-                <span data-i18n="s10">
-                    Fuel Consumption*
+                <span class="eyebrow" data-i18n="specEyebrow">
+                    TECHNICAL DETAILS
                 </span>
-                <strong>36 + 4 Kms / ltr</strong>
+
+                <h2 data-i18n="specTitle">
+                    Technical Specifications
+                </h2>
+
+                <p data-i18n="specText">
+                    Technical specifications taken from the supplied
+                    presentation.
+                </p>
+
             </div>
 
-            <div class="spec">
-                <span data-i18n="s11">
-                    Fuel Tank Capacity
-                </span>
-                <strong>10.5 Liters</strong>
-            </div>
 
-            <div class="spec">
-                <span data-i18n="s12">
-                    Max Gross Vehicle Weight (GVW)
-                </span>
-                <strong>975 Kgs</strong>
-            </div>
+            <div class="spec-grid reveal">
 
-            <div class="spec">
-                <span data-i18n="s13">
-                    Unladen Weight
-                </span>
-                <strong>438 Kgs</strong>
-            </div>
+                <div class="spec-item">
+                    <div class="spec-name" data-i18n="s1">
+                        Engine Type
+                    </div>
+                    <div class="spec-value">
+                        BSIII Single cylinder, naturally aspirated,
+                        air-cooled, direct injection, 4-stroke
+                    </div>
+                </div>
 
-            <div class="spec">
-                <span data-i18n="s14">
-                    Dimensions (L × W × H)
-                </span>
-                <strong>
-                    3145 mm × 1490 mm × 1635 mm
-                </strong>
-            </div>
+                <div class="spec-item">
+                    <div class="spec-name" data-i18n="s2">
+                        Displacement
+                    </div>
+                    <div class="spec-value">
+                        435 cc
+                    </div>
+                </div>
 
-            <div class="spec">
-                <span data-i18n="s15">
-                    Wheel Base
-                </span>
-                <strong>2100 mm</strong>
-            </div>
+                <div class="spec-item">
+                    <div class="spec-name" data-i18n="s3">
+                        Maximum Power
+                    </div>
+                    <div class="spec-value">
+                        8 HP @ 3600±50 RPM
+                    </div>
+                </div>
 
-            <div class="spec">
-                <span data-i18n="s16">
-                    Ground Clearance
-                </span>
-                <strong>240 mm</strong>
-            </div>
+                <div class="spec-item">
+                    <div class="spec-name" data-i18n="s4">
+                        Maximum Torque
+                    </div>
+                    <div class="spec-value">
+                        18 Nm @ 2200 to 2400 RPM
+                    </div>
+                </div>
 
-            <div class="spec">
-                <span data-i18n="s17">
-                    Max Gradeability (Climbing)
-                </span>
-                <strong>22.16%</strong>
-            </div>
+                <div class="spec-item">
+                    <div class="spec-name" data-i18n="s5">
+                        Fuel Type
+                    </div>
+                    <div class="spec-value">
+                        High-speed diesel
+                    </div>
+                </div>
 
-            <div class="spec">
-                <span data-i18n="s18">
-                    Cargo Bed Length
-                </span>
-                <strong>5.5 Ft</strong>
+                <div class="spec-item">
+                    <div class="spec-name" data-i18n="s6">
+                        Cooling System
+                    </div>
+                    <div class="spec-value">
+                        Forced air-cooled
+                    </div>
+                </div>
+
+                <div class="spec-item">
+                    <div class="spec-name" data-i18n="s7">
+                        Clutch
+                    </div>
+                    <div class="spec-value">
+                        Wet, multi-disc
+                    </div>
+                </div>
+
+                <div class="spec-item">
+                    <div class="spec-name" data-i18n="s8">
+                        Transmission
+                    </div>
+                    <div class="spec-value">
+                        4-speed, constant mesh gearbox
+                    </div>
+                </div>
+
+                <div class="spec-item">
+                    <div class="spec-name" data-i18n="s9">
+                        Maximum Speed
+                    </div>
+                    <div class="spec-value">
+                        55 Kms / hr
+                    </div>
+                </div>
+
+                <div class="spec-item">
+                    <div class="spec-name" data-i18n="s10">
+                        Fuel Consumption*
+                    </div>
+                    <div class="spec-value">
+                        36 + 4 Kms / ltr
+                    </div>
+                </div>
+
+                <div class="spec-item">
+                    <div class="spec-name" data-i18n="s11">
+                        Fuel Tank Capacity
+                    </div>
+                    <div class="spec-value">
+                        10.5 Liters
+                    </div>
+                </div>
+
+                <div class="spec-item">
+                    <div class="spec-name" data-i18n="s12">
+                        Max Gross Vehicle Weight (GVW)
+                    </div>
+                    <div class="spec-value">
+                        975 Kgs
+                    </div>
+                </div>
+
+                <div class="spec-item">
+                    <div class="spec-name" data-i18n="s13">
+                        Unladen Weight
+                    </div>
+                    <div class="spec-value">
+                        438 Kgs
+                    </div>
+                </div>
+
+                <div class="spec-item">
+                    <div class="spec-name" data-i18n="s14">
+                        Dimensions (L × W × H)
+                    </div>
+                    <div class="spec-value">
+                        3145 mm × 1490 mm × 1635 mm
+                    </div>
+                </div>
+
+                <div class="spec-item">
+                    <div class="spec-name" data-i18n="s15">
+                        Wheel Base
+                    </div>
+                    <div class="spec-value">
+                        2100 mm
+                    </div>
+                </div>
+
+                <div class="spec-item">
+                    <div class="spec-name" data-i18n="s16">
+                        Ground Clearance
+                    </div>
+                    <div class="spec-value">
+                        240 mm
+                    </div>
+                </div>
+
+                <div class="spec-item">
+                    <div class="spec-name" data-i18n="s17">
+                        Max Gradeability (Climbing)
+                    </div>
+                    <div class="spec-value">
+                        22.16%
+                    </div>
+                </div>
+
+                <div class="spec-item">
+                    <div class="spec-name" data-i18n="s18">
+                        Cargo Bed Length
+                    </div>
+                    <div class="spec-value">
+                        5.5 Ft
+                    </div>
+                </div>
+
             </div>
 
         </div>
@@ -1202,534 +1469,697 @@
 
     <!-- =========================
          SOLUTIONS
+         HYDRAULIC HOPPER REMOVED
     ========================= -->
 
-    <section id="solutions"
-        class="section">
+    <section
+        class="solutions"
+        id="solutions">
 
-        <div class="section-head">
+        <div class="section-inner">
 
-            <div class="eyebrow"
-                data-i18n="solutionsEyebrow">
-                CARGO APPLICATIONS
+            <div class="solution-top">
+
+                <div class="section-title reveal">
+
+                    <span
+                        class="eyebrow"
+                        data-i18n="solutionsEyebrow">
+                        COMMERCIAL APPLICATIONS
+                    </span>
+
+                    <h2 data-i18n="solutionsTitle">
+                        One Pickup. Many Business Needs.
+                    </h2>
+
+                    <p data-i18n="solutionsText">
+                        Explore the commercial body and utility solutions
+                        shown in the presentation.
+                    </p>
+
+                </div>
+
+
+                <input
+                    type="search"
+                    class="search-box"
+                    id="searchInput"
+                    data-i18n-placeholder="search"
+                    placeholder="Search solutions…">
+
             </div>
 
-            <h2 data-i18n="solutionsTitle">
-                One pickup. Many business models.
-            </h2>
 
-            <p data-i18n="solutionsText">
-                Explore the commercial body and utility concepts presented in the source document.
-            </p>
+            <div
+                class="cards"
+                id="cardsContainer">
 
-        </div>
 
-        <div class="toolbar">
+                <!-- 1 VEGETABLE -->
 
-            <input class="search"
-                id="search"
-                placeholder="Search solutions…">
+                <article
+                    class="card reveal"
+                    data-title="vegetable shop vehicle">
 
-        </div>
+                    <img
+                        class="card-image"
+                        src="assets/page_5.jpg"
+                        alt="Vegetable Shop Vehicle">
 
+                    <div class="card-body">
 
-        <div class="grid" id="grid">
+                        <span
+                            class="tag"
+                            data-i18n="application">
+                            APPLICATION
+                        </span>
 
+                        <h3 data-i18n="c1">
+                            Vegetable Shop Vehicle
+                        </h3>
 
-            <article class="card"
-                data-title="vegetable shop vehicle">
+                        <p data-i18n="p1">
+                            Fresh produce delivered efficiently
+                        </p>
 
-                <img src="assets/page_5.jpg"
-                    alt="Vegetable Shop Vehicle">
+                        <button
+                            type="button"
+                            onclick="openModal(0)"
+                            data-i18n="view">
+                            View solution →
+                        </button>
 
-                <div class="card-body">
+                    </div>
 
-                    <span class="tag"
-                        data-i18n="application">
-                        APPLICATION
-                    </span>
+                </article>
 
-                    <h3 data-i18n="c1">
-                        Vegetable Shop Vehicle
-                    </h3>
 
-                    <p data-i18n="p1">
-                        Fresh produce delivered efficiently
-                    </p>
+                <!-- 2 FISH -->
 
-                    <button onclick="openModal(0)"
-                        data-i18n="view">
-                        View solution →
-                    </button>
+                <article
+                    class="card reveal"
+                    data-title="fish delivery vehicle">
 
-                </div>
+                    <img
+                        class="card-image"
+                        src="assets/page_15.jpg"
+                        alt="Fish Delivery Vehicle">
 
-            </article>
+                    <div class="card-body">
 
+                        <span
+                            class="tag"
+                            data-i18n="application">
+                            APPLICATION
+                        </span>
 
-            <article class="card"
-                data-title="fish delivery vehicle">
+                        <h3 data-i18n="c2">
+                            Fish Delivery Vehicle
+                        </h3>
 
-                <img src="assets/page_15.jpg"
-                    alt="Fish Delivery Vehicle">
+                        <p data-i18n="p2">
+                            Fresh seafood, delivered and displayed on the move
+                        </p>
 
-                <div class="card-body">
+                        <button
+                            type="button"
+                            onclick="openModal(1)"
+                            data-i18n="view">
+                            View solution →
+                        </button>
 
-                    <span class="tag"
-                        data-i18n="application">
-                        APPLICATION
-                    </span>
+                    </div>
 
-                    <h3 data-i18n="c2">
-                        Fish Delivery Vehicle
-                    </h3>
+                </article>
 
-                    <p data-i18n="p2">
-                        Fresh seafood, delivered and displayed on the move
-                    </p>
 
-                    <button onclick="openModal(1)"
-                        data-i18n="view">
-                        View solution →
-                    </button>
+                <!-- 3 BAKERY -->
 
-                </div>
+                <article
+                    class="card reveal"
+                    data-title="bakery mobile unit">
 
-            </article>
+                    <div class="card-slider">
 
+                        <img
+                            id="bakeryImage"
+                            src="assets/page_6.jpg"
+                            alt="Bakery Mobile Unit">
 
-            <article class="card"
-                data-title="bakery mobile unit">
+                        <button
+                            class="slider-arrow prev"
+                            type="button"
+                            aria-label="Previous bakery image"
+                            onclick="event.stopPropagation(); changeBakeryImage(-1)">
+                            ‹
+                        </button>
 
-                <img src="assets/page_6.jpg"
-                    alt="Bakery Mobile Unit">
+                        <button
+                            class="slider-arrow next"
+                            type="button"
+                            aria-label="Next bakery image"
+                            onclick="event.stopPropagation(); changeBakeryImage(1)">
+                            ›
+                        </button>
 
-                <div class="card-body">
+                        <div
+                            class="slider-counter"
+                            id="bakeryCounter">
+                            1 / 2
+                        </div>
 
-                    <span class="tag"
-                        data-i18n="application">
-                        APPLICATION
-                    </span>
+                    </div>
 
-                    <h3 data-i18n="c3">
-                        Bakery Mobile Unit
-                    </h3>
 
-                    <p data-i18n="p3">
-                        Freshness Delivered Anywhere
-                    </p>
+                    <div class="card-body">
 
-                    <button onclick="openModal(2)"
-                        data-i18n="view">
-                        View solution →
-                    </button>
+                        <span
+                            class="tag"
+                            data-i18n="application">
+                            APPLICATION
+                        </span>
 
-                </div>
+                        <h3 data-i18n="c3">
+                            Bakery Mobile Unit
+                        </h3>
 
-            </article>
+                        <p data-i18n="p3">
+                            Freshness Delivered Anywhere
+                        </p>
 
+                        <button
+                            type="button"
+                            onclick="openModal(2)"
+                            data-i18n="view">
+                            View solution →
+                        </button>
 
-            <article class="card"
-                data-title="gas cylinder carrier">
+                    </div>
 
-                <img src="assets/page_7.jpg"
-                    alt="Gas Cylinder Carrier">
+                </article>
 
-                <div class="card-body">
 
-                    <span class="tag"
-                        data-i18n="application">
-                        APPLICATION
-                    </span>
+                <!-- 4 GAS -->
 
-                    <h3 data-i18n="c4">
-                        Gas Cylinder Carrier
-                    </h3>
+                <article
+                    class="card reveal"
+                    data-title="gas cylinder carrier">
 
-                    <p data-i18n="p4">
-                        Built for strength and safety
-                    </p>
+                    <img
+                        class="card-image"
+                        src="assets/page_7.jpg"
+                        alt="Gas Cylinder Carrier">
 
-                    <button onclick="openModal(3)"
-                        data-i18n="view">
-                        View solution →
-                    </button>
+                    <div class="card-body">
 
-                </div>
+                        <span
+                            class="tag"
+                            data-i18n="application">
+                            APPLICATION
+                        </span>
 
-            </article>
+                        <h3 data-i18n="c4">
+                            Gas Cylinder Carrier
+                        </h3>
 
+                        <p data-i18n="p4">
+                            Built for strength and safety
+                        </p>
 
-            <article class="card"
-                data-title="milk tankers">
+                        <button
+                            type="button"
+                            onclick="openModal(3)"
+                            data-i18n="view">
+                            View solution →
+                        </button>
 
-                <img src="assets/page_8.jpg"
-                    alt="Milk Tankers">
+                    </div>
 
-                <div class="card-body">
+                </article>
 
-                    <span class="tag"
-                        data-i18n="application">
-                        APPLICATION
-                    </span>
 
-                    <h3 data-i18n="c5">
-                        Milk Tankers
-                    </h3>
+                <!-- 5 MILK -->
 
-                    <p data-i18n="p5">
-                        Food-grade insulated transport
-                    </p>
+                <article
+                    class="card reveal"
+                    data-title="milk tankers">
 
-                    <button onclick="openModal(4)"
-                        data-i18n="view">
-                        View solution →
-                    </button>
+                    <img
+                        class="card-image"
+                        src="assets/page_8.jpg"
+                        alt="Milk Tankers">
 
-                </div>
+                    <div class="card-body">
 
-            </article>
+                        <span
+                            class="tag"
+                            data-i18n="application">
+                            APPLICATION
+                        </span>
 
+                        <h3 data-i18n="c5">
+                            Milk Tankers
+                        </h3>
 
-            <article class="card"
-                data-title="egg transport solution">
+                        <p data-i18n="p5">
+                            Food-grade insulated transport
+                        </p>
 
-                <img src="assets/page_9.jpg"
-                    alt="Egg Transport Solution">
+                        <button
+                            type="button"
+                            onclick="openModal(4)"
+                            data-i18n="view">
+                            View solution →
+                        </button>
 
-                <div class="card-body">
+                    </div>
 
-                    <span class="tag"
-                        data-i18n="application">
-                        APPLICATION
-                    </span>
+                </article>
 
-                    <h3 data-i18n="c6">
-                        Egg Transport Solution
-                    </h3>
 
-                    <p data-i18n="p6">
-                        Safe delivery for delicate products
-                    </p>
+                <!-- 6 EGG -->
 
-                    <button onclick="openModal(5)"
-                        data-i18n="view">
-                        View solution →
-                    </button>
+                <article
+                    class="card reveal"
+                    data-title="egg transport solution">
 
-                </div>
+                    <div class="card-slider">
 
-            </article>
+                        <img
+                            id="eggImage"
+                            src="assets/page_21.jpg"
+                            alt="Egg Transport Solution">
 
+                        <button
+                            class="slider-arrow prev"
+                            type="button"
+                            aria-label="Previous egg image"
+                            id="eggPrev">
+                            ‹
+                        </button>
 
-            <article class="card"
-                data-title="ice cream sales vehicle">
+                        <button
+                            class="slider-arrow next"
+                            type="button"
+                            aria-label="Next egg image"
+                            id="eggNext">
+                            ›
+                        </button>
 
-                <img src="assets/page_10.jpg"
-                    alt="Ice Cream Sales Vehicle">
+                        <div
+                            class="slider-counter"
+                            id="eggCounter">
+                            1 / 3
+                        </div>
 
-                <div class="card-body">
+                    </div>
 
-                    <span class="tag"
-                        data-i18n="application">
-                        APPLICATION
-                    </span>
+                    <div class="card-body">
 
-                    <h3 data-i18n="c7">
-                        Ice Cream Sales Vehicle
-                    </h3>
+                        <span
+                            class="tag"
+                            data-i18n="application">
+                            APPLICATION
+                        </span>
 
-                    <p data-i18n="p7">
-                        Cool treats, anywhere you go
-                    </p>
+                        <h3 data-i18n="c6">
+                            Egg Transport Solution
+                        </h3>
 
-                    <button onclick="openModal(6)"
-                        data-i18n="view">
-                        View solution →
-                    </button>
+                        <p data-i18n="p6">
+                            Safe delivery for delicate products
+                        </p>
 
-                </div>
+                        <button
+                            type="button"
+                            onclick="openModal(5)"
+                            data-i18n="view">
+                            View solution →
+                        </button>
 
-            </article>
+                    </div>
 
+                </article>
 
-            <article class="card"
-                data-title="delivery transport solution">
 
-                <img src="assets/page_10.jpg"
-                    alt="Delivery Transport Solution">
+                <!-- 7 ICE CREAM -->
 
-                <div class="card-body">
+                <article
+                    class="card reveal"
+                    data-title="ice cream sales vehicle">
 
-                    <span class="tag"
-                        data-i18n="application">
-                        APPLICATION
-                    </span>
+                    <img
+                        class="card-image"
+                        src="assets/page_10.jpg"
+                        alt="Ice Cream Sales Vehicle">
 
-                    <h3 data-i18n="c8">
-                        Delivery Transport Solution
-                    </h3>
+                    <div class="card-body">
 
-                    <p data-i18n="p8">
-                        Smart delivery solution for growing businesses
-                    </p>
+                        <span
+                            class="tag"
+                            data-i18n="application">
+                            APPLICATION
+                        </span>
 
-                    <button onclick="openModal(7)"
-                        data-i18n="view">
-                        View solution →
-                    </button>
+                        <h3 data-i18n="c7">
+                            Ice Cream Sales Vehicle
+                        </h3>
 
-                </div>
+                        <p data-i18n="p7">
+                            Cool treats, anywhere you go
+                        </p>
 
-            </article>
+                        <button
+                            type="button"
+                            onclick="openModal(6)"
+                            data-i18n="view">
+                            View solution →
+                        </button>
 
+                    </div>
 
-            <article class="card"
-                data-title="vacuum emptier">
+                </article>
 
-                <img src="assets/page_11.jpg"
-                    alt="Vacuum Emptier">
 
-                <div class="card-body">
+                <!-- 8 DELIVERY -->
 
-                    <span class="tag"
-                        data-i18n="application">
-                        APPLICATION
-                    </span>
+                <article
+                    class="card reveal"
+                    data-title="delivery transport solution">
 
-                    <h3 data-i18n="c9">
-                        Vacuum Emptier
-                    </h3>
+                    <img
+                        class="card-image"
+                        src="assets/page_17.jpg"
+                        alt="Delivery Transport Solution">
 
-                    <p data-i18n="p9">
-                        Efficient vacuum and sludge handling
-                    </p>
+                    <div class="card-body">
 
-                    <button onclick="openModal(8)"
-                        data-i18n="view">
-                        View solution →
-                    </button>
+                        <span
+                            class="tag"
+                            data-i18n="application">
+                            APPLICATION
+                        </span>
 
-                </div>
+                        <h3 data-i18n="c8">
+                            Delivery Transport Solution
+                        </h3>
 
-            </article>
+                        <p data-i18n="p8">
+                            Smart delivery solution for growing businesses
+                        </p>
 
+                        <button
+                            type="button"
+                            onclick="openModal(7)"
+                            data-i18n="view">
+                            View solution →
+                        </button>
 
-            <article class="card"
-                data-title="rexine canopy delivery truck">
+                    </div>
 
-                <img src="assets/page_11.jpg"
-                    alt="Rexine Canopy Delivery Truck">
+                </article>
 
-                <div class="card-body">
 
-                    <span class="tag"
-                        data-i18n="application">
-                        APPLICATION
-                    </span>
+                <!-- 9 VACUUM EMPTIER -->
 
-                    <h3 data-i18n="c10">
-                        Rexine Canopy Delivery Truck
-                    </h3>
+                <article
+                    class="card reveal"
+                    data-title="vacuum emptier">
 
-                    <p data-i18n="p10">
-                        Smart delivery solution for growing businesses
-                    </p>
+                    <img
+                        class="card-image"
+                        src="assets/page_18.jpg"
+                        alt="Vacuum Emptier">
 
-                    <button onclick="openModal(9)"
-                        data-i18n="view">
-                        View solution →
-                    </button>
+                    <div class="card-body">
 
-                </div>
+                        <span
+                            class="tag"
+                            data-i18n="application">
+                            APPLICATION
+                        </span>
 
-            </article>
+                        <h3 data-i18n="c9">
+                            Vacuum Emptier
+                        </h3>
 
+                        <p data-i18n="p9">
+                            Efficient vacuum and sludge handling
+                        </p>
 
-            <article class="card"
-                data-title="poultry transport unit">
+                        <button
+                            type="button"
+                            onclick="openModal(8)"
+                            data-i18n="view">
+                            View solution →
+                        </button>
 
-                <img src="assets/page_12.jpg"
-                    alt="Poultry Transport Unit">
+                    </div>
 
-                <div class="card-body">
+                </article>
 
-                    <span class="tag"
-                        data-i18n="application">
-                        APPLICATION
-                    </span>
 
-                    <h3 data-i18n="c11">
-                        Poultry Transport Unit
-                    </h3>
+                <!-- 10 REXINE -->
 
-                    <p data-i18n="p11">
-                        Comfortable and efficient livestock movement
-                    </p>
+                <article
+                    class="card reveal"
+                    data-title="rexine canopy delivery truck">
 
-                    <button onclick="openModal(10)"
-                        data-i18n="view">
-                        View solution →
-                    </button>
+                    <img
+                        class="card-image"
+                        src="assets/page_11.jpg"
+                        alt="Rexine Canopy Delivery Truck">
 
-                </div>
+                    <div class="card-body">
 
-            </article>
+                        <span
+                            class="tag"
+                            data-i18n="application">
+                            APPLICATION
+                        </span>
 
+                        <h3 data-i18n="c10">
+                            Rexine Canopy Delivery Truck
+                        </h3>
 
-            <article class="card"
-                data-title="garbage collection vehicle">
+                        <p data-i18n="p10">
+                            Smart delivery solution for growing businesses
+                        </p>
 
-                <img src="assets/page_12.jpg"
-                    alt="Garbage Collection Vehicle">
+                        <button
+                            type="button"
+                            onclick="openModal(9)"
+                            data-i18n="view">
+                            View solution →
+                        </button>
 
-                <div class="card-body">
+                    </div>
 
-                    <span class="tag"
-                        data-i18n="application">
-                        APPLICATION
-                    </span>
+                </article>
 
-                    <h3 data-i18n="c12">
-                        Garbage Collection Vehicle
-                    </h3>
 
-                    <p data-i18n="p12">
-                        Efficient waste management solution
-                    </p>
+                <!-- 11 POULTRY -->
 
-                    <button onclick="openModal(11)"
-                        data-i18n="view">
-                        View solution →
-                    </button>
+                <article
+                    class="card reveal"
+                    data-title="poultry transport unit">
 
-                </div>
+                    <img
+                        class="card-image"
+                        src="assets/page_12.jpg"
+                        alt="Poultry Transport Unit">
 
-            </article>
+                    <div class="card-body">
 
+                        <span
+                            class="tag"
+                            data-i18n="application">
+                            APPLICATION
+                        </span>
 
-            <article class="card"
-                data-title="mobile grocery shop">
+                        <h3 data-i18n="c11">
+                            Poultry Transport Unit
+                        </h3>
 
-                <img src="assets/page_13.jpg"
-                    alt="Mobile Grocery Shop">
+                        <p data-i18n="p11">
+                            Comfortable and efficient livestock movement
+                        </p>
 
-                <div class="card-body">
+                        <button
+                            type="button"
+                            onclick="openModal(10)"
+                            data-i18n="view">
+                            View solution →
+                        </button>
 
-                    <span class="tag"
-                        data-i18n="application">
-                        APPLICATION
-                    </span>
+                    </div>
 
-                    <h3 data-i18n="c13">
-                        Mobile Grocery Shop
-                    </h3>
+                </article>
 
-                    <p data-i18n="p13">
-                        Efficient and accessible mobile retail solutions
-                    </p>
 
-                    <button onclick="openModal(12)"
-                        data-i18n="view">
-                        View solution →
-                    </button>
+                <!-- 12 GARBAGE -->
 
-                </div>
+                <article
+                    class="card reveal"
+                    data-title="garbage collection vehicle">
 
-            </article>
+                    <img
+                        class="card-image"
+                        src="assets/page_19.jpg"
+                        alt="Garbage Collection Vehicle">
 
+                    <div class="card-body">
 
-            <article class="card"
-                data-title="food van">
+                        <span
+                            class="tag"
+                            data-i18n="application">
+                            APPLICATION
+                        </span>
 
-                <img src="assets/page_13.jpg"
-                    alt="Food Van">
+                        <h3 data-i18n="c12">
+                            Garbage Collection Vehicle
+                        </h3>
 
-                <div class="card-body">
+                        <p data-i18n="p12">
+                            Efficient waste management solution
+                        </p>
 
-                    <span class="tag"
-                        data-i18n="application">
-                        APPLICATION
-                    </span>
+                        <button
+                            type="button"
+                            onclick="openModal(11)"
+                            data-i18n="view">
+                            View solution →
+                        </button>
 
-                    <h3 data-i18n="c14">
-                        Food Van
-                    </h3>
+                    </div>
 
-                    <p data-i18n="p14">
-                        Ideal for street food operations
-                    </p>
+                </article>
 
-                    <button onclick="openModal(13)"
-                        data-i18n="view">
-                        View solution →
-                    </button>
 
-                </div>
+                <!-- 13 MOBILE GROCERY -->
 
-            </article>
+                <article
+                    class="card reveal"
+                    data-title="mobile grocery shop">
 
+                    <img
+                        class="card-image"
+                        src="assets/page_13.jpg"
+                        alt="Mobile Grocery Shop">
 
-            <article class="card"
-                data-title="hydraulic hopper">
+                    <div class="card-body">
 
-                <img src="assets/page_14.jpg"
-                    alt="Hydraulic Hopper">
+                        <span
+                            class="tag"
+                            data-i18n="application">
+                            APPLICATION
+                        </span>
 
-                <div class="card-body">
+                        <h3 data-i18n="c13">
+                            Mobile Grocery Shop
+                        </h3>
 
-                    <span class="tag"
-                        data-i18n="application">
-                        APPLICATION
-                    </span>
+                        <p data-i18n="p13">
+                            Efficient and accessible mobile retail solutions
+                        </p>
 
-                    <h3 data-i18n="c15">
-                        Hydraulic Hopper
-                    </h3>
+                        <button
+                            type="button"
+                            onclick="openModal(12)"
+                            data-i18n="view">
+                            View solution →
+                        </button>
 
-                    <p data-i18n="p15">
-                        Effortless and rapid bulk material lift
-                    </p>
+                    </div>
 
-                    <button onclick="openModal(14)"
-                        data-i18n="view">
-                        View solution →
-                    </button>
+                </article>
 
-                </div>
 
-            </article>
+                <!-- 14 FOOD VAN -->
 
+                <article
+                    class="card reveal"
+                    data-title="food van">
 
-            <article class="card"
-                data-title="soft drink carrier">
+                    <img
+                        class="card-image"
+                        src="assets/page_20.jpg"
+                        alt="Food Van">
 
-                <img src="assets/page_14.jpg"
-                    alt="Soft Drink Carrier">
+                    <div class="card-body">
 
-                <div class="card-body">
+                        <span
+                            class="tag"
+                            data-i18n="application">
+                            APPLICATION
+                        </span>
 
-                    <span class="tag"
-                        data-i18n="application">
-                        APPLICATION
-                    </span>
+                        <h3 data-i18n="c14">
+                            Food Van
+                        </h3>
 
-                    <h3 data-i18n="c16">
-                        Soft Drink Carrier
-                    </h3>
+                        <p data-i18n="p14">
+                            Ideal for street food operations
+                        </p>
 
-                    <p data-i18n="p16">
-                        Secure and optimized beverage crate distribution
-                    </p>
+                        <button
+                            type="button"
+                            onclick="openModal(13)"
+                            data-i18n="view">
+                            View solution →
+                        </button>
 
-                    <button onclick="openModal(15)"
-                        data-i18n="view">
-                        View solution →
-                    </button>
+                    </div>
 
-                </div>
+                </article>
 
-            </article>
+
+                <!-- 15 SOFT DRINK -->
+
+                <article
+                    class="card reveal"
+                    data-title="soft drink carrier">
+
+                    <img
+                        class="card-image"
+                        src="assets/page_14.jpg"
+                        alt="Soft Drink Carrier">
+
+                    <div class="card-body">
+
+                        <span
+                            class="tag"
+                            data-i18n="application">
+                            APPLICATION
+                        </span>
+
+                        <h3 data-i18n="c15">
+                            Soft Drink Carrier
+                        </h3>
+
+                        <p data-i18n="p15">
+                            Secure and optimized beverage crate distribution
+                        </p>
+
+                        <button
+                            type="button"
+                            onclick="openModal(14)"
+                            data-i18n="view">
+                            View solution →
+                        </button>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+
+            <div
+                class="no-results"
+                id="noResults">
+                No solutions found.
+            </div>
 
         </div>
 
@@ -1740,39 +2170,117 @@
          GALLERY
     ========================= -->
 
-    <section id="gallery"
-        class="section"
-        style="background:#eef3f6">
+    <section
+        class="gallery"
+        id="gallery">
 
-        <div class="section-head">
+        <div class="section-inner">
 
-            <div class="eyebrow"
-                data-i18n="galleryEyebrow">
-                VISUAL PRESENTATION
+            <div class="section-title reveal">
+
+                <span
+                    class="eyebrow"
+                    data-i18n="galleryEyebrow">
+                    VISUAL PRESENTATION
+                </span>
+
+                <h2 data-i18n="galleryTitle">
+                    Vehicle body concepts at a glance
+                </h2>
+
+                <p data-i18n="galleryText">
+                    The supplied presentation pages are used as a visual
+                    gallery.
+                </p>
+
             </div>
 
-            <h2 data-i18n="galleryTitle">
-                Body concepts at a glance
-            </h2>
 
-            <p data-i18n="galleryText">
-                Pages from the supplied presentation are used as the visual reference gallery.
-            </p>
+            <div class="gallery-grid reveal">
 
-        </div>
+                <div class="gallery-item">
+                    <img
+                        src="assets/page_3.jpg"
+                        alt="Commercial vehicle">
+                </div>
 
-        <div class="gallery">
+                <div class="gallery-item">
+                    <img
+                        src="assets/page_4.jpg"
+                        alt="Commercial vehicle">
+                </div>
 
-            <img src="assets/page_3.jpg"
-                alt="Cargo applications">
+                <div class="gallery-item">
+                    <img
+                        src="assets/page_5.jpg"
+                        alt="Vegetable vehicle">
+                </div>
 
-            <div class="small">
+                <div class="gallery-item">
+                    <img
+                        src="assets/page_6.jpg"
+                        alt="Bakery vehicle">
+                </div>
 
-                <img src="assets/page_4.jpg"
-                    alt="Cargo applications">
+                <div class="gallery-item">
+                    <img
+                        src="assets/page_7.jpg"
+                        alt="Gas carrier">
+                </div>
 
-                <img src="assets/page_10.jpg"
-                    alt="Vehicle applications">
+                <div class="gallery-item">
+                    <img
+                        src="assets/page_8.jpg"
+                        alt="Milk tanker">
+                </div>
+
+                <div class="gallery-item">
+                    <img
+                        src="assets/page_21.jpg"
+                        alt="Egg transport">
+                </div>
+
+                <div class="gallery-item">
+                    <img
+                        src="assets/page_10.jpg"
+                        alt="Commercial solution">
+                </div>
+
+                <div class="gallery-item">
+                    <img
+                        src="assets/page_18.jpg"
+                        alt="Vacuum Emptier">
+                </div>
+
+                <div class="gallery-item">
+                    <img
+                        src="assets/page_12.jpg"
+                        alt="Commercial solution">
+                </div>
+
+                <div class="gallery-item">
+                    <img
+                        src="assets/page_13.jpg"
+                        alt="Mobile shop">
+                </div>
+
+                <div class="gallery-item">
+                    <img
+                        src="assets/page_14.jpg"
+                        alt="Soft drink carrier">
+                </div>
+
+                <div class="gallery-item">
+                    <img
+                        src="assets/page_15.jpg"
+                        alt="Fish delivery">
+                </div>
+
+                <div class="gallery-item">
+                    <img
+                        src="assets/page_16.jpg"
+                        alt="Bakery vehicle">
+                </div>
 
             </div>
 
@@ -1787,26 +2295,35 @@
 
     <section class="cta">
 
-        <h2 data-i18n="ctaTitle">
-            Ready to present your pickup portfolio?
-        </h2>
+        <div class="section-inner reveal">
 
-        <p data-i18n="ctaText">
-            Use this page as a digital showroom or presentation-style website.
-            It works offline.
-        </p>
+            <h2 data-i18n="ctaTitle">
+                Ready to present your Pickup solutions?
+            </h2>
 
-        <a class="btn"
-            href="#solutions"
-            data-i18n="ctaButton">
-            Browse applications
-        </a>
+            <p data-i18n="ctaText">
+                This page can be used as a digital showroom or
+                presentation-style website. It also works offline.
+            </p>
+
+            <a
+                href="#solutions"
+                class="primary-btn"
+                data-i18n="ctaButton">
+                Explore applications
+            </a>
+
+        </div>
 
     </section>
 
 
+    <!-- =========================
+         FOOTER
+    ========================= -->
+
     <footer data-i18n="footer">
-        Customized Commercial Pickup Solutions • Digital presentation website
+        Commercial Pickup Solutions • Digital Presentation Website
     </footer>
 
 
@@ -1814,28 +2331,59 @@
          MODAL
     ========================= -->
 
-    <div class="modal"
-        id="modal">
+    <div
+        class="modal"
+        id="solutionModal">
 
-        <div class="modal-box">
+        <div class="modal-content">
 
-            <button class="close"
-                onclick="closeModal()">×</button>
+            <button
+                class="modal-close"
+                id="modalClose"
+                type="button"
+                aria-label="Close">
+                ×
+            </button>
 
-            <img id="mimg">
 
-            <div class="modal-info">
+            <div class="modal-image-wrapper">
 
-                <div class="eyebrow"
-                    id="modalApplication">
-                    APPLICATION
+                <img
+                    id="modalImage"
+                    class="modal-image"
+                    src=""
+                    alt="">
+
+                <button
+                    class="modal-arrow prev"
+                    id="modalPrev"
+                    type="button">
+                    ‹
+                </button>
+
+                <button
+                    class="modal-arrow next"
+                    id="modalNext"
+                    type="button">
+                    ›
+                </button>
+
+                <div
+                    class="modal-image-counter"
+                    id="modalCounter">
+                    1 / 1
                 </div>
 
-                <h2 id="mtitle"></h2>
+            </div>
 
-                <p id="msub"></p>
 
-                <ul id="mlist"></ul>
+            <div class="modal-body">
+
+                <h2 id="modalTitle"></h2>
+
+                <h4 id="modalSubtitle"></h4>
+
+                <p id="modalDetails"></p>
 
             </div>
 
@@ -1844,567 +2392,777 @@
     </div>
 
 
+    <!-- =========================
+         JAVASCRIPT
+    ========================= -->
+
     <script>
 
-        /* ==========================================
+        /* =========================
+           TRANSLATIONS
+        ========================= */
+
+        const translations = {
+
+            en: {
+
+                brand: "COMMERCIAL PICKUP SOLUTIONS",
+
+                navOverview: "Overview",
+                navSpecs: "Specifications",
+                navSolutions: "Solutions",
+                navGallery: "Gallery",
+
+                heroEyebrow:
+                    "SMART MODIFICATION SOLUTIONS",
+
+                heroTitle:
+                    "Customized Commercial Pickup Solutions",
+
+                heroText:
+                    "From cargo transportation to mobile shops and specialized utility vehicles, explore smart modification solutions designed around different business requirements.",
+
+                heroButton:
+                    "Explore solutions ↓",
+
+                overviewEyebrow:
+                    "APE XTRA LDX",
+
+                overviewTitle:
+                    "A compact vehicle platform built for business.",
+
+                overviewText:
+                    "Based on the supplied presentation, the Ape XTRA LDX features a 435 cc diesel engine, a 4-speed constant mesh gearbox and a 5.5 Ft cargo bed. It provides a practical platform for different commercial needs.",
+
+                stat1: "Displacement",
+                stat2: "Maximum power",
+                stat3: "Maximum speed",
+                stat4: "Cargo bed length",
+
+                specEyebrow:
+                    "TECHNICAL DETAILS",
+
+                specTitle:
+                    "Technical Specifications",
+
+                specText:
+                    "Technical specifications taken from the supplied presentation.",
+
+                s1: "Engine Type",
+                s2: "Displacement",
+                s3: "Maximum Power",
+                s4: "Maximum Torque",
+                s5: "Fuel Type",
+                s6: "Cooling System",
+                s7: "Clutch",
+                s8: "Transmission",
+                s9: "Maximum Speed",
+                s10: "Fuel Consumption*",
+                s11: "Fuel Tank Capacity",
+                s12: "Max Gross Vehicle Weight (GVW)",
+                s13: "Unladen Weight",
+                s14: "Dimensions (L × W × H)",
+                s15: "Wheel Base",
+                s16: "Ground Clearance",
+                s17: "Max Gradeability (Climbing)",
+                s18: "Cargo Bed Length",
+
+                solutionsEyebrow:
+                    "COMMERCIAL APPLICATIONS",
+
+                solutionsTitle:
+                    "One Pickup. Many Business Needs.",
+
+                solutionsText:
+                    "Explore the commercial body and utility solutions shown in the presentation.",
+
+                application:
+                    "APPLICATION",
+
+                view:
+                    "View solution →",
+
+                search:
+                    "Search solutions…",
+
+                galleryEyebrow:
+                    "VISUAL PRESENTATION",
+
+                galleryTitle:
+                    "Vehicle body concepts at a glance",
+
+                galleryText:
+                    "The supplied presentation pages are used as a visual gallery.",
+
+                ctaTitle:
+                    "Ready to present your Pickup solutions?",
+
+                ctaText:
+                    "This page can be used as a digital showroom or presentation-style website. It also works offline.",
+
+                ctaButton:
+                    "Explore applications",
+
+                footer:
+                    "Commercial Pickup Solutions • Digital Presentation Website",
+
+                c1: "Vegetable Shop Vehicle",
+                p1: "Fresh produce delivered efficiently",
+
+                c2: "Fish Delivery Vehicle",
+                p2: "Fresh seafood, delivered and displayed on the move",
+
+                c3: "Bakery Mobile Unit",
+                p3: "Freshness Delivered Anywhere",
+
+                c4: "Gas Cylinder Carrier",
+                p4: "Built for strength and safety",
+
+                c5: "Milk Tankers",
+                p5: "Food-grade insulated transport",
+
+                c6: "Egg Transport Solution",
+                p6: "Safe delivery for delicate products",
+
+                c7: "Ice Cream Sales Vehicle",
+                p7: "Cool treats, anywhere you go",
+
+                c8: "Delivery Transport Solution",
+                p8: "Smart delivery solution for growing businesses",
+
+                c9: "Vacuum Emptier",
+                p9: "Efficient vacuum and sludge handling",
+
+                c10: "Rexine Canopy Delivery Truck",
+                p10: "Smart delivery solution for growing businesses",
+
+                c11: "Poultry Transport Unit",
+                p11: "Comfortable and efficient livestock movement",
+
+                c12: "Garbage Collection Vehicle",
+                p12: "Efficient waste management solution",
+
+                c13: "Mobile Grocery Shop",
+                p13: "Efficient and accessible mobile retail solutions",
+
+                c14: "Food Van",
+                p14: "Ideal for street food operations",
+
+                c15: "Soft Drink Carrier",
+                p15: "Secure and optimized beverage crate distribution"
+
+            },
+
+
+            si: {
+
+                brand:
+                    "වාණිජ PICKUP විසඳුම්",
+
+                navOverview:
+                    "දළ විශ්ලේෂණය",
+
+                navSpecs:
+                    "තාක්ෂණික විස්තර",
+
+                navSolutions:
+                    "විසඳුම්",
+
+                navGallery:
+                    "ගැලරිය",
+
+                heroEyebrow:
+                    "බුද්ධිමත් නවීකරණ විසඳුම්",
+
+                heroTitle:
+                    "විවිධ ව්‍යාපාර සඳහා වාණිජ Pickup විසඳුම්",
+
+                heroText:
+                    "භාණ්ඩ ප්‍රවාහනයේ සිට ජංගම වෙළඳසැල් සහ විශේෂිත උපයෝගිතා වාහන දක්වා සෑම ව්‍යාපාරික අවශ්‍යතාවකටම ගැළපෙන නවීකරණ විසඳුම්.",
+
+                heroButton:
+                    "විසඳුම් බලන්න ↓",
+
+                overviewEyebrow:
+                    "APE XTRA LDX",
+
+                overviewTitle:
+                    "ව්‍යාපාර සඳහා නිර්මාණය කළ සංයුක්ත වාහන වේදිකාවක්.",
+
+                overviewText:
+                    "සපයා ඇති ඉදිරිපත් කිරීම අනුව Ape XTRA LDX රථය 435 cc ඩීසල් එන්ජිමක්, 4-speed constant mesh gearbox එකක් සහ අඩි 5.5 ක cargo bed එකකින් සමන්විත වේ. එය විවිධ වාණිජ අවශ්‍යතා සඳහා භාවිත කළ හැකි වේදිකාවක් සපයයි.",
+
+                stat1:
+                    "එන්ජින් ධාරිතාව",
+
+                stat2:
+                    "උපරිම බලය",
+
+                stat3:
+                    "උපරිම වේගය",
+
+                stat4:
+                    "භාණ්ඩ තට්ටුවේ දිග",
+
+                specEyebrow:
+                    "තාක්ෂණික විස්තර",
+
+                specTitle:
+                    "තාක්ෂණික පිරිවිතර",
+
+                specText:
+                    "සපයා ඇති ඉදිරිපත් කිරීමෙන් ලබාගත් තාක්ෂණික පිරිවිතර.",
+
+                s1:
+                    "එන්ජින් වර්ගය",
+
+                s2:
+                    "එන්ජින් ධාරිතාව",
+
+                s3:
+                    "උපරිම බලය",
+
+                s4:
+                    "උපරිම ව්‍යවර්ථය",
+
+                s5:
+                    "ඉන්ධන වර්ගය",
+
+                s6:
+                    "සිසිලන පද්ධතිය",
+
+                s7:
+                    "ක්ලච්",
+
+                s8:
+                    "ගියර් පද්ධතිය",
+
+                s9:
+                    "උපරිම වේගය",
+
+                s10:
+                    "ඉන්ධන පරිභෝජනය*",
+
+                s11:
+                    "ඉන්ධන ටැංකි ධාරිතාව",
+
+                s12:
+                    "උපරිම දළ වාහන බර (GVW)",
+
+                s13:
+                    "හිස් වාහන බර",
+
+                s14:
+                    "මානයන් (දිග × පළල × උස)",
+
+                s15:
+                    "රෝද අතර දුර",
+
+                s16:
+                    "බිම් නිෂ්කාශනය",
+
+                s17:
+                    "උපරිම කඳු නැගීමේ හැකියාව",
+
+                s18:
+                    "භාණ්ඩ තට්ටුවේ දිග",
+
+                solutionsEyebrow:
+                    "භාණ්ඩ ප්‍රවාහන යෙදුම්",
+
+                solutionsTitle:
+                    "එක් Pickup රථයක්. බොහෝ ව්‍යාපාරික අවශ්‍යතා.",
+
+                solutionsText:
+                    "ඉදිරිපත් කිරීමේ දක්වා ඇති වාණිජ body සහ utility විසඳුම් බලන්න.",
+
+                application:
+                    "යෙදුම",
+
+                view:
+                    "විසඳුම බලන්න →",
+
+                search:
+                    "විසඳුම් සොයන්න…",
+
+                galleryEyebrow:
+                    "දෘශ්‍ය ඉදිරිපත් කිරීම",
+
+                galleryTitle:
+                    "වාහන body සංකල්ප එකවර බලන්න",
+
+                galleryText:
+                    "සපයා ඇති ඉදිරිපත් කිරීමේ පිටු දෘශ්‍ය ගැලරිය ලෙස භාවිත කර ඇත.",
+
+                ctaTitle:
+                    "ඔබගේ Pickup විසඳුම් ඉදිරිපත් කිරීමට සූදානම්ද?",
+
+                ctaText:
+                    "මෙම පිටුව digital showroom එකක් හෝ presentation-style website එකක් ලෙස භාවිත කළ හැක. මෙය offline ද ක්‍රියා කරයි.",
+
+                ctaButton:
+                    "යෙදුම් බලන්න",
+
+                footer:
+                    "වාණිජ Pickup විසඳුම් • ඩිජිටල් ඉදිරිපත් කිරීමේ වෙබ් අඩවිය",
+
+                c1:
+                    "එළවළු වෙළඳසැල් වාහනය",
+
+                p1:
+                    "නැවුම් එළවළු කාර්යක්ෂමව බෙදාහැරීම",
+
+                c2:
+                    "මාළු බෙදාහැරීමේ වාහනය",
+
+                p2:
+                    "නැවුම් මුහුදු ආහාර ප්‍රවාහනය සහ ගමන් අතරතුර ප්‍රදර්ශනය",
+
+                c3:
+                    "බේකරි ජංගම ඒකකය",
+
+                p3:
+                    "නැවුම් බව ඕනෑම ස්ථානයකට",
+
+                c4:
+                    "ගෑස් සිලින්ඩර් ප්‍රවාහකය",
+
+                p4:
+                    "ශක්තිය සහ ආරක්ෂාව සඳහා නිර්මාණය කර ඇත",
+
+                c5:
+                    "කිරි ටැංකි",
+
+                p5:
+                    "ආහාර මට්ටමේ පරිවරණය කළ ප්‍රවාහනය",
+
+                c6:
+                    "බිත්තර ප්‍රවාහන විසඳුම",
+
+                p6:
+                    "සංවේදී නිෂ්පාදන සඳහා ආරක්ෂිත බෙදාහැරීම",
+
+                c7:
+                    "අයිස්ක්‍රීම් අලෙවි වාහනය",
+
+                p7:
+                    "ඔබ යන ඕනෑම තැනකට සිසිල් රසකැවිලි",
+
+                c8:
+                    "බෙදාහැරීමේ ප්‍රවාහන විසඳුම",
+
+                p8:
+                    "වර්ධනය වන ව්‍යාපාර සඳහා බුද්ධිමත් බෙදාහැරීමේ විසඳුම",
+
+                c9:
+                    "වැකුම් එම්ප්ටියර්",
+
+                p9:
+                    "කාර්යක්ෂම වැකුම් සහ මඩ ඉවත් කිරීමේ විසඳුම",
+
+                c10:
+                    "රෙක්සින් කැනපි බෙදාහැරීමේ රථය",
+
+                p10:
+                    "වර්ධනය වන ව්‍යාපාර සඳහා බුද්ධිමත් බෙදාහැරීමේ විසඳුම",
+
+                c11:
+                    "කුකුළු ප්‍රවාහන ඒකකය",
+
+                p11:
+                    "සුවපහසු සහ කාර්යක්ෂම සත්ව ප්‍රවාහනය",
+
+                c12:
+                    "කසළ එකතු කිරීමේ වාහනය",
+
+                p12:
+                    "කාර්යක්ෂම අපද්‍රව්‍ය කළමනාකරණ විසඳුම",
+
+                c13:
+                    "ජංගම සිල්ලර වෙළඳසැල",
+
+                p13:
+                    "කාර්යක්ෂම සහ පහසු ජංගම සිල්ලර වෙළඳ විසඳුම්",
+
+                c14:
+                    "ආහාර වෑන් රථය",
+
+                p14:
+                    "වීදි ආහාර ව්‍යාපාර සඳහා සුදුසුයි",
+
+                c15:
+                    "සිසිල් බීම ප්‍රවාහකය",
+
+                p15:
+                    "බීම පෙට්ටි ආරක්ෂිතව සහ කාර්යක්ෂමව බෙදාහැරීම"
+
+            }
+
+        };
+
+
+        /* =========================
            SOLUTION DATA
-        ========================================== */
+        ========================= */
 
         const solutions = [
 
             {
                 title: "Vegetable Shop Vehicle",
                 subtitle: "Fresh produce delivered efficiently",
-                details: "Attractive mobile vegetable display; Spacious storage for fresh produce; Easy customer access and serving; Ideal for roadside and mobile vegetable sales.",
+                details:
+                    "Designed for efficient fresh produce transportation and mobile selling. Provides convenient product access while allowing businesses to reach customers in different locations.",
                 image: "page_5.jpg"
             },
 
             {
                 title: "Fish Delivery Vehicle",
                 subtitle: "Fresh seafood, delivered and displayed on the move",
-                details: "Hygienic display and storage area; Designed to maintain product freshness; Convenient customer-serving setup; Ideal for mobile fish retail businesses.",
+                details:
+                    "Designed for fresh seafood transportation with a practical body layout for product display and delivery.",
                 image: "page_15.jpg"
             },
 
             {
                 title: "Bakery Mobile Unit",
                 subtitle: "Freshness Delivered Anywhere",
-                details: "Clear glass display for better product visibility; Strong body protects products from sun and rain; Easy to drive in small roads and busy areas; Attractive branding design to catch customer attention; Designed for efficient mobile bakery operations with smart storage and customer-friendly display solutions.",
-                image: "page_6.jpg"
+                details:
+                    "Clear glass display for better product visibility; Strong body protects products from sun and rain; Easy to drive in small roads and busy areas; Attractive branding design to catch customer attention; Designed for efficient mobile bakery operations with smart storage and customer-friendly display solutions.",
+                images: [
+                    "page_6.jpg",
+                    "page_16.jpg"
+                ]
             },
 
             {
                 title: "Gas Cylinder Carrier",
                 subtitle: "Built for strength and safety",
-                details: "Heavy-duty load capacity; Secure cylinder holding system; Safe and stable transportation; Designed for commercial distribution; Designed for safe and efficient gas cylinder transportation with secure storage and reliable delivery solutions.",
+                details:
+                    "A strong commercial body designed for safer and more organized gas cylinder transportation.",
                 image: "page_7.jpg"
             },
 
             {
                 title: "Milk Tankers",
                 subtitle: "Food-grade insulated transport",
-                details: "Outer Shell will be in M.S. Sheet; Inner Shell will be in SS 304 food grade; Insulation will be provided between inner & outer panels; Manhole will be provided with S.S. Lid.",
+                details:
+                    "Designed for practical milk transportation with an insulated tanker body suitable for commercial distribution.",
                 image: "page_8.jpg"
             },
 
             {
                 title: "Egg Transport Solution",
                 subtitle: "Safe delivery for delicate products",
-                details: "Shock-resistant rack system; Safe and secure transport; Reduces egg breakage; Ideal for farms & distributors; Designed for safe and efficient egg transportation with secure storage and damage-protection solutions.",
-                image: "page_9.jpg"
+                details:
+                    "A specialized transportation body designed to reduce product movement and provide safer egg delivery.",
+                images: [
+                    "page_21.jpg",
+                    "page_22.jpg",
+                    "page_23.jpg"
+                ]
             },
 
             {
                 title: "Ice Cream Sales Vehicle",
                 subtitle: "Cool treats, anywhere you go",
-                details: "Heavy-duty square tube structure with flex roof, side panels, and opening doors; Foldable SS counters on LH side and rear; Side and rear doors convertible into canopies; Branding panels provided on all four sides; Two 12V tube lights and one electrical charging point; Automotive paint finish matching the vehicle color; FRP/metal aerodynamic canopy above the driver's cabin.",
+                details:
+                    "A mobile sales solution designed for ice cream distribution and convenient customer access.",
                 image: "page_10.jpg"
             },
 
             {
                 title: "Delivery Transport Solution",
                 subtitle: "Smart delivery solution for growing businesses",
-                details: "Spacious cargo storage; Safe and secure goods transport; Ideal for daily business deliveries; Perfect for small & medium businesses.",
-                image: "page_10.jpg"
+                details:
+                    "A flexible commercial transportation body designed to support growing delivery operations.",
+                image: "page_17.jpg"
             },
 
             {
                 title: "Vacuum Emptier",
                 subtitle: "Efficient vacuum and sludge handling",
-                details: "Fresh Water Tank-In FRP/HDPE – 100 Lts.; Sludge Tank-In – MS 500 Ltrs. (Wall thickness 3 mm.); Auxiliary Engine – Greaves Make, 5 HP @ 3000 RPM, Air Cooled, 4 Stroke, Diesel Engine; Suction -Through Vacuum Pump; Suction Hose-Heavy duty PVC suction hose with strainer Dia. 50mm & 15 mtrs. Long; Hose Gallows-At rear side of vehicle.",
-                image: "page_11.jpg"
+                details:
+                    "A specialized utility solution designed for efficient vacuum operation and sludge handling.",
+                image: "page_18.jpg"
             },
 
             {
                 title: "Rexine Canopy Delivery Truck",
                 subtitle: "Smart delivery solution for growing businesses",
-                details: "Heavy-duty square tube frame with covered canopy body; Enclosed cargo area with rexine canopy for weather protection; Lockable rear double door for easy loading and unloading; Spacious body suitable for parcel and goods delivery; Fabricated body painted to match vehicle colour.",
+                details:
+                    "A practical canopy solution that provides additional protection for goods during transportation and delivery.",
                 image: "page_11.jpg"
             },
 
             {
                 title: "Poultry Transport Unit",
                 subtitle: "Comfortable and efficient livestock movement",
-                details: "Ventilated structure for airflow; Animal-friendly transport design; Easy loading & unloading; Suitable for farm operations.",
+                details:
+                    "Designed to support organized and practical poultry transportation.",
                 image: "page_12.jpg"
             },
 
             {
                 title: "Garbage Collection Vehicle",
                 subtitle: "Efficient waste management solution",
-                details: "Strong and durable body; Easy loading mechanism; Ideal for municipal use; Low maintenance design.",
-                image: "page_12.jpg"
+                details:
+                    "A utility body designed to improve the collection and transportation of waste materials.",
+                image: "page_19.jpg"
             },
 
             {
                 title: "Mobile Grocery Shop",
                 subtitle: "Efficient and accessible mobile retail solutions",
-                details: "Attractive mobile display; Spacious stock storage; Easy customer access; Ideal for roadside sales.",
+                details:
+                    "A mobile retail body designed to bring grocery products closer to customers in different locations.",
                 image: "page_13.jpg"
             },
 
             {
                 title: "Food Van",
                 subtitle: "Ideal for street food operations",
-                details: "Premium kitchen setup; Optimized storage space; Easy utility access; Ideal for street catering.",
-                image: "page_13.jpg"
-            },
-
-            {
-                title: "Hydraulic Hopper",
-                subtitle: "Effortless and rapid bulk material lift",
-                details: "Heavy-duty hydraulic lift; High-capacity cargo hopper; Swift automated unloading; Ideal for construction materials.",
-                image: "page_14.jpg"
+                details:
+                    "A compact mobile food solution designed for street food businesses and mobile food operations.",
+                image: "page_20.jpg"
             },
 
             {
                 title: "Soft Drink Carrier",
                 subtitle: "Secure and optimized beverage crate distribution",
-                details: "Specialized crate racking; High-capacity load layout; Quick side access; Ideal for beverage distribution.",
+                details:
+                    "A specialized carrier designed to organize and transport beverage crates efficiently.",
                 image: "page_14.jpg"
             }
 
         ];
 
 
-        /* ==========================================
-           SINHALA TRANSLATIONS
-        ========================================== */
+        /* =========================
+           EGG SLIDER - FIX
+        ========================= */
 
-        const sinhala = {
+        const eggImages = [
+            "page_21.jpg",
+            "page_22.jpg",
+            "page_23.jpg"
+        ];
 
-            brand: "වාණිජ PICKUP විසඳුම්",
+        let eggImageIndex = 0;
 
-            navOverview: "දළ විශ්ලේෂණය",
-            navSpecs: "තාක්ෂණික විස්තර",
-            navSolutions: "විසඳුම්",
-            navGallery: "ගැලරිය",
+        function changeEggImage(direction) {
+            const eggImage = document.getElementById("eggImage");
+            const eggCounter = document.getElementById("eggCounter");
 
-            heroEyebrow: "බුද්ධිමත් නවීකරණ විසඳුම්",
+            if (!eggImage || !eggCounter) return;
 
-            heroTitle:
-                "විවිධ ව්‍යාපාර සඳහා වාණිජ Pickup විසඳුම්",
+            eggImageIndex += direction;
 
-            heroText:
-                "භාණ්ඩ ප්‍රවාහනයේ සිට ජංගම වෙළඳසැල් සහ විශේෂිත උපයෝගිතා වාහන දක්වා සෑම ව්‍යාපාරික අවශ්‍යතාවකටම ගැළපෙන නවීකරණ විසඳුම්.",
+            if (eggImageIndex < 0) {
+                eggImageIndex = eggImages.length - 1;
+            }
 
-            heroButton:
-                "විසඳුම් බලන්න ↓",
+            if (eggImageIndex >= eggImages.length) {
+                eggImageIndex = 0;
+            }
 
-            overviewEyebrow:
-                "APE XTRA LDX",
+            eggImage.src = "assets/" + eggImages[eggImageIndex];
+            eggCounter.textContent =
+                (eggImageIndex + 1) + " / " + eggImages.length;
+        }
 
-            overviewTitle:
-                "ව්‍යාපාර සඳහා නිර්මාණය කළ සංයුක්ත වාහන වේදිකාවක්.",
+        document.getElementById("eggPrev").addEventListener("click", function(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            changeEggImage(-1);
+        });
 
-            overviewText:
-                "සපයා ඇති ඉදිරිපත් කිරීම අනුව Ape XTRA LDX රථය 435 cc ඩීසල් එන්ජිමක්, 4-speed constant mesh gearbox එකක් සහ අඩි 5.5 ක cargo bed එකකින් සමන්විත වේ. එය විවිධ වාණිජ අවශ්‍යතා සඳහා භාවිත කළ හැකි වේදිකාවක් සපයයි.",
-
-            stat1: "එන්ජින් ධාරිතාව",
-            stat2: "උපරිම බලය",
-            stat3: "උපරිම වේගය",
-            stat4: "භාණ්ඩ තට්ටුවේ දිග",
-
-            specEyebrow:
-                "තාක්ෂණික විස්තර",
-
-            specTitle:
-                "තාක්ෂණික පිරිවිතර",
-
-            specText:
-                "සපයා ඇති ඉදිරිපත් කිරීමෙන් ලබාගත් තාක්ෂණික පිරිවිතර.",
-
-            s1: "එන්ජින් වර්ගය",
-            v1: "BSIII Single cylinder, naturally aspirated, air-cooled, direct injection, 4-stroke",
-
-            s2: "එන්ජින් ධාරිතාව",
-
-            s3: "උපරිම බලය",
-
-            s4: "උපරිම ව්‍යවර්ථය",
-
-            s5: "ඉන්ධන වර්ගය",
-            v5: "අධි වේග ඩීසල්",
-
-            s6: "සිසිලන පද්ධතිය",
-            v6: "Forced air-cooled",
-
-            s7: "ක්ලච්",
-            v7: "Wet, multi-disc",
-
-            s8: "ගියර් පද්ධතිය",
-            v8: "4-speed, constant mesh gearbox",
-
-            s9: "උපරිම වේගය",
-
-            s10: "ඉන්ධන පරිභෝජනය*",
-
-            s11: "ඉන්ධන ටැංකි ධාරිතාව",
-
-            s12: "උපරිම දළ වාහන බර (GVW)",
-
-            s13: "හිස් වාහන බර",
-
-            s14: "මානයන් (දිග × පළල × උස)",
-
-            s15: "රෝද අතර දුර",
-
-            s16: "බිම් නිෂ්කාශනය",
-
-            s17: "උපරිම කඳු නැගීමේ හැකියාව",
-
-            s18: "භාණ්ඩ තට්ටුවේ දිග",
-
-            solutionsEyebrow:
-                "භාණ්ඩ ප්‍රවාහන යෙදුම්",
-
-            solutionsTitle:
-                "එක් Pickup රථයක්. බොහෝ ව්‍යාපාරික අවශ්‍යතා.",
-
-            solutionsText:
-                "ඉදිරිපත් කිරීමේ දක්වා ඇති වාණිජ body සහ utility විසඳුම් බලන්න.",
-
-            application:
-                "යෙදුම",
-
-            view:
-                "විසඳුම බලන්න →",
-
-            search:
-                "විසඳුම් සොයන්න…",
-
-            galleryEyebrow:
-                "දෘශ්‍ය ඉදිරිපත් කිරීම",
-
-            galleryTitle:
-                "වාහන body සංකල්ප එකවර බලන්න",
-
-            galleryText:
-                "සපයා ඇති ඉදිරිපත් කිරීමේ පිටු දෘශ්‍ය ගැලරිය ලෙස භාවිත කර ඇත.",
-
-            ctaTitle:
-                "ඔබගේ Pickup විසඳුම් ඉදිරිපත් කිරීමට සූදානම්ද?",
-
-            ctaText:
-                "මෙම පිටුව digital showroom එකක් හෝ presentation-style website එකක් ලෙස භාවිත කළ හැක. මෙය offline ද ක්‍රියා කරයි.",
-
-            ctaButton:
-                "යෙදුම් බලන්න",
-
-            footer:
-                "වාණිජ Pickup විසඳුම් • ඩිජිටල් ඉදිරිපත් කිරීමේ වෙබ් අඩවිය"
-
-        };
+        document.getElementById("eggNext").addEventListener("click", function(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            changeEggImage(1);
+        });
 
 
-        /* ==========================================
-           SOLUTION SINHALA TRANSLATIONS
-        ========================================== */
+        /* =========================
+           SINHALA SOLUTION DATA
+        ========================= */
 
         const solutionSinhala = [
 
             {
-                title: "එළවළු වෙළඳසැල් වාහනය",
-                subtitle: "නැවුම් එළවළු කාර්යක්ෂමව බෙදා හැරීම",
-                details: "ආකර්ෂණීය ජංගම එළවළු ප්‍රදර්ශන පද්ධතිය; නැවුම් නිෂ්පාදන සඳහා ඉඩකඩ සහිත ගබඩා පහසුකම්; පාරිභෝගිකයන්ට පහසු ප්‍රවේශය සහ සේවාව; මාර්ග අසල සහ ජංගම එළවළු අලෙවිය සඳහා සුදුසුය."
+                title:
+                    "එළවළු වෙළඳසැල් වාහනය",
+
+                subtitle:
+                    "නැවුම් එළවළු කාර්යක්ෂමව බෙදාහැරීම",
+
+                details:
+                    "නැවුම් එළවළු ප්‍රවාහනය සහ ජංගම අලෙවිය සඳහා නිර්මාණය කර ඇත. පාරිභෝගිකයන් වෙත පහසුවෙන් නිෂ්පාදන ගෙන යාමට සහ විවිධ ස්ථානවල අලෙවි කිරීමට පහසුකම් සපයයි."
             },
 
             {
-                title: "මාළු බෙදාහැරීමේ වාහනය",
-                subtitle: "නැවුම් මුහුදු ආහාර ප්‍රවාහනය සහ ජංගම අලෙවිය",
-                details: "සනීපාරක්ෂිත ප්‍රදර්ශන සහ ගබඩා ප්‍රදේශය; නිෂ්පාදන නැවුම්ව තබා ගැනීමට නිර්මාණය කර ඇත; පාරිභෝගික සේවාව සඳහා පහසු සැකසුම; ජංගම මාළු අලෙවි ව්‍යාපාර සඳහා සුදුසුය."
+                title:
+                    "මාළු බෙදාහැරීමේ වාහනය",
+
+                subtitle:
+                    "නැවුම් මුහුදු ආහාර ප්‍රවාහනය සහ ප්‍රදර්ශනය",
+
+                details:
+                    "නැවුම් මුහුදු ආහාර ප්‍රවාහනය සහ ගමන් අතරතුර නිෂ්පාදන ප්‍රදර්ශනය සඳහා ප්‍රායෝගික body layout එකක් සහිත විසඳුමකි."
             },
 
             {
-                title: "බේකරි ජංගම ඒකකය",
-                subtitle: "නැවුම් ආහාර ඕනෑම ස්ථානයකට",
-                details: "නිෂ්පාදන පැහැදිලිව දැකීමට වීදුරු ප්‍රදර්ශන පද්ධතිය; හිරු එළිය සහ වර්ෂාවෙන් ආරක්ෂා කරන ශක්තිමත් body එක; පටු මාර්ග සහ කාර්යබහුල ප්‍රදේශවල පහසුවෙන් ධාවනය කළ හැක; පාරිභෝගික අවධානය ලබාගැනීමට ආකර්ෂණීය branding; කාර්යක්ෂම ජංගම බේකරි මෙහෙයුම් සඳහා smart storage සහ customer-friendly display."
+                title:
+                    "බේකරි ජංගම ඒකකය",
+
+                subtitle:
+                    "නැවුම් බව ඕනෑම ස්ථානයකට",
+
+                details:
+                    "නිෂ්පාදන වඩාත් පැහැදිලිව පෙන්වීමට පැහැදිලි වීදුරු display එකක්; හිරු සහ වැසි වලින් නිෂ්පාදන ආරක්ෂා කරන ශක්තිමත් body එකක්; පටු මාර්ග සහ කාර්යබහුල ප්‍රදේශවල පහසුවෙන් ධාවනය කළ හැක; පාරිභෝගික අවධානය ලබාගැනීමට ආකර්ෂණීය branding design එකක්; smart storage සහ පාරිභෝගික හිතකාමී display සමඟ ජංගම බේකරි මෙහෙයුම් සඳහා නිර්මාණය කර ඇත."
             },
 
             {
-                title: "ගෑස් සිලින්ඩර් ප්‍රවාහන වාහනය",
-                subtitle: "ශක්තිය සහ ආරක්ෂාව සඳහා නිර්මාණය කර ඇත",
-                details: "බර පැටවීම සඳහා ශක්තිමත් ධාරිතාව; සිලින්ඩර් ආරක්ෂිතව තබා ගැනීමේ පද්ධතිය; ආරක්ෂිත සහ ස්ථාවර ප්‍රවාහනය; වාණිජ බෙදාහැරීම සඳහා සුදුසුය; ආරක්ෂිත ගබඩා කිරීම සහ විශ්වාසදායක බෙදාහැරීම සඳහා නිර්මාණය කර ඇත."
+                title:
+                    "ගෑස් සිලින්ඩර් ප්‍රවාහකය",
+
+                subtitle:
+                    "ශක්තිය සහ ආරක්ෂාව සඳහා නිර්මාණය කර ඇත",
+
+                details:
+                    "ගෑස් සිලින්ඩර් වඩාත් ආරක්ෂිතව සහ පිළිවෙළට ප්‍රවාහනය කිරීම සඳහා ශක්තිමත් වාණිජ body විසඳුමකි."
             },
 
             {
-                title: "කිරි ප්‍රවාහන ටැංකි",
-                subtitle: "ආහාර ප්‍රමිතියට ගැළපෙන insulated ප්‍රවාහනය",
-                details: "පිටත ආවරණය M.S. Sheet වලින්; ඇතුළත ආවරණය SS 304 food grade වලින්; ඇතුළත සහ පිටත panels අතර insulation සපයනු ලැබේ; S.S. Lid සහිත manhole එකක් සපයනු ලැබේ."
+                title:
+                    "කිරි ටැංකි",
+
+                subtitle:
+                    "ආහාර මට්ටමේ පරිවරණය කළ ප්‍රවාහනය",
+
+                details:
+                    "වාණිජ කිරි බෙදාහැරීම සඳහා සුදුසු පරිවරණය කළ tanker body එකක් සහිත ප්‍රායෝගික ප්‍රවාහන විසඳුමකි."
             },
 
             {
-                title: "බිත්තර ප්‍රවාහන විසඳුම",
-                subtitle: "සංවේදී නිෂ්පාදන සඳහා ආරක්ෂිත බෙදාහැරීම",
-                details: "කම්පන අවම කරන rack පද්ධතිය; ආරක්ෂිත සහ ස්ථාවර ප්‍රවාහනය; බිත්තර කැඩීම අවම කරයි; ගොවිපළ සහ බෙදාහරින්නන් සඳහා සුදුසුය; ආරක්ෂිත ගබඩා කිරීම සහ හානි වැළැක්වීම සඳහා නිර්මාණය කර ඇත."
+                title:
+                    "බිත්තර ප්‍රවාහන විසඳුම",
+
+                subtitle:
+                    "සංවේදී නිෂ්පාදන සඳහා ආරක්ෂිත බෙදාහැරීම",
+
+                details:
+                    "ප්‍රවාහනයේදී නිෂ්පාදන චලනය අඩු කරමින් බිත්තර වඩාත් ආරක්ෂිතව බෙදාහැරීමට නිර්මාණය කර ඇත."
             },
 
             {
-                title: "අයිස්ක්‍රීම් අලෙවි වාහනය",
-                subtitle: "ඔබ යන ඕනෑම තැනක සිසිල් අයිස්ක්‍රීම්",
-                details: "Flex roof, side panels සහ opening doors සහිත heavy-duty square tube structure; LH පැත්තේ සහ පසුපස foldable SS counters; side සහ rear doors canopies ලෙස භාවිත කළ හැක; පැති හතරේම branding panels; 12V tube lights දෙකක් සහ electrical charging point එකක්; වාහනයේ වර්ණයට ගැළපෙන automotive paint finish; රියදුරු cabin එකට ඉහළින් FRP/metal aerodynamic canopy."
+                title:
+                    "අයිස්ක්‍රීම් අලෙවි වාහනය",
+
+                subtitle:
+                    "ඔබ යන ඕනෑම තැනකට සිසිල් රසකැවිලි",
+
+                details:
+                    "අයිස්ක්‍රීම් බෙදාහැරීම සහ පාරිභෝගිකයන්ට පහසු අලෙවි පහසුකම් සැපයීම සඳහා නිර්මාණය කර ඇත."
             },
 
             {
-                title: "බෙදාහැරීමේ ප්‍රවාහන විසඳුම",
-                subtitle: "වර්ධනය වන ව්‍යාපාර සඳහා smart delivery විසඳුම",
-                details: "ඉඩකඩ සහිත cargo storage; භාණ්ඩ ආරක්ෂිතව ප්‍රවාහනය කිරීම; දෛනික ව්‍යාපාරික බෙදාහැරීම් සඳහා සුදුසුය; කුඩා සහ මධ්‍යම ව්‍යාපාර සඳහා ඉතා සුදුසුය."
+                title:
+                    "බෙදාහැරීමේ ප්‍රවාහන විසඳුම",
+
+                subtitle:
+                    "වර්ධනය වන ව්‍යාපාර සඳහා බුද්ධිමත් බෙදාහැරීමේ විසඳුම",
+
+                details:
+                    "වර්ධනය වන බෙදාහැරීමේ ව්‍යාපාර සඳහා සහාය වන නම්‍යශීලී වාණිජ ප්‍රවාහන body විසඳුමකි."
             },
 
             {
-                title: "වැකුම් හිස්කරණ වාහනය",
-                subtitle: "කාර්යක්ෂම වැකුම් සහ sludge handling",
-                details: "Fresh Water Tank – FRP/HDPE – 100 Lts.; Sludge Tank – MS 500 Ltrs. (Wall thickness 3 mm.); Auxiliary Engine – Greaves Make, 5 HP @ 3000 RPM, Air Cooled, 4 Stroke, Diesel Engine; Vacuum Pump මගින් suction; Heavy duty PVC suction hose, strainer Dia. 50mm සහ දිග 15 mtrs.; වාහනයේ පසුපස Hose Gallows."
+                title:
+                    "වැකුම් එම්ප්ටියර්",
+
+                subtitle:
+                    "කාර්යක්ෂම වැකුම් සහ මඩ ඉවත් කිරීමේ විසඳුම",
+
+                details:
+                    "කාර්යක්ෂම වැකුම් මෙහෙයුම් සහ මඩ ඉවත් කිරීම සඳහා නිර්මාණය කළ විශේෂිත utility විසඳුමකි."
             },
 
             {
-                title: "Rexine Canopy බෙදාහැරීමේ වාහනය",
-                subtitle: "වර්ධනය වන ව්‍යාපාර සඳහා smart delivery විසඳුම",
-                details: "Covered canopy body සහිත heavy-duty square tube frame; කාලගුණයෙන් ආරක්ෂා වන enclosed cargo area; පහසුවෙන් loading සහ unloading සඳහා lockable rear double door; parcel සහ goods delivery සඳහා ඉඩකඩ සහිත body; වාහනයේ වර්ණයට ගැළපෙන ලෙස painted fabricated body."
+                title:
+                    "රෙක්සින් කැනපි බෙදාහැරීමේ රථය",
+
+                subtitle:
+                    "වර්ධනය වන ව්‍යාපාර සඳහා බුද්ධිමත් බෙදාහැරීමේ විසඳුම",
+
+                details:
+                    "ප්‍රවාහනයේදී භාණ්ඩ වැසි සහ හිරු එළියෙන් ආරක්ෂා කිරීමට උපකාරී වන ප්‍රායෝගික canopy විසඳුමකි."
             },
 
             {
-                title: "කුකුළු ප්‍රවාහන ඒකකය",
-                subtitle: "සතුන් සඳහා පහසු සහ කාර්යක්ෂම ප්‍රවාහනය",
-                details: "හොඳ වායු සංසරණයක් සඳහා ventilated structure; සතුන්ට සුදුසු ප්‍රවාහන සැලසුම; පහසු loading සහ unloading; ගොවිපළ මෙහෙයුම් සඳහා සුදුසුය."
+                title:
+                    "කුකුළු ප්‍රවාහන ඒකකය",
+
+                subtitle:
+                    "සුවපහසු සහ කාර්යක්ෂම සත්ව ප්‍රවාහනය",
+
+                details:
+                    "කුකුළු ප්‍රවාහනය වඩාත් පිළිවෙළට සහ කාර්යක්ෂමව සිදු කිරීම සඳහා නිර්මාණය කර ඇත."
             },
 
             {
-                title: "කසළ එකතු කිරීමේ වාහනය",
-                subtitle: "කාර්යක්ෂම අපද්‍රව්‍ය කළමනාකරණ විසඳුම",
-                details: "ශක්තිමත් සහ කල් පවතින body එක; පහසු loading mechanism; නගර සභා සහ municipal භාවිතය සඳහා සුදුසුය; අඩු නඩත්තු සැලසුම."
+                title:
+                    "කසළ එකතු කිරීමේ වාහනය",
+
+                subtitle:
+                    "කාර්යක්ෂම අපද්‍රව්‍ය කළමනාකරණ විසඳුම",
+
+                details:
+                    "කසළ එකතු කිරීම සහ ප්‍රවාහනය වඩාත් කාර්යක්ෂම කිරීමට නිර්මාණය කළ utility body එකකි."
             },
 
             {
-                title: "ජංගම සිල්ලර වෙළඳසැල",
-                subtitle: "කාර්යක්ෂම සහ පහසුවෙන් ප්‍රවේශ විය හැකි ජංගම වෙළඳ විසඳුම",
-                details: "ආකර්ෂණීය ජංගම ප්‍රදර්ශනය; stock ගබඩා කිරීමට ඉඩකඩ; පාරිභෝගිකයන්ට පහසු ප්‍රවේශය; මාර්ග අසල අලෙවිය සඳහා සුදුසුය."
+                title:
+                    "ජංගම සිල්ලර වෙළඳසැල",
+
+                subtitle:
+                    "කාර්යක්ෂම සහ පහසු ජංගම සිල්ලර වෙළඳ විසඳුම්",
+
+                details:
+                    "විවිධ ස්ථානවල පාරිභෝගිකයන් වෙත grocery නිෂ්පාදන ගෙන යාම සඳහා නිර්මාණය කළ mobile retail body එකකි."
             },
 
             {
-                title: "ආහාර වෑන් රථය",
-                subtitle: "වීදි ආහාර ව්‍යාපාර සඳහා සුදුසුය",
-                details: "Premium kitchen setup; උපරිම ලෙස භාවිත කළ storage space; utilities සඳහා පහසු ප්‍රවේශය; street catering සඳහා ඉතා සුදුසුය."
+                title:
+                    "ආහාර වෑන් රථය",
+
+                subtitle:
+                    "වීදි ආහාර ව්‍යාපාර සඳහා සුදුසුයි",
+
+                details:
+                    "වීදි ආහාර ව්‍යාපාර සහ mobile food operations සඳහා නිර්මාණය කළ සංයුක්ත ආහාර වාහන විසඳුමකි."
             },
 
             {
-                title: "Hydraulic Hopper",
-                subtitle: "තොග ද්‍රව්‍ය වේගයෙන් සහ පහසුවෙන් එසවීම",
-                details: "Heavy-duty hydraulic lift; ඉහළ ධාරිතාවකින් යුතු cargo hopper; වේගවත් automated unloading; ඉදිකිරීම් ද්‍රව්‍ය සඳහා සුදුසුය."
-            },
+                title:
+                    "සිසිල් බීම ප්‍රවාහකය",
 
-            {
-                title: "සිසිල් බීම ප්‍රවාහන වාහනය",
-                subtitle: "බීම crates ආරක්ෂිතව සහ කාර්යක්ෂමව බෙදාහැරීම",
-                details: "විශේෂිත crate racking පද්ධතිය; ඉහළ ධාරිතාවකින් යුතු load layout; ඉක්මන් side access; බීම බෙදාහැරීමේ ව්‍යාපාර සඳහා සුදුසුය."
+                subtitle:
+                    "බීම පෙට්ටි ආරක්ෂිතව සහ කාර්යක්ෂමව බෙදාහැරීම",
+
+                details:
+                    "බීම පෙට්ටි පිළිවෙළට සහ කාර්යක්ෂමව ප්‍රවාහනය කිරීම සඳහා නිර්මාණය කළ විශේෂිත carrier එකකි."
             }
 
         ];
 
 
-        /* ==========================================
-           ELEMENTS
-        ========================================== */
-
-        const modal =
-            document.getElementById("modal");
-
-        const mimg =
-            document.getElementById("mimg");
-
-        const mtitle =
-            document.getElementById("mtitle");
-
-        const msub =
-            document.getElementById("msub");
-
-        const mlist =
-            document.getElementById("mlist");
-
-        const search =
-            document.getElementById("search");
-
-        const menuBtn =
-            document.getElementById("menuBtn");
-
-        const navLinks =
-            document.getElementById("navLinks");
-
-        const langEN =
-            document.getElementById("langEN");
-
-        const langSI =
-            document.getElementById("langSI");
+        /* =========================
+           LANGUAGE
+        ========================= */
 
         let currentLanguage = "en";
 
-        let currentModalIndex = null;
-
-
-        /* ==========================================
-           MOBILE NAVIGATION
-        ========================================== */
-
-        menuBtn.addEventListener("click", () => {
-
-            const isOpen =
-                navLinks.classList.toggle("active");
-
-            menuBtn.setAttribute(
-                "aria-expanded",
-                String(isOpen)
-            );
-
-            menuBtn.textContent =
-                isOpen ? "×" : "☰";
-
-        });
-
-
-        document.querySelectorAll(".navlinks a")
-            .forEach(link => {
-
-                link.addEventListener("click", () => {
-
-                    navLinks.classList.remove("active");
-
-                    menuBtn.setAttribute(
-                        "aria-expanded",
-                        "false"
-                    );
-
-                    menuBtn.textContent = "☰";
-
-                });
-
-            });
-
-
-        /* ==========================================
-           MODAL
-        ========================================== */
-
-        function openModal(i) {
-
-            currentModalIndex = i;
-
-            const x = solutions[i];
-
-            const translated =
-                currentLanguage === "si"
-                    ? solutionSinhala[i]
-                    : x;
-
-            mimg.src =
-                "assets/" + x.image;
-
-            mimg.alt =
-                translated.title;
-
-            mtitle.textContent =
-                translated.title;
-
-            msub.textContent =
-                translated.subtitle;
-
-            mlist.innerHTML =
-                translated.details
-                    .split(";")
-                    .map(v =>
-                        "<li>" +
-                        v.trim() +
-                        "</li>"
-                    )
-                    .join("");
-
-            document.getElementById(
-                "modalApplication"
-            ).textContent =
-                currentLanguage === "si"
-                    ? "යෙදුම"
-                    : "APPLICATION";
-
-            modal.classList.add("open");
-
-            modal.setAttribute(
-                "aria-hidden",
-                "false"
-            );
-
-            document.body.style.overflow =
-                "hidden";
-
-        }
-
-
-        function closeModal() {
-
-            modal.classList.remove("open");
-
-            modal.setAttribute(
-                "aria-hidden",
-                "true"
-            );
-
-            document.body.style.overflow = "";
-
-            currentModalIndex = null;
-
-        }
-
-
-        modal.addEventListener("click", e => {
-
-            if (e.target === modal) {
-                closeModal();
-            }
-
-        });
-
-
-        document.addEventListener("keydown", e => {
-
-            if (
-                e.key === "Escape" &&
-                modal.classList.contains("open")
-            ) {
-
-                closeModal();
-
-            }
-
-        });
-
-
-        /* ==========================================
-           SEARCH
-        ========================================== */
-
-        search.addEventListener("input", () => {
-
-            const q =
-                search.value
-                    .toLowerCase()
-                    .trim();
-
-            document.querySelectorAll(".card")
-                .forEach(card => {
-
-                    card.style.display =
-                        card.dataset.title
-                            .toLowerCase()
-                            .includes(q)
-                            ? ""
-                            : "none";
-
-                });
-
-        });
-
-
-        /* ==========================================
-           APPLY LANGUAGE
-        ========================================== */
 
         function changeLanguage(lang) {
 
@@ -2416,351 +3174,499 @@
                     : "en";
 
 
-            if (lang === "si") {
-
-                document
-                    .querySelectorAll("[data-i18n]")
-                    .forEach(element => {
-
-                        const key =
-                            element.getAttribute(
-                                "data-i18n"
-                            );
-
-                        if (sinhala[key]) {
-
-                            element.textContent =
-                                sinhala[key];
-
-                        }
-
-                    });
-
-                search.placeholder =
-                    sinhala.search;
+            const texts =
+                translations[lang];
 
 
-                langSI.classList.add("active");
-                langEN.classList.remove("active");
+            document
+                .querySelectorAll("[data-i18n]")
+                .forEach(element => {
+
+                    const key =
+                        element.getAttribute(
+                            "data-i18n"
+                        );
+
+                    if (texts[key]) {
+                        element.textContent =
+                            texts[key];
+                    }
+
+                });
 
 
-                const cards =
-                    document.querySelectorAll(".card");
+            document
+                .querySelectorAll(
+                    "[data-i18n-placeholder]"
+                )
+                .forEach(element => {
 
-                cards.forEach((card, index) => {
+                    const key =
+                        element.getAttribute(
+                            "data-i18n-placeholder"
+                        );
 
-                    const s =
-                        solutionSinhala[index];
+                    if (texts[key]) {
+                        element.placeholder =
+                            texts[key];
+                    }
+
+                });
+
+
+            document
+                .getElementById("langEN")
+                .classList.toggle(
+                    "active",
+                    lang === "en"
+                );
+
+
+            document
+                .getElementById("langSI")
+                .classList.toggle(
+                    "active",
+                    lang === "si"
+                );
+
+
+            const cards =
+                document.querySelectorAll(
+                    ".card"
+                );
+
+
+            cards.forEach(
+                (card, index) => {
+
+                    if (!solutions[index]) {
+                        return;
+                    }
+
 
                     const title =
                         card.querySelector("h3");
 
-                    const paragraph =
+                    const subtitle =
                         card.querySelector("p");
 
-                    const button =
-                        card.querySelector("button");
 
-                    if (title)
+                    if (lang === "si") {
+
                         title.textContent =
-                            s.title;
+                            solutionSinhala[
+                                index
+                            ].title;
 
-                    if (paragraph)
-                        paragraph.textContent =
-                            s.subtitle;
+                        subtitle.textContent =
+                            solutionSinhala[
+                                index
+                            ].subtitle;
 
-                    if (button)
-                        button.textContent =
-                            "විසඳුම බලන්න →";
+                    } else {
 
-                });
-
-            } else {
-
-                document
-                    .querySelectorAll("[data-i18n]")
-                    .forEach(element => {
-
-                        const key =
-                            element.getAttribute(
-                                "data-i18n"
-                            );
-
-                        const english =
-                            englishText[key];
-
-                        if (english !== undefined) {
-
-                            element.textContent =
-                                english;
-
-                        }
-
-                    });
-
-                search.placeholder =
-                    "Search solutions…";
-
-
-                langEN.classList.add("active");
-                langSI.classList.remove("active");
-
-
-                const cards =
-                    document.querySelectorAll(".card");
-
-                cards.forEach((card, index) => {
-
-                    const s =
-                        solutions[index];
-
-                    const title =
-                        card.querySelector("h3");
-
-                    const paragraph =
-                        card.querySelector("p");
-
-                    const button =
-                        card.querySelector("button");
-
-                    if (title)
                         title.textContent =
-                            s.title;
+                            translations.en[
+                                "c" + (index + 1)
+                            ];
 
-                    if (paragraph)
-                        paragraph.textContent =
-                            s.subtitle;
+                        subtitle.textContent =
+                            translations.en[
+                                "p" + (index + 1)
+                            ];
 
-                    if (button)
-                        button.textContent =
-                            "View solution →";
+                    }
 
-                });
+                }
+            );
+
+
+            filterCards();
+
+        }
+
+
+        document
+            .getElementById("langEN")
+            .addEventListener(
+                "click",
+                () => changeLanguage("en")
+            );
+
+
+        document
+            .getElementById("langSI")
+            .addEventListener(
+                "click",
+                () => changeLanguage("si")
+            );
+
+
+        /* =========================
+           MOBILE MENU
+        ========================= */
+
+        const menuBtn =
+            document.getElementById(
+                "menuBtn"
+            );
+
+        const navLinks =
+            document.getElementById(
+                "navLinks"
+            );
+
+
+        menuBtn.addEventListener(
+            "click",
+            () => {
+
+                menuBtn.classList.toggle(
+                    "active"
+                );
+
+                navLinks.classList.toggle(
+                    "active"
+                );
+
+            }
+        );
+
+
+        navLinks
+            .querySelectorAll("a")
+            .forEach(link => {
+
+                link.addEventListener(
+                    "click",
+                    () => {
+
+                        menuBtn.classList.remove(
+                            "active"
+                        );
+
+                        navLinks.classList.remove(
+                            "active"
+                        );
+
+                    }
+                );
+
+            });
+
+
+        /* =========================
+           BAKERY SLIDER
+        ========================= */
+
+        const bakeryImages =
+            solutions[2].images;
+
+        let bakeryImageIndex = 0;
+
+
+        function changeBakeryImage(
+            direction
+        ) {
+
+            bakeryImageIndex +=
+                direction;
+
+
+            if (
+                bakeryImageIndex < 0
+            ) {
+
+                bakeryImageIndex =
+                    bakeryImages.length - 1;
 
             }
 
 
             if (
-                currentModalIndex !== null &&
-                modal.classList.contains("open")
+                bakeryImageIndex >=
+                bakeryImages.length
             ) {
 
-                openModal(currentModalIndex);
+                bakeryImageIndex = 0;
+
+            }
+
+
+            const bakeryImage =
+                document.getElementById(
+                    "bakeryImage"
+                );
+
+            const bakeryCounter =
+                document.getElementById(
+                    "bakeryCounter"
+                );
+
+
+            bakeryImage.style.opacity =
+                "0";
+
+
+            setTimeout(
+                () => {
+
+                    bakeryImage.src =
+                        "assets/" +
+                        bakeryImages[
+                            bakeryImageIndex
+                        ];
+
+                    bakeryImage.style.opacity =
+                        "1";
+
+                    bakeryCounter.textContent =
+                        `${bakeryImageIndex + 1} / ${bakeryImages.length}`;
+
+                },
+                120
+            );
+
+        }
+
+
+        /* =========================
+           MODAL
+        ========================= */
+
+        const modal =
+            document.getElementById(
+                "solutionModal"
+            );
+
+        const modalClose =
+            document.getElementById(
+                "modalClose"
+            );
+
+        const modalImage =
+            document.getElementById(
+                "modalImage"
+            );
+
+        const modalTitle =
+            document.getElementById(
+                "modalTitle"
+            );
+
+        const modalSubtitle =
+            document.getElementById(
+                "modalSubtitle"
+            );
+
+        const modalDetails =
+            document.getElementById(
+                "modalDetails"
+            );
+
+        const modalPrev =
+            document.getElementById(
+                "modalPrev"
+            );
+
+        const modalNext =
+            document.getElementById(
+                "modalNext"
+            );
+
+        const modalCounter =
+            document.getElementById(
+                "modalCounter"
+            );
+
+
+        let currentModalIndex = 0;
+
+        let currentModalImages = [];
+
+        let currentModalImageIndex = 0;
+
+
+        function openModal(index) {
+
+            currentModalIndex = index;
+
+
+            const solution =
+                solutions[index];
+
+
+            const languageSolution =
+                currentLanguage === "si"
+                    ? solutionSinhala[index]
+                    : solution;
+
+
+            currentModalImages =
+                solution.images
+                    ? solution.images
+                    : [solution.image];
+
+
+            currentModalImageIndex = 0;
+
+
+            modalTitle.textContent =
+                languageSolution.title;
+
+
+            modalSubtitle.textContent =
+                languageSolution.subtitle;
+
+
+            modalDetails.textContent =
+                languageSolution.details;
+
+
+            updateModalImage();
+
+
+            modal.classList.add(
+                "active"
+            );
+
+
+            document.body.style.overflow =
+                "hidden";
+
+        }
+
+
+        function updateModalImage() {
+
+            modalImage.src =
+                "assets/" +
+                currentModalImages[
+                    currentModalImageIndex
+                ];
+
+
+            modalImage.alt =
+                currentLanguage === "si"
+                    ? solutionSinhala[
+                        currentModalIndex
+                    ].title
+                    : solutions[
+                        currentModalIndex
+                    ].title;
+
+
+            if (
+                currentModalImages.length > 1
+            ) {
+
+                modalPrev.style.display =
+                    "flex";
+
+                modalNext.style.display =
+                    "flex";
+
+                modalCounter.style.display =
+                    "block";
+
+                modalCounter.textContent =
+                    `${currentModalImageIndex + 1} / ${currentModalImages.length}`;
+
+            } else {
+
+                modalPrev.style.display =
+                    "none";
+
+                modalNext.style.display =
+                    "none";
+
+                modalCounter.style.display =
+                    "none";
 
             }
 
         }
 
 
-        /* ==========================================
-           ENGLISH TEXT
-        ========================================== */
+        function changeModalImage(
+            direction
+        ) {
 
-        const englishText = {
-
-            brand:
-                "COMMERCIAL PICKUP SOLUTIONS",
-
-            navOverview:
-                "Overview",
-
-            navSpecs:
-                "Specifications",
-
-            navSolutions:
-                "Solutions",
-
-            navGallery:
-                "Gallery",
-
-            heroEyebrow:
-                "INTELLIGENT MODIFICATION FRAMEWORK",
-
-            heroTitle:
-                "Customized Commercial Pickup Solutions",
-
-            heroText:
-                "Smart modifications for every business need — from cargo transport to mobile retail and specialized utility vehicles.",
-
-            heroButton:
-                "Explore solutions ↓",
-
-            overviewEyebrow:
-                "APE XTRA LDX",
-
-            overviewTitle:
-                "A compact platform built for business.",
-
-            overviewText:
-                "The supplied presentation identifies the Ape XTRA LDX with a 435 cc diesel engine, 4-speed constant mesh gearbox and 5.5 Ft cargo bed, providing a base for a wide range of commercial applications.",
-
-            stat1:
-                "Displacement",
-
-            stat2:
-                "Maximum power",
-
-            stat3:
-                "Maximum speed",
-
-            stat4:
-                "Cargo bed length",
-
-            specEyebrow:
-                "TECHNICAL DETAILS",
-
-            specTitle:
-                "A quick specification view",
-
-            specText:
-                "Specifications reproduced from the supplied presentation.",
-
-            s1:
-                "Engine Type",
-
-            v1:
-                "BSIII Single cylinder, naturally aspirated, air-cooled, direct injection, 4-stroke",
-
-            s2:
-                "Displacement",
-
-            s3:
-                "Maximum Power",
-
-            s4:
-                "Maximum Torque",
-
-            s5:
-                "Fuel Type",
-
-            v5:
-                "High-speed diesel",
-
-            s6:
-                "Cooling System",
-
-            v6:
-                "Forced air-cooled",
-
-            s7:
-                "Clutch",
-
-            v7:
-                "Wet, multi-disc",
-
-            s8:
-                "Transmission",
-
-            v8:
-                "4-speed, constant mesh gearbox",
-
-            s9:
-                "Maximum Speed",
-
-            s10:
-                "Fuel Consumption*",
-
-            s11:
-                "Fuel Tank Capacity",
-
-            s12:
-                "Max Gross Vehicle Weight (GVW)",
-
-            s13:
-                "Unladen Weight",
-
-            s14:
-                "Dimensions (L × W × H)",
-
-            s15:
-                "Wheel Base",
-
-            s16:
-                "Ground Clearance",
-
-            s17:
-                "Max Gradeability (Climbing)",
-
-            s18:
-                "Cargo Bed Length",
-
-            solutionsEyebrow:
-                "CARGO APPLICATIONS",
-
-            solutionsTitle:
-                "One pickup. Many business models.",
-
-            solutionsText:
-                "Explore the commercial body and utility concepts presented in the source document.",
-
-            application:
-                "APPLICATION",
-
-            view:
-                "View solution →",
-
-            galleryEyebrow:
-                "VISUAL PRESENTATION",
-
-            galleryTitle:
-                "Body concepts at a glance",
-
-            galleryText:
-                "Pages from the supplied presentation are used as the visual reference gallery.",
-
-            ctaTitle:
-                "Ready to present your pickup portfolio?",
-
-            ctaText:
-                "Use this page as a digital showroom or presentation-style website. It works offline.",
-
-            ctaButton:
-                "Browse applications",
-
-            footer:
-                "Customized Commercial Pickup Solutions • Digital presentation website"
-
-        };
+            if (
+                currentModalImages.length <= 1
+            ) {
+                return;
+            }
 
 
-        /* ==========================================
-           LANGUAGE BUTTONS
-        ========================================== */
+            currentModalImageIndex +=
+                direction;
 
-        langEN.addEventListener(
+
+            if (
+                currentModalImageIndex < 0
+            ) {
+
+                currentModalImageIndex =
+                    currentModalImages.length - 1;
+
+            }
+
+
+            if (
+                currentModalImageIndex >=
+                currentModalImages.length
+            ) {
+
+                currentModalImageIndex = 0;
+
+            }
+
+
+            updateModalImage();
+
+        }
+
+
+        modalPrev.addEventListener(
             "click",
-            () => changeLanguage("en")
-        );
-
-        langSI.addEventListener(
-            "click",
-            () => changeLanguage("si")
+            () => changeModalImage(-1)
         );
 
 
-        /* ==========================================
-           SCROLL REVEAL
-        ========================================== */
+        modalNext.addEventListener(
+            "click",
+            () => changeModalImage(1)
+        );
 
-        const animatedItems =
-            document.querySelectorAll(
-                ".section-head, .stat, .card, .gallery, .cta, footer"
+
+        function closeModal() {
+
+            modal.classList.remove(
+                "active"
             );
 
+            document.body.style.overflow =
+                "";
 
-        animatedItems.forEach(
-            (item, index) => {
+        }
 
-                item.classList.add("reveal");
+
+        modalClose.addEventListener(
+            "click",
+            closeModal
+        );
+
+
+        modal.addEventListener(
+            "click",
+            event => {
 
                 if (
-                    item.classList.contains("card")
+                    event.target === modal
                 ) {
 
-                    item.style.setProperty(
-                        "--delay",
-                        `${(index % 3) * 0.08}s`
-                    );
+                    closeModal();
 
                 }
 
@@ -2768,21 +3674,164 @@
         );
 
 
-        if ("IntersectionObserver" in window) {
+        document.addEventListener(
+            "keydown",
+            event => {
 
-            const observer =
-                new IntersectionObserver(
-                    entries => {
+                if (
+                    event.key === "Escape" &&
+                    modal.classList.contains(
+                        "active"
+                    )
+                ) {
 
-                        entries.forEach(entry => {
+                    closeModal();
+
+                }
+
+
+                if (
+                    modal.classList.contains(
+                        "active"
+                    )
+                ) {
+
+                    if (
+                        event.key === "ArrowLeft"
+                    ) {
+
+                        changeModalImage(
+                            -1
+                        );
+
+                    }
+
+
+                    if (
+                        event.key === "ArrowRight"
+                    ) {
+
+                        changeModalImage(
+                            1
+                        );
+
+                    }
+
+                }
+
+            }
+        );
+
+
+        /* =========================
+           SEARCH
+        ========================= */
+
+        const searchInput =
+            document.getElementById(
+                "searchInput"
+            );
+
+        const noResults =
+            document.getElementById(
+                "noResults"
+            );
+
+
+        function filterCards() {
+
+            const query =
+                searchInput.value
+                    .toLowerCase()
+                    .trim();
+
+
+            const cards =
+                document.querySelectorAll(
+                    ".card"
+                );
+
+
+            let visibleCount = 0;
+
+
+            cards.forEach(
+                card => {
+
+                    const title =
+                        card
+                            .querySelector("h3")
+                            .textContent
+                            .toLowerCase();
+
+
+                    const dataTitle =
+                        card.dataset.title
+                            .toLowerCase();
+
+
+                    const matches =
+                        !query ||
+                        title.includes(query) ||
+                        dataTitle.includes(query);
+
+
+                    if (matches) {
+
+                        card.style.display =
+                            "";
+
+                        visibleCount++;
+
+                    } else {
+
+                        card.style.display =
+                            "none";
+
+                    }
+
+                }
+            );
+
+
+            noResults.style.display =
+                visibleCount === 0
+                    ? "block"
+                    : "none";
+
+        }
+
+
+        searchInput.addEventListener(
+            "input",
+            filterCards
+        );
+
+
+        /* =========================
+           SCROLL REVEAL
+        ========================= */
+
+        const revealElements =
+            document.querySelectorAll(
+                ".reveal"
+            );
+
+
+        const observer =
+            new IntersectionObserver(
+                entries => {
+
+                    entries.forEach(
+                        entry => {
 
                             if (
                                 entry.isIntersecting
                             ) {
 
-                                entry.target
-                                    .classList
-                                    .add("visible");
+                                entry.target.classList.add(
+                                    "visible"
+                                );
 
                                 observer.unobserve(
                                     entry.target
@@ -2790,28 +3839,83 @@
 
                             }
 
-                        });
+                        }
+                    );
 
-                    },
-                    {
-                        threshold: 0.12,
-                        rootMargin:
-                            "0px 0px -40px 0px"
-                    }
-                );
-
-
-            animatedItems.forEach(item =>
-                observer.observe(item)
+                },
+                {
+                    threshold: .12
+                }
             );
 
-        } else {
 
-            animatedItems.forEach(item =>
-                item.classList.add("visible")
+        revealElements.forEach(
+            element => {
+
+                observer.observe(element);
+
+            }
+        );
+
+
+        /* =========================
+           GALLERY IMAGE CLICK
+        ========================= */
+
+        document
+            .querySelectorAll(
+                ".gallery-item img"
+            )
+            .forEach(
+                img => {
+
+                    img.addEventListener(
+                        "click",
+                        () => {
+
+                            modalImage.src =
+                                img.src;
+
+                            modalImage.alt =
+                                img.alt;
+
+                            modalTitle.textContent =
+                                img.alt;
+
+                            modalSubtitle.textContent =
+                                "";
+
+                            modalDetails.textContent =
+                                "";
+
+                            modalPrev.style.display =
+                                "none";
+
+                            modalNext.style.display =
+                                "none";
+
+                            modalCounter.style.display =
+                                "none";
+
+                            modal.classList.add(
+                                "active"
+                            );
+
+                            document.body.style.overflow =
+                                "hidden";
+
+                        }
+                    );
+
+                }
             );
 
-        }
+
+        /* =========================
+           INITIAL LANGUAGE
+        ========================= */
+
+        changeLanguage("en");
 
     </script>
 
