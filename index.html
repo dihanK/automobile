@@ -1,13 +1,22 @@
+```html
 <!doctype html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
+
     <title>Customized Commercial Pickup Solutions</title>
+
+    <!-- Sinhala / Unicode Font Support -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Sinhala:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
     <style>
         * {
-            box-sizing: border-box
+            box-sizing: border-box;
         }
 
         html {
@@ -17,7 +26,7 @@
 
         body {
             margin: 0;
-            font-family: Inter, system-ui, Arial;
+            font-family: Inter, "Noto Sans Sinhala", system-ui, Arial, sans-serif;
             color: #09283b;
             background: #f6f8fa;
             overflow-x: hidden;
@@ -29,8 +38,12 @@
 
         a {
             color: inherit;
-            text-decoration: none
+            text-decoration: none;
         }
+
+        /* =========================
+           NAVIGATION
+        ========================== */
 
         .nav {
             position: fixed;
@@ -38,25 +51,33 @@
             top: 0;
             left: 0;
             right: 0;
-            background: #071e2deF;
+            background: #071e2def;
             color: white;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 14px 5vw
+            padding: 14px 5vw;
+            gap: 20px;
         }
 
         .brand {
             font-weight: 900;
             letter-spacing: .08em;
-            font-size: 14px
+            font-size: 14px;
+            white-space: nowrap;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 22px;
         }
 
         .navlinks {
             display: flex;
             gap: 24px;
             font-size: 13px;
-            font-weight: 700
+            font-weight: 700;
         }
 
         .navlinks a {
@@ -66,6 +87,40 @@
         .navlinks a:hover {
             color: #f3b52b;
             transform: translateY(-1px);
+        }
+
+        /* Language Switcher */
+
+        .language-switcher {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            padding: 4px;
+            background: #ffffff18;
+            border: 1px solid #ffffff25;
+            border-radius: 999px;
+        }
+
+        .lang-btn {
+            border: 0;
+            background: transparent;
+            color: white;
+            padding: 7px 11px;
+            border-radius: 999px;
+            font-family: inherit;
+            font-size: 12px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: .25s ease;
+        }
+
+        .lang-btn:hover {
+            background: #ffffff20;
+        }
+
+        .lang-btn.active {
+            background: #f3b52b;
+            color: #09283b;
         }
 
         .menu-btn {
@@ -79,13 +134,17 @@
             padding: 4px 8px;
         }
 
+        /* =========================
+           HERO
+        ========================== */
+
         .hero {
             min-height: 100vh;
             display: grid;
             place-items: center;
             position: relative;
             overflow: hidden;
-            background: #071d2a
+            background: #071d2a;
         }
 
         .hero img {
@@ -103,7 +162,12 @@
             content: "";
             position: absolute;
             inset: 0;
-            background: linear-gradient(90deg, #041620e8, #04162066, #04162088)
+            background: linear-gradient(
+                90deg,
+                #041620e8,
+                #04162066,
+                #04162088
+            );
         }
 
         .hero-content {
@@ -111,27 +175,27 @@
             z-index: 1;
             color: white;
             width: min(1100px, 90%);
-            padding-top: 70px
+            padding-top: 70px;
         }
 
         .eyebrow {
             color: #f3b52b;
             font-weight: 900;
             letter-spacing: .18em;
-            font-size: 12px
+            font-size: 12px;
         }
 
         h1 {
             font-size: clamp(44px, 7vw, 86px);
             line-height: .95;
             max-width: 800px;
-            margin: 18px 0
+            margin: 18px 0;
         }
 
         .hero p {
             font-size: clamp(17px, 2vw, 23px);
             max-width: 650px;
-            color: #dce8ee
+            color: #dce8ee;
         }
 
         .btn {
@@ -141,33 +205,47 @@
             padding: 14px 20px;
             border-radius: 999px;
             font-weight: 900;
-            margin-top: 16px
+            margin-top: 16px;
+            transition: .25s ease;
         }
 
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px #0004;
+        }
+
+        /* =========================
+           SECTIONS
+        ========================== */
+
         .section {
-            padding: 90px 5vw
+            padding: 90px 5vw;
         }
 
         .section-head {
             max-width: 850px;
-            margin-bottom: 34px
+            margin-bottom: 34px;
         }
 
         .section-head h2 {
             font-size: clamp(32px, 4vw, 52px);
-            margin: 8px 0
+            margin: 8px 0;
         }
 
         .section-head p {
             color: #61717d;
             font-size: 17px;
-            line-height: 1.6
+            line-height: 1.6;
         }
+
+        /* =========================
+           STATS
+        ========================== */
 
         .stats {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 14px
+            gap: 14px;
         }
 
         .stat,
@@ -175,29 +253,33 @@
         .spec {
             background: white;
             border: 1px solid #e0e7eb;
-            box-shadow: 0 10px 30px #08283d10
+            box-shadow: 0 10px 30px #08283d10;
         }
 
         .stat {
             border-radius: 18px;
-            padding: 22px
+            padding: 22px;
         }
 
         .stat b {
             font-size: 27px;
             display: block;
-            color: #07558a
+            color: #07558a;
         }
 
         .stat span {
             color: #61717d;
-            font-size: 13px
+            font-size: 13px;
         }
+
+        /* =========================
+           SPECIFICATIONS
+        ========================== */
 
         .specs {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 10px
+            gap: 10px;
         }
 
         .spec {
@@ -205,22 +287,26 @@
             border-radius: 12px;
             display: flex;
             justify-content: space-between;
-            gap: 20px
+            gap: 20px;
         }
 
         .spec span {
-            color: #61717d
+            color: #61717d;
         }
 
         .spec strong {
-            text-align: right
+            text-align: right;
         }
+
+        /* =========================
+           SEARCH
+        ========================== */
 
         .toolbar {
             display: flex;
             gap: 12px;
             flex-wrap: wrap;
-            margin-bottom: 24px
+            margin-bottom: 24px;
         }
 
         .search {
@@ -229,60 +315,63 @@
             padding: 14px 18px;
             border-radius: 12px;
             border: 1px solid #d5dfe5;
-            font: inherit
+            font: inherit;
+            outline: none;
+            background: white;
         }
 
-        .filter {
-            padding: 12px 16px;
-            border: 1px solid #d5dfe5;
-            background: white;
-            border-radius: 12px;
-            font-weight: 700
+        .search:focus {
+            border-color: #07558a;
+            box-shadow: 0 0 0 3px #07558a15;
         }
+
+        /* =========================
+           CARDS
+        ========================== */
 
         .grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 20px
+            gap: 20px;
         }
 
         .card {
             border-radius: 20px;
             overflow: hidden;
-            transition: .25s
+            transition: .25s;
         }
 
         .card:hover {
-            transform: translateY(-5px)
+            transform: translateY(-5px);
         }
 
         .card img {
             width: 100%;
             aspect-ratio: 16/10;
             object-fit: cover;
-            display: block
+            display: block;
         }
 
         .card-body {
-            padding: 20px
+            padding: 20px;
         }
 
         .tag {
             font-size: 10px;
             letter-spacing: .16em;
             font-weight: 900;
-            color: #07558a
+            color: #07558a;
         }
 
         .card h3 {
             font-size: 22px;
-            margin: 7px 0
+            margin: 7px 0;
         }
 
         .card p {
             color: #61717d;
             line-height: 1.5;
-            min-height: 48px
+            min-height: 48px;
         }
 
         .card button {
@@ -291,51 +380,72 @@
             color: #07558a;
             font-weight: 900;
             padding: 0;
-            cursor: pointer
+            cursor: pointer;
+            font-family: inherit;
         }
+
+        .card button:hover {
+            text-decoration: underline;
+        }
+
+        /* =========================
+           GALLERY
+        ========================== */
 
         .gallery {
             display: grid;
             grid-template-columns: 1.3fr .7fr;
-            gap: 16px
+            gap: 16px;
         }
 
         .gallery img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            border-radius: 18px
+            border-radius: 18px;
         }
 
         .gallery .small {
             display: grid;
             gap: 16px;
-            grid-template-rows: 1fr 1fr
+            grid-template-rows: 1fr 1fr;
         }
+
+        /* =========================
+           CTA
+        ========================== */
 
         .cta {
             background: #09283b;
             color: white;
             text-align: center;
-            padding: 80px 5vw
+            padding: 80px 5vw;
         }
 
         .cta h2 {
             font-size: clamp(32px, 4vw, 55px);
-            margin: 0 0 12px
+            margin: 0 0 12px;
         }
 
         .cta p {
-            color: #bfd0da
+            color: #bfd0da;
         }
+
+        /* =========================
+           FOOTER
+        ========================== */
 
         footer {
             padding: 24px 5vw;
             background: #041720;
             color: #8fa4af;
             font-size: 12px;
-            text-align: center
+            text-align: center;
         }
+
+        /* =========================
+           MODAL
+        ========================== */
 
         .modal {
             position: fixed;
@@ -345,11 +455,11 @@
             display: none;
             align-items: center;
             justify-content: center;
-            padding: 20px
+            padding: 20px;
         }
 
         .modal.open {
-            display: flex
+            display: flex;
         }
 
         .modal-box {
@@ -361,18 +471,18 @@
             border-radius: 24px;
             position: relative;
             display: grid;
-            grid-template-columns: 1fr 1fr
+            grid-template-columns: 1fr 1fr;
         }
 
         .modal-box img {
             width: 100%;
             height: 100%;
             min-height: 420px;
-            object-fit: cover
+            object-fit: cover;
         }
 
         .modal-info {
-            padding: 40px
+            padding: 40px;
         }
 
         .close {
@@ -385,52 +495,86 @@
             height: 40px;
             background: white;
             font-size: 22px;
-            cursor: pointer
+            cursor: pointer;
+            z-index: 2;
         }
 
         .modal-info h2 {
             font-size: 36px;
-            margin: 10px 0
+            margin: 10px 0;
         }
 
         .modal-info p {
             color: #61717d;
-            line-height: 1.7
+            line-height: 1.7;
         }
 
         .modal-info li {
             margin: 10px 0;
-            color: #42545f
+            color: #42545f;
+            line-height: 1.5;
         }
-
 
         /* =========================
            ANIMATIONS
         ========================== */
 
         @keyframes heroZoom {
-            from { transform: scale(1); }
-            to { transform: scale(1.045); }
+            from {
+                transform: scale(1);
+            }
+
+            to {
+                transform: scale(1.045);
+            }
         }
 
         @keyframes heroContentIn {
-            from { opacity: 0; transform: translateY(35px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(35px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         @keyframes navIn {
-            from { opacity: 0; transform: translateY(-100%); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(-100%);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         @keyframes floatButton {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-5px);
+            }
         }
 
         @keyframes menuIn {
-            from { opacity: 0; transform: translateY(-8px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(-8px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .nav {
@@ -454,11 +598,15 @@
         }
 
         .hero-content .btn {
-            animation: heroContentIn .9s .8s ease both, floatButton 3s 2s ease-in-out infinite;
+            animation:
+                heroContentIn .9s .8s ease both,
+                floatButton 3s 2s ease-in-out infinite;
         }
 
         .stat {
-            transition: transform .25s ease, box-shadow .25s ease;
+            transition:
+                transform .25s ease,
+                box-shadow .25s ease;
         }
 
         .stat:hover {
@@ -467,7 +615,9 @@
         }
 
         .card {
-            transition: transform .3s ease, box-shadow .3s ease;
+            transition:
+                transform .3s ease,
+                box-shadow .3s ease;
         }
 
         .card img {
@@ -479,7 +629,9 @@
         }
 
         .gallery img {
-            transition: transform .5s ease, filter .5s ease;
+            transition:
+                transform .5s ease,
+                filter .5s ease;
         }
 
         .gallery img:hover {
@@ -490,7 +642,9 @@
         .reveal {
             opacity: 0;
             transform: translateY(35px);
-            transition: opacity .7s ease, transform .7s ease;
+            transition:
+                opacity .7s ease,
+                transform .7s ease;
         }
 
         .reveal.visible {
@@ -502,10 +656,19 @@
             transition-delay: var(--delay, 0s);
         }
 
-        @media (prefers-reduced-motion: reduce) {
-            html { scroll-behavior: auto; }
+        /* =========================
+           REDUCED MOTION
+        ========================== */
 
-            *, *::before, *::after {
+        @media (prefers-reduced-motion: reduce) {
+
+            html {
+                scroll-behavior: auto;
+            }
+
+            *,
+            *::before,
+            *::after {
                 animation-duration: .01ms !important;
                 animation-iteration-count: 1 !important;
                 transition-duration: .01ms !important;
@@ -517,7 +680,12 @@
             }
         }
 
+        /* =========================
+           TABLET
+        ========================== */
+
         @media(max-width:800px) {
+
             .nav {
                 padding: 13px 5vw;
                 min-height: 58px;
@@ -531,8 +699,21 @@
                 white-space: nowrap;
             }
 
+            .nav-right {
+                gap: 8px;
+            }
+
             .menu-btn {
                 display: block;
+            }
+
+            .language-switcher {
+                margin-right: 2px;
+            }
+
+            .lang-btn {
+                padding: 6px 8px;
+                font-size: 11px;
             }
 
             .navlinks {
@@ -585,11 +766,11 @@
 
             .stats,
             .grid {
-                grid-template-columns: 1fr 1fr
+                grid-template-columns: 1fr 1fr;
             }
 
             .specs {
-                grid-template-columns: 1fr
+                grid-template-columns: 1fr;
             }
 
             .spec {
@@ -631,7 +812,7 @@
 
             .modal-box img {
                 min-height: 230px;
-                max-height: 320px
+                max-height: 320px;
             }
 
             .modal-info {
@@ -643,7 +824,12 @@
             }
         }
 
+        /* =========================
+           MOBILE
+        ========================== */
+
         @media(max-width:560px) {
+
             .nav {
                 padding: 12px 4vw;
             }
@@ -651,6 +837,24 @@
             .brand {
                 font-size: 10px;
                 letter-spacing: .05em;
+            }
+
+            .nav-right {
+                gap: 4px;
+            }
+
+            .language-switcher {
+                padding: 3px;
+            }
+
+            .lang-btn {
+                padding: 6px 7px;
+                font-size: 10px;
+            }
+
+            .menu-btn {
+                font-size: 26px;
+                padding: 4px 5px;
             }
 
             .hero-content {
@@ -679,7 +883,7 @@
 
             .stats,
             .grid {
-                grid-template-columns: 1fr
+                grid-template-columns: 1fr;
             }
 
             .search {
@@ -740,223 +944,1589 @@
 </head>
 
 <body>
+
+    <!-- =========================
+         NAVIGATION
+    ========================== -->
+
     <nav class="nav">
-        <div class="brand">COMMERCIAL PICKUP SOLUTIONS</div>
 
-        <button class="menu-btn" id="menuBtn"
+        <div class="brand">
+            COMMERCIAL PICKUP SOLUTIONS
+        </div>
+
+        <div class="nav-right">
+
+            <!-- Language Switcher -->
+            <div class="language-switcher">
+                <button class="lang-btn active" id="langEN" onclick="changeLanguage('en')">
+                    English
+                </button>
+
+                <button class="lang-btn" id="langSI" onclick="changeLanguage('si')">
+                    සිංහල
+                </button>
+            </div>
+
+            <button class="menu-btn"
+                id="menuBtn"
                 aria-label="Open navigation menu"
-                aria-expanded="false">☰</button>
+                aria-expanded="false">
+                ☰
+            </button>
 
-        <div class="navlinks" id="navLinks">
-            <a href="#overview">Overview</a>
-            <a href="#specs">Specifications</a>
-            <a href="#solutions">Solutions</a>
-            <a href="#gallery">Gallery</a>
+            <div class="navlinks" id="navLinks">
+
+                <a href="#overview"
+                    data-en="Overview"
+                    data-si="දළ විශ්ලේෂණය">
+                    Overview
+                </a>
+
+                <a href="#specs"
+                    data-en="Specifications"
+                    data-si="තාක්ෂණික විස්තර">
+                    Specifications
+                </a>
+
+                <a href="#solutions"
+                    data-en="Solutions"
+                    data-si="විසඳුම්">
+                    Solutions
+                </a>
+
+                <a href="#gallery"
+                    data-en="Gallery"
+                    data-si="ගැලරිය">
+                    Gallery
+                </a>
+
+            </div>
+
         </div>
     </nav>
-    <header class="hero"><img src="assets/page_1.jpg">
+
+
+    <!-- =========================
+         HERO
+    ========================== -->
+
+    <header class="hero">
+
+        <img src="assets/page_1.jpg"
+            alt="Commercial Pickup">
+
         <div class="hero-content">
-            <div class="eyebrow">INTELLIGENT MODIFICATION FRAMEWORK</div>
-            <h1>Customized Commercial Pickup Solutions</h1>
-            <p>Smart modifications for every business need — from cargo transport to mobile retail and specialized
-                utility vehicles.</p><a class="btn" href="#solutions">Explore solutions ↓</a>
+
+            <div class="eyebrow"
+                data-en="INTELLIGENT MODIFICATION FRAMEWORK"
+                data-si="බුද්ධිමත් වෙනස්කිරීම් රාමුව">
+                INTELLIGENT MODIFICATION FRAMEWORK
+            </div>
+
+            <h1
+                data-en="Customized Commercial Pickup Solutions"
+                data-si="අභිරුචිකරණය කළ වාණිජ පිකප් විසඳුම්">
+                Customized Commercial Pickup Solutions
+            </h1>
+
+            <p
+                data-en="Smart modifications for every business need — from cargo transport to mobile retail and specialized utility vehicles."
+                data-si="භාණ්ඩ ප්‍රවාහනයේ සිට ජංගම වෙළඳාම සහ විශේෂිත උපයෝගිතා වාහන දක්වා සෑම ව්‍යාපාරික අවශ්‍යතාවයකටම ගැලපෙන බුද්ධිමත් වෙනස්කිරීම්.">
+                Smart modifications for every business need — from cargo transport to mobile retail and specialized utility vehicles.
+            </p>
+
+            <a class="btn"
+                href="#solutions"
+                data-en="Explore solutions ↓"
+                data-si="විසඳුම් බලන්න ↓">
+                Explore solutions ↓
+            </a>
+
         </div>
     </header>
+
+
+    <!-- =========================
+         OVERVIEW
+    ========================== -->
+
     <section id="overview" class="section">
+
         <div class="section-head">
-            <div class="eyebrow">APE XTRA LDX</div>
-            <h2>A compact platform built for business.</h2>
-            <p>The supplied presentation identifies the Ape XTRA LDX with a 435 cc diesel engine, 4-speed constant mesh
-                gearbox and 5.5 Ft cargo bed, providing a base for a wide range of commercial applications.</p>
-        </div>
-        <div class="stats">
-            <div class="stat"><b>435 cc</b><span>Displacement</span></div>
-            <div class="stat"><b>8 HP</b><span>Maximum power</span></div>
-            <div class="stat"><b>55 km/h</b><span>Maximum speed</span></div>
-            <div class="stat"><b>5.5 Ft</b><span>Cargo bed length</span></div>
-        </div>
-    </section>
-    <section id="specs" class="section" style="background:#eef3f6">
-        <div class="section-head">
-            <div class="eyebrow">TECHNICAL DETAILS</div>
-            <h2>A quick specification view</h2>
-            <p>Specifications reproduced from the supplied presentation.</p>
-        </div>
-        <div class="specs">
-            <div class="spec"><span>Engine Type</span><strong>BSIII Single cylinder, naturally aspirated, air-cooled,
-                    direct injection, 4-stroke</strong></div>
-            <div class="spec"><span>Displacement</span><strong>435 cc</strong></div>
-            <div class="spec"><span>Maximum Power</span><strong>8 HP @ 3600±50 RPM</strong></div>
-            <div class="spec"><span>Maximum Torque</span><strong>18 Nm @ 2200 to 2400 RPM</strong></div>
-            <div class="spec"><span>Fuel Type</span><strong>High-speed diesel</strong></div>
-            <div class="spec"><span>Cooling System</span><strong>Forced air-cooled</strong></div>
-            <div class="spec"><span>Clutch</span><strong>Wet, multi-disc</strong></div>
-            <div class="spec"><span>Transmission</span><strong>4-speed, constant mesh gearbox</strong></div>
-            <div class="spec"><span>Maximum Speed</span><strong>55 Kms / hr</strong></div>
-            <div class="spec"><span>Fuel Consumption*</span><strong>36 + 4 Kms / ltr</strong></div>
-            <div class="spec"><span>Fuel Tank Capacity</span><strong>10.5 Liters</strong></div>
-            <div class="spec"><span>Max Gross Vehicle Weight (GVW)</span><strong>975 Kgs</strong></div>
-            <div class="spec"><span>Unladen Weight</span><strong>438 Kgs</strong></div>
-            <div class="spec"><span>Dimensions (L × W × H)</span><strong>3145 mm × 1490 mm × 1635 mm</strong></div>
-            <div class="spec"><span>Wheel Base</span><strong>2100 mm</strong></div>
-            <div class="spec"><span>Ground Clearance</span><strong>240 mm</strong></div>
-            <div class="spec"><span>Max Gradeability (Climbing)</span><strong>22.16%</strong></div>
-            <div class="spec"><span>Cargo Bed Length</span><strong>5.5 Ft</strong></div>
-        </div>
-    </section>
-    <section id="solutions" class="section">
-        <div class="section-head">
-            <div class="eyebrow">CARGO APPLICATIONS</div>
-            <h2>One pickup. Many business models.</h2>
-            <p>Explore the commercial body and utility concepts presented in the source document.</p>
-        </div>
-        <div class="toolbar"><input class="search" id="search" placeholder="Search solutions…"></div>
-        <div class="grid" id="grid">
-            <article class="card" data-title="vegetable shop vehicle"><img src="assets/page_5.jpg"
-                    alt="Vegetable Shop Vehicle">
-                <div class="card-body"><span class="tag">APPLICATION</span>
-                    <h3>Vegetable Shop Vehicle</h3>
-                    <p>Fresh produce delivered efficiently</p><button onclick="openModal(0)">View solution →</button>
-                </div>
-            </article>
-            <article class="card" data-title="fish delivery vehicle"><img src="assets/page_5.jpg"
-                    alt="Fish Delivery Vehicle">
-                <div class="card-body"><span class="tag">APPLICATION</span>
-                    <h3>Fish Delivery Vehicle</h3>
-                    <p>Fresh seafood, delivered and displayed on the move</p><button onclick="openModal(1)">View
-                        solution →</button>
-                </div>
-            </article>
-            <article class="card" data-title="bakery mobile unit"><img src="assets/page_6.jpg" alt="Bakery Mobile Unit">
-                <div class="card-body"><span class="tag">APPLICATION</span>
-                    <h3>Bakery Mobile Unit</h3>
-                    <p>Freshness Delivered Anywhere</p><button onclick="openModal(2)">View solution →</button>
-                </div>
-            </article>
-            <article class="card" data-title="gas cylinder carrier"><img src="assets/page_7.jpg"
-                    alt="Gas Cylinder Carrier">
-                <div class="card-body"><span class="tag">APPLICATION</span>
-                    <h3>Gas Cylinder Carrier</h3>
-                    <p>Built for strength and safety</p><button onclick="openModal(3)">View solution →</button>
-                </div>
-            </article>
-            <article class="card" data-title="milk tankers"><img src="assets/page_8.jpg" alt="Milk Tankers">
-                <div class="card-body"><span class="tag">APPLICATION</span>
-                    <h3>Milk Tankers</h3>
-                    <p>Food-grade insulated transport</p><button onclick="openModal(4)">View solution →</button>
-                </div>
-            </article>
-            <article class="card" data-title="egg transport solution"><img src="assets/page_9.jpg"
-                    alt="Egg Transport Solution">
-                <div class="card-body"><span class="tag">APPLICATION</span>
-                    <h3>Egg Transport Solution</h3>
-                    <p>Safe delivery for delicate products</p><button onclick="openModal(5)">View solution →</button>
-                </div>
-            </article>
-            <article class="card" data-title="ice cream sales vehicle"><img src="assets/page_10.jpg"
-                    alt="Ice Cream Sales Vehicle">
-                <div class="card-body"><span class="tag">APPLICATION</span>
-                    <h3>Ice Cream Sales Vehicle</h3>
-                    <p>Cool treats, anywhere you go</p><button onclick="openModal(6)">View solution →</button>
-                </div>
-            </article>
-            <article class="card" data-title="delivery transport solution"><img src="assets/page_10.jpg"
-                    alt="Delivery Transport Solution">
-                <div class="card-body"><span class="tag">APPLICATION</span>
-                    <h3>Delivery Transport Solution</h3>
-                    <p>Smart delivery solution for growing businesses</p><button onclick="openModal(7)">View solution
-                        →</button>
-                </div>
-            </article>
-            <article class="card" data-title="vacuum emptier"><img src="assets/page_11.jpg" alt="Vacuum Emptier">
-                <div class="card-body"><span class="tag">APPLICATION</span>
-                    <h3>Vacuum Emptier</h3>
-                    <p>Efficient vacuum and sludge handling</p><button onclick="openModal(8)">View solution →</button>
-                </div>
-            </article>
-            <article class="card" data-title="rexine canopy delivery truck"><img src="assets/page_11.jpg"
-                    alt="Rexine Canopy Delivery Truck">
-                <div class="card-body"><span class="tag">APPLICATION</span>
-                    <h3>Rexine Canopy Delivery Truck</h3>
-                    <p>Smart delivery solution for growing businesses</p><button onclick="openModal(9)">View solution
-                        →</button>
-                </div>
-            </article>
-            <article class="card" data-title="poultry transport unit"><img src="assets/page_12.jpg"
-                    alt="Poultry Transport Unit">
-                <div class="card-body"><span class="tag">APPLICATION</span>
-                    <h3>Poultry Transport Unit</h3>
-                    <p>Comfortable and efficient livestock movement</p><button onclick="openModal(10)">View solution
-                        →</button>
-                </div>
-            </article>
-            <article class="card" data-title="garbage collection vehicle"><img src="assets/page_12.jpg"
-                    alt="Garbage Collection Vehicle">
-                <div class="card-body"><span class="tag">APPLICATION</span>
-                    <h3>Garbage Collection Vehicle</h3>
-                    <p>Efficient waste management solution</p><button onclick="openModal(11)">View solution →</button>
-                </div>
-            </article>
-            <article class="card" data-title="mobile grocery shop"><img src="assets/page_13.jpg"
-                    alt="Mobile Grocery Shop">
-                <div class="card-body"><span class="tag">APPLICATION</span>
-                    <h3>Mobile Grocery Shop</h3>
-                    <p>Efficient and accessible mobile retail solutions</p><button onclick="openModal(12)">View solution
-                        →</button>
-                </div>
-            </article>
-            <article class="card" data-title="food van"><img src="assets/page_13.jpg" alt="Food Van">
-                <div class="card-body"><span class="tag">APPLICATION</span>
-                    <h3>Food Van</h3>
-                    <p>Ideal for street food operations</p><button onclick="openModal(13)">View solution →</button>
-                </div>
-            </article>
-            <article class="card" data-title="hydraulic hopper"><img src="assets/page_14.jpg" alt="Hydraulic Hopper">
-                <div class="card-body"><span class="tag">APPLICATION</span>
-                    <h3>Hydraulic Hopper</h3>
-                    <p>Effortless and rapid bulk material lift</p><button onclick="openModal(14)">View solution
-                        →</button>
-                </div>
-            </article>
-            <article class="card" data-title="soft drink carrier"><img src="assets/page_14.jpg"
-                    alt="Soft Drink Carrier">
-                <div class="card-body"><span class="tag">APPLICATION</span>
-                    <h3>Soft Drink Carrier</h3>
-                    <p>Secure and optimized beverage crate distribution</p><button onclick="openModal(15)">View solution
-                        →</button>
-                </div>
-            </article>
-        </div>
-    </section>
-    <section id="gallery" class="section" style="background:#eef3f6">
-        <div class="section-head">
-            <div class="eyebrow">VISUAL PRESENTATION</div>
-            <h2>Body concepts at a glance</h2>
-            <p>Pages from the supplied presentation are used as the visual reference gallery.</p>
-        </div>
-        <div class="gallery"><img src="assets/page_3.jpg" alt="Cargo applications">
-            <div class="small"><img src="assets/page_4.jpg" alt="Cargo applications"><img src="assets/page_10.jpg"
-                    alt="Vehicle applications"></div>
-        </div>
-    </section>
-    <section class="cta">
-        <h2>Ready to present your pickup portfolio?</h2>
-        <p>Use this page as a digital showroom or presentation-style website. It works offline.</p><a class="btn"
-            href="#solutions">Browse applications</a>
-    </section>
-    <footer>Customized Commercial Pickup Solutions • Digital presentation website</footer>
-    <div class="modal" id="modal">
-        <div class="modal-box"><button class="close" onclick="closeModal()">×</button><img id="mimg">
-            <div class="modal-info">
-                <div class="eyebrow">APPLICATION</div>
-                <h2 id="mtitle"></h2>
-                <p id="msub"></p>
-                <ul id="mlist"></ul>
+
+            <div class="eyebrow"
+                data-en="APE XTRA LDX"
+                data-si="APE XTRA LDX">
+                APE XTRA LDX
             </div>
+
+            <h2
+                data-en="A compact platform built for business."
+                data-si="ව්‍යාපාර සඳහා නිර්මාණය කළ සංයුක්ත වේදිකාවක්.">
+                A compact platform built for business.
+            </h2>
+
+            <p
+                data-en="The supplied presentation identifies the Ape XTRA LDX with a 435 cc diesel engine, 4-speed constant mesh gearbox and 5.5 Ft cargo bed, providing a base for a wide range of commercial applications."
+                data-si="ලබා දී ඇති ඉදිරිපත් කිරීම අනුව Ape XTRA LDX රථය 435 cc ඩීසල් එන්ජිමක්, වේග 4ක constant mesh ගියර් පද්ධතියක් සහ අඩි 5.5ක භාණ්ඩ ප්‍රවාහන තට්ටුවකින් සමන්විත වේ. මෙය විවිධ වාණිජ භාවිතයන් සඳහා සුදුසු පදනමක් සපයයි.">
+                The supplied presentation identifies the Ape XTRA LDX with a 435 cc diesel engine, 4-speed constant mesh gearbox and 5.5 Ft cargo bed, providing a base for a wide range of commercial applications.
+            </p>
+
         </div>
+
+        <div class="stats">
+
+            <div class="stat">
+                <b>435 cc</b>
+                <span
+                    data-en="Displacement"
+                    data-si="එන්ජින් ධාරිතාව">
+                    Displacement
+                </span>
+            </div>
+
+            <div class="stat">
+                <b>8 HP</b>
+                <span
+                    data-en="Maximum power"
+                    data-si="උපරිම බලය">
+                    Maximum power
+                </span>
+            </div>
+
+            <div class="stat">
+                <b>55 km/h</b>
+                <span
+                    data-en="Maximum speed"
+                    data-si="උපරිම වේගය">
+                    Maximum speed
+                </span>
+            </div>
+
+            <div class="stat">
+                <b>5.5 Ft</b>
+                <span
+                    data-en="Cargo bed length"
+                    data-si="භාණ්ඩ තට්ටුවේ දිග">
+                    Cargo bed length
+                </span>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         SPECIFICATIONS
+    ========================== -->
+
+    <section id="specs"
+        class="section"
+        style="background:#eef3f6">
+
+        <div class="section-head">
+
+            <div class="eyebrow"
+                data-en="TECHNICAL DETAILS"
+                data-si="තාක්ෂණික විස්තර">
+                TECHNICAL DETAILS
+            </div>
+
+            <h2
+                data-en="A quick specification view"
+                data-si="තාක්ෂණික විස්තර කෙටියෙන්">
+                A quick specification view
+            </h2>
+
+            <p
+                data-en="Specifications reproduced from the supplied presentation."
+                data-si="ලබා දී ඇති ඉදිරිපත් කිරීමෙන් ලබාගත් තාක්ෂණික විස්තර.">
+                Specifications reproduced from the supplied presentation.
+            </p>
+
+        </div>
+
+        <div class="specs">
+
+            <div class="spec">
+                <span data-en="Engine Type" data-si="එන්ජින් වර්ගය">
+                    Engine Type
+                </span>
+                <strong>
+                    BSIII Single cylinder, naturally aspirated, air-cooled,
+                    direct injection, 4-stroke
+                </strong>
+            </div>
+
+            <div class="spec">
+                <span data-en="Displacement" data-si="එන්ජින් ධාරිතාව">
+                    Displacement
+                </span>
+                <strong>435 cc</strong>
+            </div>
+
+            <div class="spec">
+                <span data-en="Maximum Power" data-si="උපරිම බලය">
+                    Maximum Power
+                </span>
+                <strong>8 HP @ 3600±50 RPM</strong>
+            </div>
+
+            <div class="spec">
+                <span data-en="Maximum Torque" data-si="උපරිම ව්‍යවර්ථය">
+                    Maximum Torque
+                </span>
+                <strong>18 Nm @ 2200 to 2400 RPM</strong>
+            </div>
+
+            <div class="spec">
+                <span data-en="Fuel Type" data-si="ඉන්ධන වර්ගය">
+                    Fuel Type
+                </span>
+                <strong>High-speed diesel</strong>
+            </div>
+
+            <div class="spec">
+                <span data-en="Cooling System" data-si="සිසිලන පද්ධතිය">
+                    Cooling System
+                </span>
+                <strong>Forced air-cooled</strong>
+            </div>
+
+            <div class="spec">
+                <span data-en="Clutch" data-si="ක්ලච් පද්ධතිය">
+                    Clutch
+                </span>
+                <strong>Wet, multi-disc</strong>
+            </div>
+
+            <div class="spec">
+                <span data-en="Transmission" data-si="ගියර් පද්ධතිය">
+                    Transmission
+                </span>
+                <strong>4-speed, constant mesh gearbox</strong>
+            </div>
+
+            <div class="spec">
+                <span data-en="Maximum Speed" data-si="උපරිම වේගය">
+                    Maximum Speed
+                </span>
+                <strong>55 Kms / hr</strong>
+            </div>
+
+            <div class="spec">
+                <span data-en="Fuel Consumption*" data-si="ඉන්ධන පරිභෝජනය*">
+                    Fuel Consumption*
+                </span>
+                <strong>36 + 4 Kms / ltr</strong>
+            </div>
+
+            <div class="spec">
+                <span data-en="Fuel Tank Capacity" data-si="ඉන්ධන ටැංකි ධාරිතාව">
+                    Fuel Tank Capacity
+                </span>
+                <strong>10.5 Liters</strong>
+            </div>
+
+            <div class="spec">
+                <span data-en="Max Gross Vehicle Weight (GVW)"
+                    data-si="උපරිම දළ වාහන බර (GVW)">
+                    Max Gross Vehicle Weight (GVW)
+                </span>
+                <strong>975 Kgs</strong>
+            </div>
+
+            <div class="spec">
+                <span data-en="Unladen Weight"
+                    data-si="හිස් වාහනයේ බර">
+                    Unladen Weight
+                </span>
+                <strong>438 Kgs</strong>
+            </div>
+
+            <div class="spec">
+                <span data-en="Dimensions (L × W × H)"
+                    data-si="මාන (දිග × පළල × උස)">
+                    Dimensions (L × W × H)
+                </span>
+                <strong>3145 mm × 1490 mm × 1635 mm</strong>
+            </div>
+
+            <div class="spec">
+                <span data-en="Wheel Base"
+                    data-si="රෝද අතර දුර">
+                    Wheel Base
+                </span>
+                <strong>2100 mm</strong>
+            </div>
+
+            <div class="spec">
+                <span data-en="Ground Clearance"
+                    data-si="බිම් නිෂ්කාශනය">
+                    Ground Clearance
+                </span>
+                <strong>240 mm</strong>
+            </div>
+
+            <div class="spec">
+                <span data-en="Max Gradeability (Climbing)"
+                    data-si="උපරිම නැගීමේ හැකියාව">
+                    Max Gradeability (Climbing)
+                </span>
+                <strong>22.16%</strong>
+            </div>
+
+            <div class="spec">
+                <span data-en="Cargo Bed Length"
+                    data-si="භාණ්ඩ තට්ටුවේ දිග">
+                    Cargo Bed Length
+                </span>
+                <strong>5.5 Ft</strong>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- =========================
+         SOLUTIONS
+    ========================== -->
+
+    <section id="solutions" class="section">
+
+        <div class="section-head">
+
+            <div class="eyebrow"
+                data-en="CARGO APPLICATIONS"
+                data-si="භාණ්ඩ ප්‍රවාහන භාවිතයන්">
+                CARGO APPLICATIONS
+            </div>
+
+            <h2
+                data-en="One pickup. Many business models."
+                data-si="එක් පිකප් රථයක්. ව්‍යාපාරික අවස්ථා රැසක්.">
+                One pickup. Many business models.
+            </h2>
+
+            <p
+                data-en="Explore the commercial body and utility concepts presented in the source document."
+                data-si="මූලාශ්‍ර ලේඛනයේ ඉදිරිපත් කර ඇති වාණිජ බොඩි සහ උපයෝගිතා සංකල්ප ගවේෂණය කරන්න.">
+                Explore the commercial body and utility concepts presented in the source document.
+            </p>
+
+        </div>
+
+        <div class="toolbar">
+
+            <input
+                class="search"
+                id="search"
+                type="search"
+                data-placeholder-en="Search solutions…"
+                data-placeholder-si="විසඳුම් සොයන්න…"
+                placeholder="Search solutions…">
+
+        </div>
+
+        <div class="grid" id="grid">
+
+            <!-- 1 -->
+            <article class="card"
+                data-title="vegetable shop vehicle"
+                data-title-si="එළවළු වෙළඳසැල් රථය">
+
+                <img src="assets/page_5.jpg"
+                    alt="Vegetable Shop Vehicle">
+
+                <div class="card-body">
+
+                    <span class="tag"
+                        data-en="APPLICATION"
+                        data-si="භාවිතය">
+                        APPLICATION
+                    </span>
+
+                    <h3
+                        data-en="Vegetable Shop Vehicle"
+                        data-si="එළවළු වෙළඳසැල් රථය">
+                        Vegetable Shop Vehicle
+                    </h3>
+
+                    <p
+                        data-en="Fresh produce delivered efficiently"
+                        data-si="නැවුම් එළවළු කාර්යක්ෂමව පාරිභෝගිකයන් වෙත ගෙන යාම">
+                        Fresh produce delivered efficiently
+                    </p>
+
+                    <button onclick="openModal(0)"
+                        data-en="View solution →"
+                        data-si="විසඳුම බලන්න →">
+                        View solution →
+                    </button>
+
+                </div>
+            </article>
+
+
+            <!-- 2 -->
+            <article class="card"
+                data-title="fish delivery vehicle"
+                data-title-si="මාළු බෙදාහැරීමේ රථය">
+
+                <img src="assets/page_5.jpg"
+                    alt="Fish Delivery Vehicle">
+
+                <div class="card-body">
+
+                    <span class="tag"
+                        data-en="APPLICATION"
+                        data-si="භාවිතය">
+                        APPLICATION
+                    </span>
+
+                    <h3
+                        data-en="Fish Delivery Vehicle"
+                        data-si="මාළු බෙදාහැරීමේ රථය">
+                        Fish Delivery Vehicle
+                    </h3>
+
+                    <p
+                        data-en="Fresh seafood, delivered and displayed on the move"
+                        data-si="නැවුම් මුහුදු ආහාර ගෙන යමින් ප්‍රදර්ශනය කිරීම සහ බෙදාහැරීම">
+                        Fresh seafood, delivered and displayed on the move
+                    </p>
+
+                    <button onclick="openModal(1)"
+                        data-en="View solution →"
+                        data-si="විසඳුම බලන්න →">
+                        View solution →
+                    </button>
+
+                </div>
+            </article>
+
+
+            <!-- 3 -->
+            <article class="card"
+                data-title="bakery mobile unit"
+                data-title-si="ජංගම බේකරි ඒකකය">
+
+                <img src="assets/page_6.jpg"
+                    alt="Bakery Mobile Unit">
+
+                <div class="card-body">
+
+                    <span class="tag"
+                        data-en="APPLICATION"
+                        data-si="භාවිතය">
+                        APPLICATION
+                    </span>
+
+                    <h3
+                        data-en="Bakery Mobile Unit"
+                        data-si="ජංගම බේකරි ඒකකය">
+                        Bakery Mobile Unit
+                    </h3>
+
+                    <p
+                        data-en="Freshness Delivered Anywhere"
+                        data-si="නැවුම් බේකරි නිෂ්පාදන ඕනෑම ස්ථානයකට">
+                        Freshness Delivered Anywhere
+                    </p>
+
+                    <button onclick="openModal(2)"
+                        data-en="View solution →"
+                        data-si="විසඳුම බලන්න →">
+                        View solution →
+                    </button>
+
+                </div>
+            </article>
+
+
+            <!-- 4 -->
+            <article class="card"
+                data-title="gas cylinder carrier"
+                data-title-si="ගෑස් සිලින්ඩර් ප්‍රවාහන රථය">
+
+                <img src="assets/page_7.jpg"
+                    alt="Gas Cylinder Carrier">
+
+                <div class="card-body">
+
+                    <span class="tag"
+                        data-en="APPLICATION"
+                        data-si="භාවිතය">
+                        APPLICATION
+                    </span>
+
+                    <h3
+                        data-en="Gas Cylinder Carrier"
+                        data-si="ගෑස් සිලින්ඩර් ප්‍රවාහන රථය">
+                        Gas Cylinder Carrier
+                    </h3>
+
+                    <p
+                        data-en="Built for strength and safety"
+                        data-si="ශක්තිය සහ ආරක්ෂාව සඳහා නිර්මාණය කර ඇත">
+                        Built for strength and safety
+                    </p>
+
+                    <button onclick="openModal(3)"
+                        data-en="View solution →"
+                        data-si="විසඳුම බලන්න →">
+                        View solution →
+                    </button>
+
+                </div>
+            </article>
+
+
+            <!-- 5 -->
+            <article class="card"
+                data-title="milk tankers"
+                data-title-si="කිරි ටැංකි රථ">
+
+                <img src="assets/page_8.jpg"
+                    alt="Milk Tankers">
+
+                <div class="card-body">
+
+                    <span class="tag"
+                        data-en="APPLICATION"
+                        data-si="භාවිතය">
+                        APPLICATION
+                    </span>
+
+                    <h3
+                        data-en="Milk Tankers"
+                        data-si="කිරි ටැංකි රථ">
+                        Milk Tankers
+                    </h3>
+
+                    <p
+                        data-en="Food-grade insulated transport"
+                        data-si="ආහාර ප්‍රමිතියට ගැලපෙන පරිවරණය කළ ප්‍රවාහනය">
+                        Food-grade insulated transport
+                    </p>
+
+                    <button onclick="openModal(4)"
+                        data-en="View solution →"
+                        data-si="විසඳුම බලන්න →">
+                        View solution →
+                    </button>
+
+                </div>
+            </article>
+
+
+            <!-- 6 -->
+            <article class="card"
+                data-title="egg transport solution"
+                data-title-si="බිත්තර ප්‍රවාහන විසඳුම">
+
+                <img src="assets/page_9.jpg"
+                    alt="Egg Transport Solution">
+
+                <div class="card-body">
+
+                    <span class="tag"
+                        data-en="APPLICATION"
+                        data-si="භාවිතය">
+                        APPLICATION
+                    </span>
+
+                    <h3
+                        data-en="Egg Transport Solution"
+                        data-si="බිත්තර ප්‍රවාහන විසඳුම">
+                        Egg Transport Solution
+                    </h3>
+
+                    <p
+                        data-en="Safe delivery for delicate products"
+                        data-si="සියුම් නිෂ්පාදන සඳහා ආරක්ෂිත බෙදාහැරීම">
+                        Safe delivery for delicate products
+                    </p>
+
+                    <button onclick="openModal(5)"
+                        data-en="View solution →"
+                        data-si="විසඳුම බලන්න →">
+                        View solution →
+                    </button>
+
+                </div>
+            </article>
+
+
+            <!-- 7 -->
+            <article class="card"
+                data-title="ice cream sales vehicle"
+                data-title-si="අයිස්ක්‍රීම් අලෙවි රථය">
+
+                <img src="assets/page_10.jpg"
+                    alt="Ice Cream Sales Vehicle">
+
+                <div class="card-body">
+
+                    <span class="tag"
+                        data-en="APPLICATION"
+                        data-si="භාවිතය">
+                        APPLICATION
+                    </span>
+
+                    <h3
+                        data-en="Ice Cream Sales Vehicle"
+                        data-si="අයිස්ක්‍රීම් අලෙවි රථය">
+                        Ice Cream Sales Vehicle
+                    </h3>
+
+                    <p
+                        data-en="Cool treats, anywhere you go"
+                        data-si="ඔබ යන ඕනෑම තැනක සිසිල් රසකැවිලි">
+                        Cool treats, anywhere you go
+                    </p>
+
+                    <button onclick="openModal(6)"
+                        data-en="View solution →"
+                        data-si="විසඳුම බලන්න →">
+                        View solution →
+                    </button>
+
+                </div>
+            </article>
+
+
+            <!-- 8 -->
+            <article class="card"
+                data-title="delivery transport solution"
+                data-title-si="බෙදාහැරීමේ ප්‍රවාහන විසඳුම">
+
+                <img src="assets/page_10.jpg"
+                    alt="Delivery Transport Solution">
+
+                <div class="card-body">
+
+                    <span class="tag"
+                        data-en="APPLICATION"
+                        data-si="භාවිතය">
+                        APPLICATION
+                    </span>
+
+                    <h3
+                        data-en="Delivery Transport Solution"
+                        data-si="බෙදාහැරීමේ ප්‍රවාහන විසඳුම">
+                        Delivery Transport Solution
+                    </h3>
+
+                    <p
+                        data-en="Smart delivery solution for growing businesses"
+                        data-si="වර්ධනය වන ව්‍යාපාර සඳහා බුද්ධිමත් බෙදාහැරීමේ විසඳුම">
+                        Smart delivery solution for growing businesses
+                    </p>
+
+                    <button onclick="openModal(7)"
+                        data-en="View solution →"
+                        data-si="විසඳුම බලන්න →">
+                        View solution →
+                    </button>
+
+                </div>
+            </article>
+
+
+            <!-- 9 -->
+            <article class="card"
+                data-title="vacuum emptier"
+                data-title-si="වැකුම් එම්ප්ටියර් රථය">
+
+                <img src="assets/page_11.jpg"
+                    alt="Vacuum Emptier">
+
+                <div class="card-body">
+
+                    <span class="tag"
+                        data-en="APPLICATION"
+                        data-si="භාවිතය">
+                        APPLICATION
+                    </span>
+
+                    <h3
+                        data-en="Vacuum Emptier"
+                        data-si="වැකුම් එම්ප්ටියර්">
+                        Vacuum Emptier
+                    </h3>
+
+                    <p
+                        data-en="Efficient vacuum and sludge handling"
+                        data-si="වැකුම් සහ අපද්‍රව්‍ය මඩ හැසිරවීම සඳහා කාර්යක්ෂම විසඳුම">
+                        Efficient vacuum and sludge handling
+                    </p>
+
+                    <button onclick="openModal(8)"
+                        data-en="View solution →"
+                        data-si="විසඳුම බලන්න →">
+                        View solution →
+                    </button>
+
+                </div>
+            </article>
+
+
+            <!-- 10 -->
+            <article class="card"
+                data-title="rexine canopy delivery truck"
+                data-title-si="රෙක්සින් කැනපි බෙදාහැරීමේ රථය">
+
+                <img src="assets/page_11.jpg"
+                    alt="Rexine Canopy Delivery Truck">
+
+                <div class="card-body">
+
+                    <span class="tag"
+                        data-en="APPLICATION"
+                        data-si="භාවිතය">
+                        APPLICATION
+                    </span>
+
+                    <h3
+                        data-en="Rexine Canopy Delivery Truck"
+                        data-si="රෙක්සින් කැනපි බෙදාහැරීමේ රථය">
+                        Rexine Canopy Delivery Truck
+                    </h3>
+
+                    <p
+                        data-en="Smart delivery solution for growing businesses"
+                        data-si="වර්ධනය වන ව්‍යාපාර සඳහා බුද්ධිමත් බෙදාහැරීමේ විසඳුම">
+                        Smart delivery solution for growing businesses
+                    </p>
+
+                    <button onclick="openModal(9)"
+                        data-en="View solution →"
+                        data-si="විසඳුම බලන්න →">
+                        View solution →
+                    </button>
+
+                </div>
+            </article>
+
+
+            <!-- 11 -->
+            <article class="card"
+                data-title="poultry transport unit"
+                data-title-si="කුකුළු ප්‍රවාහන ඒකකය">
+
+                <img src="assets/page_12.jpg"
+                    alt="Poultry Transport Unit">
+
+                <div class="card-body">
+
+                    <span class="tag"
+                        data-en="APPLICATION"
+                        data-si="භාවිතය">
+                        APPLICATION
+                    </span>
+
+                    <h3
+                        data-en="Poultry Transport Unit"
+                        data-si="කුකුළු ප්‍රවාහන ඒකකය">
+                        Poultry Transport Unit
+                    </h3>
+
+                    <p
+                        data-en="Comfortable and efficient livestock movement"
+                        data-si="සත්ව ප්‍රවාහනය සඳහා පහසු සහ කාර්යක්ෂම විසඳුම">
+                        Comfortable and efficient livestock movement
+                    </p>
+
+                    <button onclick="openModal(10)"
+                        data-en="View solution →"
+                        data-si="විසඳුම බලන්න →">
+                        View solution →
+                    </button>
+
+                </div>
+            </article>
+
+
+            <!-- 12 -->
+            <article class="card"
+                data-title="garbage collection vehicle"
+                data-title-si="කසළ එකතු කිරීමේ රථය">
+
+                <img src="assets/page_12.jpg"
+                    alt="Garbage Collection Vehicle">
+
+                <div class="card-body">
+
+                    <span class="tag"
+                        data-en="APPLICATION"
+                        data-si="භාවිතය">
+                        APPLICATION
+                    </span>
+
+                    <h3
+                        data-en="Garbage Collection Vehicle"
+                        data-si="කසළ එකතු කිරීමේ රථය">
+                        Garbage Collection Vehicle
+                    </h3>
+
+                    <p
+                        data-en="Efficient waste management solution"
+                        data-si="කාර්යක්ෂම අපද්‍රව්‍ය කළමනාකරණ විසඳුම">
+                        Efficient waste management solution
+                    </p>
+
+                    <button onclick="openModal(11)"
+                        data-en="View solution →"
+                        data-si="විසඳුම බලන්න →">
+                        View solution →
+                    </button>
+
+                </div>
+            </article>
+
+
+            <!-- 13 -->
+            <article class="card"
+                data-title="mobile grocery shop"
+                data-title-si="ජංගම සිල්ලර වෙළඳසැල">
+
+                <img src="assets/page_13.jpg"
+                    alt="Mobile Grocery Shop">
+
+                <div class="card-body">
+
+                    <span class="tag"
+                        data-en="APPLICATION"
+                        data-si="භාවිතය">
+                        APPLICATION
+                    </span>
+
+                    <h3
+                        data-en="Mobile Grocery Shop"
+                        data-si="ජංගම සිල්ලර වෙළඳසැල">
+                        Mobile Grocery Shop
+                    </h3>
+
+                    <p
+                        data-en="Efficient and accessible mobile retail solutions"
+                        data-si="කාර්යක්ෂම සහ පහසුවෙන් ප්‍රවේශ විය හැකි ජංගම වෙළඳ විසඳුම්">
+                        Efficient and accessible mobile retail solutions
+                    </p>
+
+                    <button onclick="openModal(12)"
+                        data-en="View solution →"
+                        data-si="විසඳුම බලන්න →">
+                        View solution →
+                    </button>
+
+                </div>
+            </article>
+
+
+            <!-- 14 -->
+            <article class="card"
+                data-title="food van"
+                data-title-si="ආහාර වෑන් රථය">
+
+                <img src="assets/page_13.jpg"
+                    alt="Food Van">
+
+                <div class="card-body">
+
+                    <span class="tag"
+                        data-en="APPLICATION"
+                        data-si="භාවිතය">
+                        APPLICATION
+                    </span>
+
+                    <h3
+                        data-en="Food Van"
+                        data-si="ආහාර වෑන් රථය">
+                        Food Van
+                    </h3>
+
+                    <p
+                        data-en="Ideal for street food operations"
+                        data-si="වීදි ආහාර ව්‍යාපාර සඳහා සුදුසුය">
+                        Ideal for street food operations
+                    </p>
+
+                    <button onclick="openModal(13)"
+                        data-en="View solution →"
+                        data-si="විසඳුම බලන්න →">
+                        View solution →
+                    </button>
+
+                </div>
+            </article>
+
+
+            <!-- 15 -->
+            <article class="card"
+                data-title="hydraulic hopper"
+                data-title-si="හයිඩ්‍රොලික් හොපර්">
+
+                <img src="assets/page_14.jpg"
+                    alt="Hydraulic Hopper">
+
+                <div class="card-body">
+
+                    <span class="tag"
+                        data-en="APPLICATION"
+                        data-si="භාවිතය">
+                        APPLICATION
+                    </span>
+
+                    <h3
+                        data-en="Hydraulic Hopper"
+                        data-si="හයිඩ්‍රොලික් හොපර්">
+                        Hydraulic Hopper
+                    </h3>
+
+                    <p
+                        data-en="Effortless and rapid bulk material lift"
+                        data-si="විශාල ප්‍රමාණයේ ද්‍රව්‍ය වේගයෙන් සහ පහසුවෙන් එසවීම">
+                        Effortless and rapid bulk material lift
+                    </p>
+
+                    <button onclick="openModal(14)"
+                        data-en="View solution →"
+                        data-si="විසඳුම බලන්න →">
+                        View solution →
+                    </button>
+
+                </div>
+            </article>
+
+
+            <!-- 16 -->
+            <article class="card"
+                data-title="soft drink carrier"
+                data-title-si="මෘදු පානය ප්‍රවාහන රථය">
+
+                <img src="assets/page_14.jpg"
+                    alt="Soft Drink Carrier">
+
+                <div class="card-body">
+
+                    <span class="tag"
+                        data-en="APPLICATION"
+                        data-si="භාවිතය">
+                        APPLICATION
+                    </span>
+
+                    <h3
+                        data-en="Soft Drink Carrier"
+                        data-si="මෘදු පානය ප්‍රවාහන රථය">
+                        Soft Drink Carrier
+                    </h3>
+
+                    <p
+                        data-en="Secure and optimized beverage crate distribution"
+                        data-si="පාන වර්ග පෙට්ටි ආරක්ෂිතව සහ කාර්යක්ෂමව බෙදාහැරීම">
+                        Secure and optimized beverage crate distribution
+                    </p>
+
+                    <button onclick="openModal(15)"
+                        data-en="View solution →"
+                        data-si="විසඳුම බලන්න →">
+                        View solution →
+                    </button>
+
+                </div>
+            </article>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         GALLERY
+    ========================== -->
+
+    <section id="gallery"
+        class="section"
+        style="background:#eef3f6">
+
+        <div class="section-head">
+
+            <div class="eyebrow"
+                data-en="VISUAL PRESENTATION"
+                data-si="දෘශ්‍ය ඉදිරිපත් කිරීම">
+                VISUAL PRESENTATION
+            </div>
+
+            <h2
+                data-en="Body concepts at a glance"
+                data-si="වාහන බොඩි සංකල්ප එක බැල්මකින්">
+                Body concepts at a glance
+            </h2>
+
+            <p
+                data-en="Pages from the supplied presentation are used as the visual reference gallery."
+                data-si="ලබා දී ඇති ඉදිරිපත් කිරීමේ පිටු දෘශ්‍ය යොමු ගැලරිය ලෙස භාවිතා කර ඇත.">
+                Pages from the supplied presentation are used as the visual reference gallery.
+            </p>
+
+        </div>
+
+        <div class="gallery">
+
+            <img src="assets/page_3.jpg"
+                alt="Cargo applications">
+
+            <div class="small">
+
+                <img src="assets/page_4.jpg"
+                    alt="Cargo applications">
+
+                <img src="assets/page_10.jpg"
+                    alt="Vehicle applications">
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         CTA
+    ========================== -->
+
+    <section class="cta">
+
+        <h2
+            data-en="Ready to present your pickup portfolio?"
+            data-si="ඔබේ පිකප් වාහන විසඳුම් ඉදිරිපත් කිරීමට සූදානම්ද?">
+            Ready to present your pickup portfolio?
+        </h2>
+
+        <p
+            data-en="Use this page as a digital showroom or presentation-style website. It works offline."
+            data-si="මෙම පිටුව ඩිජිටල් ප්‍රදර්ශනාගාරයක් හෝ ඉදිරිපත් කිරීමේ ආකාරයේ වෙබ් අඩවියක් ලෙස භාවිතා කළ හැකිය. මෙය offline ආකාරයෙන්ද ක්‍රියා කරයි.">
+            Use this page as a digital showroom or presentation-style website. It works offline.
+        </p>
+
+        <a class="btn"
+            href="#solutions"
+            data-en="Browse applications"
+            data-si="භාවිතයන් බලන්න">
+            Browse applications
+        </a>
+
+    </section>
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
+    <footer
+        data-en="Customized Commercial Pickup Solutions • Digital presentation website"
+        data-si="අභිරුචිකරණය කළ වාණිජ පිකප් විසඳුම් • ඩිජිටල් ඉදිරිපත් කිරීමේ වෙබ් අඩවිය">
+        Customized Commercial Pickup Solutions • Digital presentation website
+    </footer>
+
+
+    <!-- =========================
+         MODAL
+    ========================== -->
+
+    <div class="modal"
+        id="modal"
+        aria-hidden="true">
+
+        <div class="modal-box">
+
+            <button
+                class="close"
+                onclick="closeModal()"
+                aria-label="Close">
+                ×
+            </button>
+
+            <img id="mimg"
+                src=""
+                alt="">
+
+            <div class="modal-info">
+
+                <div class="eyebrow"
+                    data-en="APPLICATION"
+                    data-si="භාවිතය">
+                    APPLICATION
+                </div>
+
+                <h2 id="mtitle"></h2>
+
+                <p id="msub"></p>
+
+                <ul id="mlist"></ul>
+
+            </div>
+
+        </div>
+
     </div>
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================== -->
+
     <script>
-        const solutions = [{ "title": "Vegetable Shop Vehicle", "subtitle": "Fresh produce delivered efficiently", "details": "Attractive mobile vegetable display; Spacious storage for fresh produce; Easy customer access and serving; Ideal for roadside and mobile vegetable sales.", "image": "page_5.jpg" }, { "title": "Fish Delivery Vehicle", "subtitle": "Fresh seafood, delivered and displayed on the move", "details": "Hygienic display and storage area; Designed to maintain product freshness; Convenient customer-serving setup; Ideal for mobile fish retail businesses.", "image": "page_5.jpg" }, { "title": "Bakery Mobile Unit", "subtitle": "Freshness Delivered Anywhere", "details": "Clear glass display for better product visibility; Strong body protects products from sun and rain; Easy to drive in small roads and busy areas; Attractive branding design to catch customer attention; Designed for efficient mobile bakery operations with smart storage and customer-friendly display solutions.", "image": "page_6.jpg" }, { "title": "Gas Cylinder Carrier", "subtitle": "Built for strength and safety", "details": "Heavy-duty load capacity; Secure cylinder holding system; Safe and stable transportation; Designed for commercial distribution; Designed for safe and efficient gas cylinder transportation with secure storage and reliable delivery solutions.", "image": "page_7.jpg" }, { "title": "Milk Tankers", "subtitle": "Food-grade insulated transport", "details": "Outer Shell will be in M.S. Sheet; Inner Shell will be in SS 304 food grade; Insulation will be provided between inner & outer panels; Manhole will be provided with S.S. Lid.", "image": "page_8.jpg" }, { "title": "Egg Transport Solution", "subtitle": "Safe delivery for delicate products", "details": "Shock-resistant rack system; Safe and secure transport; Reduces egg breakage; Ideal for farms & distributors; Designed for safe and efficient egg transportation with secure storage and damage-protection solutions.", "image": "page_9.jpg" }, { "title": "Ice Cream Sales Vehicle", "subtitle": "Cool treats, anywhere you go", "details": "Heavy-duty square tube structure with flex roof, side panels, and opening doors; Foldable SS counters on LH side and rear; Side and rear doors convertible into canopies; Branding panels provided on all four sides; Two 12V tube lights and one electrical charging point; Automotive paint finish matching the vehicle color; FRP/metal aerodynamic canopy above the driver's cabin.", "image": "page_10.jpg" }, { "title": "Delivery Transport Solution", "subtitle": "Smart delivery solution for growing businesses", "details": "Spacious cargo storage; Safe and secure goods transport; Ideal for daily business deliveries; Perfect for small & medium businesses.", "image": "page_10.jpg" }, { "title": "Vacuum Emptier", "subtitle": "Efficient vacuum and sludge handling", "details": "Fresh Water Tank-In FRP/HDPE \u2013 100 Lts.; Sludge Tank-In \u2013 MS 500 Ltrs. (Wall thickness 3 mm.); Auxiliary Engine \u2013 Greaves Make, 5 HP @ 3000 RPM, Air Cooled, 4 Stroke, Diesel Engine; Suction -Through Vacuum Pump; Suction Hose-Heavy duty PVC suction hose with strainer Dia. 50mm & 15 mtrs. Long; Hose Gallows-At rear side of vehicle.", "image": "page_11.jpg" }, { "title": "Rexine Canopy Delivery Truck", "subtitle": "Smart delivery solution for growing businesses", "details": "Heavy-duty square tube frame with covered canopy body; Enclosed cargo area with rexine canopy for weather protection; Lockable rear double door for easy loading and unloading; Spacious body suitable for parcel and goods delivery; Fabricated body painted to match vehicle colour.", "image": "page_11.jpg" }, { "title": "Poultry Transport Unit", "subtitle": "Comfortable and efficient livestock movement", "details": "Ventilated structure for airflow; Animal-friendly transport design; Easy loading & unloading; Suitable for farm operations.", "image": "page_12.jpg" }, { "title": "Garbage Collection Vehicle", "subtitle": "Efficient waste management solution", "details": "Strong and durable body; Easy loading mechanism; Ideal for municipal use; Low maintenance design.", "image": "page_12.jpg" }, { "title": "Mobile Grocery Shop", "subtitle": "Efficient and accessible mobile retail solutions", "details": "Attractive mobile display; Spacious stock storage; Easy customer access; Ideal for roadside sales.", "image": "page_13.jpg" }, { "title": "Food Van", "subtitle": "Ideal for street food operations", "details": "Premium kitchen setup; Optimized storage space; Easy utility access; Ideal for street catering.", "image": "page_13.jpg" }, { "title": "Hydraulic Hopper", "subtitle": "Effortless and rapid bulk material lift", "details": "Heavy-duty hydraulic lift; High-capacity cargo hopper; Swift automated unloading; Ideal for construction materials.", "image": "page_14.jpg" }, { "title": "Soft Drink Carrier", "subtitle": "Secure and optimized beverage crate distribution", "details": "Specialized crate racking; High-capacity load layout; Quick side access; Ideal for beverage distribution.", "image": "page_14.jpg" }];
+
+        /* =========================================
+           SOLUTION DATA
+        ========================================= */
+
+        const solutions = [
+
+            {
+                title: {
+                    en: "Vegetable Shop Vehicle",
+                    si: "එළවළු වෙළඳසැල් රථය"
+                },
+                subtitle: {
+                    en: "Fresh produce delivered efficiently",
+                    si: "නැවුම් එළවළු කාර්යක්ෂමව පාරිභෝගිකයන් වෙත ගෙන යාම"
+                },
+                details: {
+                    en: [
+                        "Attractive mobile vegetable display",
+                        "Spacious storage for fresh produce",
+                        "Easy customer access and serving",
+                        "Ideal for roadside and mobile vegetable sales"
+                    ],
+                    si: [
+                        "ආකර්ෂණීය ජංගම එළවළු ප්‍රදර්ශන පද්ධතිය",
+                        "නැවුම් එළවළු සඳහා ප්‍රමාණවත් ගබඩා ඉඩකඩ",
+                        "පාරිභෝගිකයන්ට පහසුවෙන් ප්‍රවේශ වී භාණ්ඩ ලබාගැනීමේ හැකියාව",
+                        "මාර්ග අසල සහ ජංගම එළවළු අලෙවිය සඳහා සුදුසුය"
+                    ]
+                },
+                image: "page_5.jpg"
+            },
+
+            {
+                title: {
+                    en: "Fish Delivery Vehicle",
+                    si: "මාළු බෙදාහැරීමේ රථය"
+                },
+                subtitle: {
+                    en: "Fresh seafood, delivered and displayed on the move",
+                    si: "නැවුම් මුහුදු ආහාර ගෙන යමින් ප්‍රදර්ශනය කිරීම සහ බෙදාහැරීම"
+                },
+                details: {
+                    en: [
+                        "Hygienic display and storage area",
+                        "Designed to maintain product freshness",
+                        "Convenient customer-serving setup",
+                        "Ideal for mobile fish retail businesses"
+                    ],
+                    si: [
+                        "සනීපාරක්ෂක ප්‍රදර්ශන සහ ගබඩා ප්‍රදේශය",
+                        "නිෂ්පාදනවල නැවුම් බව පවත්වා ගැනීමට නිර්මාණය කර ඇත",
+                        "පාරිභෝගික සේවාව සඳහා පහසු සැකසුම",
+                        "ජංගම මාළු අලෙවි ව්‍යාපාර සඳහා සුදුසුය"
+                    ]
+                },
+                image: "page_5.jpg"
+            },
+
+            {
+                title: {
+                    en: "Bakery Mobile Unit",
+                    si: "ජංගම බේකරි ඒකකය"
+                },
+                subtitle: {
+                    en: "Freshness Delivered Anywhere",
+                    si: "නැවුම් බේකරි නිෂ්පාදන ඕනෑම ස්ථානයකට"
+                },
+                details: {
+                    en: [
+                        "Clear glass display for better product visibility",
+                        "Strong body protects products from sun and rain",
+                        "Easy to drive in small roads and busy areas",
+                        "Attractive branding design to catch customer attention",
+                        "Designed for efficient mobile bakery operations with smart storage and customer-friendly display solutions"
+                    ],
+                    si: [
+                        "නිෂ්පාදන පැහැදිලිව දැකගැනීමට වීදුරු ප්‍රදර්ශන පද්ධතිය",
+                        "හිරු සහ වැසි වලින් නිෂ්පාදන ආරක්ෂා කරන ශක්තිමත් බොඩිය",
+                        "කුඩා මාර්ග සහ තදබද ප්‍රදේශවල පහසුවෙන් ධාවනය කළ හැකිය",
+                        "පාරිභෝගික අවධානය දිනාගැනීමට ආකර්ෂණීය Branding නිර්මාණය",
+                        "බුද්ධිමත් ගබඩා සහ පාරිභෝගික හිතකාමී ප්‍රදර්ශන පහසුකම් සහිත ජංගම බේකරි මෙහෙයුම් සඳහා නිර්මාණය කර ඇත"
+                    ]
+                },
+                image: "page_6.jpg"
+            },
+
+            {
+                title: {
+                    en: "Gas Cylinder Carrier",
+                    si: "ගෑස් සිලින්ඩර් ප්‍රවාහන රථය"
+                },
+                subtitle: {
+                    en: "Built for strength and safety",
+                    si: "ශක්තිය සහ ආරක්ෂාව සඳහා නිර්මාණය කර ඇත"
+                },
+                details: {
+                    en: [
+                        "Heavy-duty load capacity",
+                        "Secure cylinder holding system",
+                        "Safe and stable transportation",
+                        "Designed for commercial distribution",
+                        "Designed for safe and efficient gas cylinder transportation with secure storage and reliable delivery solutions"
+                    ],
+                    si: [
+                        "අධික බරක් දැරිය හැකි හැකියාව",
+                        "සිලින්ඩර් ආරක්ෂිතව රඳවා තැබීමේ පද්ධතිය",
+                        "ආරක්ෂිත සහ ස්ථාවර ප්‍රවාහනය",
+                        "වාණිජ බෙදාහැරීම සඳහා නිර්මාණය කර ඇත",
+                        "ආරක්ෂිත ගබඩා සහ විශ්වාසදායක බෙදාහැරීමේ පහසුකම් සහිතව ගෑස් සිලින්ඩර් ආරක්ෂිතව හා කාර්යක්ෂමව ප්‍රවාහනය කිරීම සඳහා නිර්මාණය කර ඇත"
+                    ]
+                },
+                image: "page_7.jpg"
+            },
+
+            {
+                title: {
+                    en: "Milk Tankers",
+                    si: "කිරි ටැංකි රථ"
+                },
+                subtitle: {
+                    en: "Food-grade insulated transport",
+                    si: "ආහාර ප්‍රමිතියට ගැලපෙන පරිවරණය කළ ප්‍රවාහනය"
+                },
+                details: {
+                    en: [
+                        "Outer Shell will be in M.S. Sheet",
+                        "Inner Shell will be in SS 304 food grade",
+                        "Insulation will be provided between inner & outer panels",
+                        "Manhole will be provided with S.S. Lid"
+                    ],
+                    si: [
+                        "පිටත Shell එක M.S. Sheet වලින් සමන්විත වේ",
+                        "ඇතුළත Shell එක SS 304 food grade ද්‍රව්‍යයෙන් සමන්විත වේ",
+                        "ඇතුළත සහ පිටත පැනල් අතර Insulation ලබා දේ",
+                        "S.S. Lid සහිත Manhole එකක් ලබා දේ"
+                    ]
+                },
+                image: "page_8.jpg"
+            },
+
+            {
+                title: {
+                    en: "Egg Transport Solution",
+                    si: "බිත්තර ප්‍රවාහන විසඳුම"
+                },
+                subtitle: {
+                    en: "Safe delivery for delicate products",
+                    si: "සියුම් නිෂ්පාදන සඳහා ආරක්ෂිත බෙදාහැරීම"
+                },
+                details: {
+                    en: [
+                        "Shock-resistant rack system",
+                        "Safe and secure transport",
+                        "Reduces egg breakage",
+                        "Ideal for farms & distributors",
+                        "Designed for safe and efficient egg transportation with secure storage and damage-protection solutions"
+                    ],
+                    si: [
+                        "කම්පනවලට ඔරොත්තු දෙන Rack පද්ධතිය",
+                        "ආරක්ෂිත සහ සුරක්ෂිත ප්‍රවාහනය",
+                        "බිත්තර කැඩීයාම අඩු කරයි",
+                        "ගොවිපළ සහ බෙදාහරින්නන් සඳහා සුදුසුය",
+                        "ආරක්ෂිත ගබඩා සහ හානි ආරක්ෂණ පහසුකම් සහිතව බිත්තර ආරක්ෂිතව හා කාර්යක්ෂමව ප්‍රවාහනය කිරීම සඳහා නිර්මාණය කර ඇත"
+                    ]
+                },
+                image: "page_9.jpg"
+            },
+
+            {
+                title: {
+                    en: "Ice Cream Sales Vehicle",
+                    si: "අයිස්ක්‍රීම් අලෙවි රථය"
+                },
+                subtitle: {
+                    en: "Cool treats, anywhere you go",
+                    si: "ඔබ යන ඕනෑම තැනක සිසිල් රසකැවිලි"
+                },
+                details: {
+                    en: [
+                        "Heavy-duty square tube structure with flex roof, side panels, and opening doors",
+                        "Foldable SS counters on LH side and rear",
+                        "Side and rear doors convertible into canopies",
+                        "Branding panels provided on all four sides",
+                        "Two 12V tube lights and one electrical charging point",
+                        "Automotive paint finish matching the vehicle color",
+                        "FRP/metal aerodynamic canopy above the driver's cabin"
+                    ],
+                    si: [
+                        "Flex roof, side panels සහ විවෘත කළ හැකි දොරවල් සහිත ශක්තිමත් square tube structure",
+                        "වම් පැත්තේ සහ පසුපස Foldable SS counters",
+                        "පැති සහ පසුපස දොරවල් Canopy බවට පරිවර්තනය කළ හැකිය",
+                        "පැති හතරේම Branding panels ලබා දේ",
+                        "12V Tube lights දෙකක් සහ විදුලි Charging point එකක්",
+                        "වාහනයේ වර්ණයට ගැලපෙන Automotive paint finish",
+                        "රියදුරු කැබින් එකට ඉහළින් FRP/metal aerodynamic canopy"
+                    ]
+                },
+                image: "page_10.jpg"
+            },
+
+            {
+                title: {
+                    en: "Delivery Transport Solution",
+                    si: "බෙදාහැරීමේ ප්‍රවාහන විසඳුම"
+                },
+                subtitle: {
+                    en: "Smart delivery solution for growing businesses",
+                    si: "වර්ධනය වන ව්‍යාපාර සඳහා බුද්ධිමත් බෙදාහැරීමේ විසඳුම"
+                },
+                details: {
+                    en: [
+                        "Spacious cargo storage",
+                        "Safe and secure goods transport",
+                        "Ideal for daily business deliveries",
+                        "Perfect for small & medium businesses"
+                    ],
+                    si: [
+                        "විශාල භාණ්ඩ ගබඩා ඉඩකඩ",
+                        "භාණ්ඩ ආරක්ෂිතව ප්‍රවාහනය කිරීම",
+                        "දෛනික ව්‍යාපාරික බෙදාහැරීම් සඳහා සුදුසුය",
+                        "කුඩා සහ මධ්‍යම පරිමාණ ව්‍යාපාර සඳහා ඉතා සුදුසුය"
+                    ]
+                },
+                image: "page_10.jpg"
+            },
+
+            {
+                title: {
+                    en: "Vacuum Emptier",
+                    si: "වැකුම් එම්ප්ටියර්"
+                },
+                subtitle: {
+                    en: "Efficient vacuum and sludge handling",
+                    si: "වැකුම් සහ අපද්‍රව්‍ය මඩ හැසිරවීම සඳහා කාර්යක්ෂම විසඳුම"
+                },
+                details: {
+                    en: [
+                        "Fresh Water Tank-In FRP/HDPE – 100 Lts.",
+                        "Sludge Tank-In – MS 500 Ltrs. (Wall thickness 3 mm.)",
+                        "Auxiliary Engine – Greaves Make, 5 HP @ 3000 RPM, Air Cooled, 4 Stroke, Diesel Engine",
+                        "Suction - Through Vacuum Pump",
+                        "Suction Hose - Heavy duty PVC suction hose with strainer Dia. 50mm & 15 mtrs. Long",
+                        "Hose Gallows - At rear side of vehicle"
+                    ],
+                    si: [
+                        "Fresh Water Tank - FRP/HDPE – ලීටර් 100",
+                        "Sludge Tank - MS ලීටර් 500 (Wall thickness 3 mm.)",
+                        "Auxiliary Engine - Greaves Make, 5 HP @ 3000 RPM, Air Cooled, 4 Stroke Diesel Engine",
+                        "Vacuum Pump හරහා Suction",
+                        "Suction Hose - Strainer සහිත Heavy duty PVC suction hose, විෂ්කම්භය 50mm සහ දිග මීටර් 15",
+                        "Hose Gallows - වාහනයේ පසුපස පැත්තේ"
+                    ]
+                },
+                image: "page_11.jpg"
+            },
+
+            {
+                title: {
+                    en: "Rexine Canopy Delivery Truck",
+                    si: "රෙක්සින් කැනපි බෙදාහැරීමේ රථය"
+                },
+                subtitle: {
+                    en: "Smart delivery solution for growing businesses",
+                    si: "වර්ධනය වන ව්‍යාපාර සඳහා බුද්ධිමත් බෙදාහැරීමේ විසඳුම"
+                },
+                details: {
+                    en: [
+                        "Heavy-duty square tube frame with covered canopy body",
+                        "Enclosed cargo area with rexine canopy for weather protection",
+                        "Lockable rear double door for easy loading and unloading",
+                        "Spacious body suitable for parcel and goods delivery",
+                        "Fabricated body painted to match vehicle colour"
+                    ],
+                    si: [
+                        "Covered canopy body සහිත Heavy-duty square tube frame",
+                        "කාලගුණයෙන් ආරක්ෂාව සඳහා Rexine canopy සහිත ආවරණය කළ භාණ්ඩ ප්‍රදේශය",
+                        "භාණ්ඩ පැටවීම සහ බෑම සඳහා Lock කළ හැකි පසුපස double door",
+                        "Parcel සහ භාණ්ඩ බෙදාහැරීම සඳහා සුදුසු විශාල බොඩිය",
+                        "වාහනයේ වර්ණයට ගැලපෙන ලෙස වර්ණ ගැන්වූ Fabricated body"
+                    ]
+                },
+                image: "page_11.jpg"
+            },
+
+            {
+                title: {
+                    en: "Poultry Transport Unit",
+                    si: "කුකුළු ප්‍රවාහන ඒකකය"
+                },
+                subtitle: {
+                    en: "Comfortable and efficient livestock movement",
+                    si: "සත්ව ප්‍රවාහනය සඳහා පහසු සහ කාර්යක්ෂම විසඳුම"
+                },
+                details: {
+                    en: [
+                        "Ventilated structure for airflow",
+                        "Animal-friendly transport design",
+                        "Easy loading & unloading",
+                        "Suitable for farm operations"
+                    ],
+                    si: [
+                        "හොඳ වායු සංසරණයක් සඳහා Ventilated structure",
+                        "සතුන් සඳහා හිතකර ප්‍රවාහන නිර්මාණය",
+                        "පහසු පැටවීම සහ බෑම",
+                        "ගොවිපළ මෙහෙයුම් සඳහා සුදුසුය"
+                    ]
+                },
+                image: "page_12.jpg"
+            },
+
+            {
+                title: {
+                    en: "Garbage Collection Vehicle",
+                    si: "කසළ එකතු කිරීමේ රථය"
+                },
+                subtitle: {
+                    en: "Efficient waste management solution",
+                    si: "කාර්යක්ෂම අපද්‍රව්‍ය කළමනාකරණ විසඳුම"
+                },
+                details: {
+                    en: [
+                        "Strong and durable body",
+                        "Easy loading mechanism",
+                        "Ideal for municipal use",
+                        "Low maintenance design"
+                    ],
+                    si: [
+                        "ශක්තිමත් සහ කල් පවතින බොඩිය",
+                        "පහසු පැටවීමේ යාන්ත්‍රණය",
+                        "නගර සභා සහ පළාත් පාලන භාවිතය සඳහා සුදුසුය",
+                        "අඩු නඩත්තු අවශ්‍යතාවක් සහිත නිර්මාණය"
+                    ]
+                },
+                image: "page_12.jpg"
+            },
+
+            {
+                title: {
+                    en: "Mobile Grocery Shop",
+                    si: "ජංගම සිල්ලර වෙළඳසැල"
+                },
+                subtitle: {
+                    en: "Efficient and accessible mobile retail solutions",
+                    si: "කාර්යක්ෂම සහ පහසුවෙන් ප්‍රවේශ විය හැකි ජංගම වෙළඳ විසඳුම"
+                },
+                details: {
+                    en: [
+                        "Attractive mobile display",
+                        "Spacious stock storage",
+                        "Easy customer access",
+                        "Ideal for roadside sales"
+                    ],
+                    si: [
+                        "ආකර්ෂණීය ජංගම ප්‍රදර්ශන පද්ධතිය",
+                        "විශාල භාණ්ඩ ගබඩා ඉඩකඩ",
+                        "පාරිභෝගිකයන්ට පහසුවෙන් ප්‍රවේශ විය හැකිය",
+                        "මාර්ග අසල අලෙවිය සඳහා සුදුසුය"
+                    ]
+                },
+                image: "page_13.jpg"
+            },
+
+            {
+                title: {
+                    en: "Food Van",
+                    si: "ආහාර වෑන් රථය"
+                },
+                subtitle: {
+                    en: "Ideal for street food operations",
+                    si: "වීදි ආහාර ව්‍යාපාර සඳහා සුදුසුය"
+                },
+                details: {
+                    en: [
+                        "Premium kitchen setup",
+                        "Optimized storage space",
+                        "Easy utility access",
+                        "Ideal for street catering"
+                    ],
+                    si: [
+                        "උසස් තත්ත්වයේ Kitchen setup",
+                        "කාර්යක්ෂම ලෙස සැලසුම් කළ ගබඩා ඉඩකඩ",
+                        "Utility පහසුකම් සඳහා පහසු ප්‍රවේශය",
+                        "වීදි ආහාර අලෙවිය සඳහා සුදුසුය"
+                    ]
+                },
+                image: "page_13.jpg"
+            },
+
+            {
+                title: {
+                    en: "Hydraulic Hopper",
+                    si: "හයිඩ්‍රොලික් හොපර්"
+                },
+                subtitle: {
+                    en: "Effortless and rapid bulk material lift",
+                    si: "විශාල ප්‍රමාණයේ ද්‍රව්‍ය වේගයෙන් සහ පහසුවෙන් එසවීම"
+                },
+                details: {
+                    en: [
+                        "Heavy-duty hydraulic lift",
+                        "High-capacity cargo hopper",
+                        "Swift automated unloading",
+                        "Ideal for construction materials"
+                    ],
+                    si: [
+                        "Heavy-duty Hydraulic lift",
+                        "වැඩි ධාරිතාවකින් යුත් Cargo hopper",
+                        "වේගවත් ස්වයංක්‍රීය බෑමේ පද්ධතිය",
+                        "ඉදිකිරීම් ද්‍රව්‍ය ප්‍රවාහනය සඳහා සුදුසුය"
+                    ]
+                },
+                image: "page_14.jpg"
+            },
+
+            {
+                title: {
+                    en: "Soft Drink Carrier",
+                    si: "මෘදු පානය ප්‍රවාහන රථය"
+                },
+                subtitle: {
+                    en: "Secure and optimized beverage crate distribution",
+                    si: "පාන වර්ග පෙට්ටි ආරක්ෂිතව සහ කාර්යක්ෂමව බෙදාහැරීම"
+                },
+                details: {
+                    en: [
+                        "Specialized crate racking",
+                        "High-capacity load layout",
+                        "Quick side access",
+                        "Ideal for beverage distribution"
+                    ],
+                    si: [
+                        "විශේෂිත Crate racking පද්ධතිය",
+                        "වැඩි ධාරිතාවකින් යුත් භාණ්ඩ පැටවීමේ සැලසුම",
+                        "පැතිවලින් ඉක්මන් ප්‍රවේශය",
+                        "පාන වර්ග බෙදාහැරීම සඳහා සුදුසුය"
+                    ]
+                },
+                image: "page_14.jpg"
+            }
+
+        ];
+
+
+        /* =========================================
+           ELEMENTS
+        ========================================= */
 
         const modal = document.getElementById("modal");
         const mimg = document.getElementById("mimg");
@@ -968,100 +2538,364 @@
         const menuBtn = document.getElementById("menuBtn");
         const navLinks = document.getElementById("navLinks");
 
-        /* Mobile navigation */
-        menuBtn.addEventListener("click", () => {
-            const isOpen = navLinks.classList.toggle("active");
-            menuBtn.setAttribute("aria-expanded", String(isOpen));
-            menuBtn.textContent = isOpen ? "×" : "☰";
-        });
 
-        document.querySelectorAll(".navlinks a").forEach(link => {
-            link.addEventListener("click", () => {
-                navLinks.classList.remove("active");
-                menuBtn.setAttribute("aria-expanded", "false");
-                menuBtn.textContent = "☰";
-            });
-        });
+        /* =========================================
+           CURRENT LANGUAGE
+        ========================================= */
 
-        /* Solution modal */
-        function openModal(i) {
-            const x = solutions[i];
+        let currentLanguage =
+            localStorage.getItem("language") || "en";
 
-            mimg.src = "assets/" + x.image;
-            mimg.alt = x.title;
-            mtitle.textContent = x.title;
-            msub.textContent = x.subtitle;
 
-            mlist.innerHTML = x.details
-                .split(";")
-                .map(v => "<li>" + v.trim() + "</li>")
-                .join("");
+        /* =========================================
+           LANGUAGE CHANGER
+        ========================================= */
 
-            modal.classList.add("open");
-            modal.setAttribute("aria-hidden", "false");
-            document.body.style.overflow = "hidden";
-        }
+        function changeLanguage(language) {
 
-        function closeModal() {
-            modal.classList.remove("open");
-            modal.setAttribute("aria-hidden", "true");
-            document.body.style.overflow = "";
-        }
+            currentLanguage = language;
 
-        modal.addEventListener("click", e => {
-            if (e.target === modal) closeModal();
-        });
+            /* Change all translated text */
 
-        document.addEventListener("keydown", e => {
-            if (e.key === "Escape" && modal.classList.contains("open")) {
-                closeModal();
-            }
-        });
+            document
+                .querySelectorAll("[data-en][data-si]")
+                .forEach(element => {
 
-        /* Search */
-        search.addEventListener("input", () => {
-            const q = search.value.toLowerCase().trim();
+                    element.textContent =
+                        element.getAttribute("data-" + language);
 
-            document.querySelectorAll(".card").forEach(card => {
-                card.style.display =
-                    card.dataset.title.toLowerCase().includes(q) ? "" : "none";
-            });
-        });
+                });
 
-        /* Scroll reveal animations */
-        const animatedItems = document.querySelectorAll(
-            ".section-head, .stat, .card, .gallery, .cta, footer"
-        );
 
-        animatedItems.forEach((item, index) => {
-            item.classList.add("reveal");
+            /* Change search placeholder */
 
-            if (item.classList.contains("card")) {
-                item.style.setProperty("--delay", `${(index % 3) * 0.08}s`);
-            }
-        });
+            search.placeholder =
+                search.getAttribute(
+                    "data-placeholder-" + language
+                );
 
-        if ("IntersectionObserver" in window) {
-            const observer = new IntersectionObserver(
-                entries => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            entry.target.classList.add("visible");
-                            observer.unobserve(entry.target);
-                        }
-                    });
-                },
-                {
-                    threshold: 0.12,
-                    rootMargin: "0px 0px -40px 0px"
-                }
+
+            /* Change HTML language */
+
+            document.documentElement.lang = language;
+
+
+            /* Update active buttons */
+
+            document
+                .getElementById("langEN")
+                .classList.toggle(
+                    "active",
+                    language === "en"
+                );
+
+            document
+                .getElementById("langSI")
+                .classList.toggle(
+                    "active",
+                    language === "si"
+                );
+
+
+            /* Save language */
+
+            localStorage.setItem(
+                "language",
+                language
             );
 
-            animatedItems.forEach(item => observer.observe(item));
-        } else {
-            animatedItems.forEach(item => item.classList.add("visible"));
+
+            /* Refresh modal if currently open */
+
+            if (modal.classList.contains("open")) {
+
+                const index =
+                    parseInt(
+                        modal.getAttribute("data-solution-index")
+                    );
+
+                if (!isNaN(index)) {
+                    openModal(index);
+                }
+
+            }
+
         }
+
+
+        /* =========================================
+           MOBILE NAVIGATION
+        ========================================= */
+
+        menuBtn.addEventListener("click", () => {
+
+            const isOpen =
+                navLinks.classList.toggle("active");
+
+            menuBtn.setAttribute(
+                "aria-expanded",
+                String(isOpen)
+            );
+
+            menuBtn.textContent =
+                isOpen ? "×" : "☰";
+
+        });
+
+
+        document
+            .querySelectorAll(".navlinks a")
+            .forEach(link => {
+
+                link.addEventListener("click", () => {
+
+                    navLinks.classList.remove("active");
+
+                    menuBtn.setAttribute(
+                        "aria-expanded",
+                        "false"
+                    );
+
+                    menuBtn.textContent = "☰";
+
+                });
+
+            });
+
+
+        /* =========================================
+           SOLUTION MODAL
+        ========================================= */
+
+        function openModal(index) {
+
+            const solution =
+                solutions[index];
+
+            if (!solution) return;
+
+
+            modal.setAttribute(
+                "data-solution-index",
+                index
+            );
+
+
+            mimg.src =
+                "assets/" + solution.image;
+
+            mimg.alt =
+                solution.title[currentLanguage];
+
+
+            mtitle.textContent =
+                solution.title[currentLanguage];
+
+            msub.textContent =
+                solution.subtitle[currentLanguage];
+
+
+            mlist.innerHTML =
+                solution.details[currentLanguage]
+                    .map(detail =>
+                        `<li>${detail}</li>`
+                    )
+                    .join("");
+
+
+            modal.classList.add("open");
+
+            modal.setAttribute(
+                "aria-hidden",
+                "false"
+            );
+
+            document.body.style.overflow =
+                "hidden";
+        }
+
+
+        function closeModal() {
+
+            modal.classList.remove("open");
+
+            modal.setAttribute(
+                "aria-hidden",
+                "true"
+            );
+
+            modal.removeAttribute(
+                "data-solution-index"
+            );
+
+            document.body.style.overflow =
+                "";
+
+        }
+
+
+        /* Close modal by clicking outside */
+
+        modal.addEventListener("click", event => {
+
+            if (event.target === modal) {
+                closeModal();
+            }
+
+        });
+
+
+        /* Close modal with ESC */
+
+        document.addEventListener(
+            "keydown",
+            event => {
+
+                if (
+                    event.key === "Escape" &&
+                    modal.classList.contains("open")
+                ) {
+                    closeModal();
+                }
+
+            }
+        );
+
+
+        /* =========================================
+           SEARCH
+        ========================================= */
+
+        search.addEventListener(
+            "input",
+            () => {
+
+                const query =
+                    search.value
+                        .toLowerCase()
+                        .trim();
+
+
+                document
+                    .querySelectorAll(".card")
+                    .forEach(card => {
+
+                        const englishTitle =
+                            card
+                                .getAttribute("data-title")
+                                .toLowerCase();
+
+                        const sinhalaTitle =
+                            card
+                                .getAttribute("data-title-si")
+                                .toLowerCase();
+
+
+                        const visible =
+                            englishTitle.includes(query) ||
+                            sinhalaTitle.includes(query);
+
+
+                        card.style.display =
+                            visible ? "" : "none";
+
+                    });
+
+            }
+        );
+
+
+        /* =========================================
+           SCROLL REVEAL ANIMATIONS
+        ========================================= */
+
+        const animatedItems =
+            document.querySelectorAll(
+                ".section-head, .stat, .card, .gallery, .cta, footer"
+            );
+
+
+        animatedItems.forEach(
+            (item, index) => {
+
+                item.classList.add("reveal");
+
+
+                if (
+                    item.classList.contains("card")
+                ) {
+
+                    item.style.setProperty(
+                        "--delay",
+                        `${(index % 3) * 0.08}s`
+                    );
+
+                }
+
+            }
+        );
+
+
+        if ("IntersectionObserver" in window) {
+
+            const observer =
+                new IntersectionObserver(
+                    entries => {
+
+                        entries.forEach(entry => {
+
+                            if (
+                                entry.isIntersecting
+                            ) {
+
+                                entry.target
+                                    .classList
+                                    .add("visible");
+
+                                observer.unobserve(
+                                    entry.target
+                                );
+
+                            }
+
+                        });
+
+                    },
+                    {
+                        threshold: 0.12,
+                        rootMargin:
+                            "0px 0px -40px 0px"
+                    }
+                );
+
+
+            animatedItems.forEach(
+                item => observer.observe(item)
+            );
+
+        } else {
+
+            animatedItems.forEach(
+                item =>
+                    item.classList.add("visible")
+            );
+
+        }
+
+
+        /* =========================================
+           START WEBSITE
+        ========================================= */
+
+        changeLanguage(
+            currentLanguage
+        );
+
     </script>
+
+
+
 </body>
 
 </html>
+```
