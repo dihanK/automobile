@@ -10,11 +10,21 @@
             box-sizing: border-box
         }
 
+        html {
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
         body {
             margin: 0;
             font-family: Inter, system-ui, Arial;
             color: #09283b;
-            background: #f6f8fa
+            background: #f6f8fa;
+            overflow-x: hidden;
+        }
+
+        img {
+            max-width: 100%;
         }
 
         a {
@@ -31,6 +41,7 @@
             background: #071e2deF;
             color: white;
             display: flex;
+            align-items: center;
             justify-content: space-between;
             padding: 14px 5vw
         }
@@ -48,8 +59,24 @@
             font-weight: 700
         }
 
+        .navlinks a {
+            transition: color .2s ease, transform .2s ease;
+        }
+
         .navlinks a:hover {
-            color: #f3b52b
+            color: #f3b52b;
+            transform: translateY(-1px);
+        }
+
+        .menu-btn {
+            display: none;
+            background: transparent;
+            border: 0;
+            color: white;
+            font-size: 28px;
+            line-height: 1;
+            cursor: pointer;
+            padding: 4px 8px;
         }
 
         .hero {
@@ -63,10 +90,13 @@
 
         .hero img {
             position: absolute;
+            inset: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover;
-            opacity: .55
+            object-fit: contain;
+            object-position: center;
+            opacity: .55;
+            animation: heroZoom 16s ease-in-out infinite alternate;
         }
 
         .hero:after {
@@ -373,9 +403,184 @@
             color: #42545f
         }
 
+
+        /* =========================
+           ANIMATIONS
+        ========================== */
+
+        @keyframes heroZoom {
+            from { transform: scale(1); }
+            to { transform: scale(1.045); }
+        }
+
+        @keyframes heroContentIn {
+            from { opacity: 0; transform: translateY(35px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes navIn {
+            from { opacity: 0; transform: translateY(-100%); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes floatButton {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        @keyframes menuIn {
+            from { opacity: 0; transform: translateY(-8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .nav {
+            animation: navIn .7s ease both;
+        }
+
+        .hero-content {
+            animation: heroContentIn 1s .2s ease both;
+        }
+
+        .hero-content .eyebrow {
+            animation: heroContentIn .8s .35s ease both;
+        }
+
+        .hero-content h1 {
+            animation: heroContentIn .9s .5s ease both;
+        }
+
+        .hero-content p {
+            animation: heroContentIn .9s .65s ease both;
+        }
+
+        .hero-content .btn {
+            animation: heroContentIn .9s .8s ease both, floatButton 3s 2s ease-in-out infinite;
+        }
+
+        .stat {
+            transition: transform .25s ease, box-shadow .25s ease;
+        }
+
+        .stat:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 18px 38px #08283d20;
+        }
+
+        .card {
+            transition: transform .3s ease, box-shadow .3s ease;
+        }
+
+        .card img {
+            transition: transform .5s ease;
+        }
+
+        .card:hover img {
+            transform: scale(1.045);
+        }
+
+        .gallery img {
+            transition: transform .5s ease, filter .5s ease;
+        }
+
+        .gallery img:hover {
+            transform: scale(1.025);
+            filter: brightness(1.04);
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(35px);
+            transition: opacity .7s ease, transform .7s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .card.reveal {
+            transition-delay: var(--delay, 0s);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+
+            *, *::before, *::after {
+                animation-duration: .01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: .01ms !important;
+            }
+
+            .reveal {
+                opacity: 1;
+                transform: none;
+            }
+        }
+
         @media(max-width:800px) {
+            .nav {
+                padding: 13px 5vw;
+                min-height: 58px;
+            }
+
+            .brand {
+                font-size: 11px;
+                max-width: calc(100% - 55px);
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+
+            .menu-btn {
+                display: block;
+            }
+
             .navlinks {
-                display: none
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: #071e2d;
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0;
+                padding: 8px 5vw 18px;
+                box-shadow: 0 10px 25px #0004;
+            }
+
+            .navlinks.active {
+                display: flex;
+                animation: menuIn .25s ease both;
+            }
+
+            .navlinks a {
+                width: 100%;
+                padding: 15px 0;
+                border-bottom: 1px solid #ffffff20;
+            }
+
+            .navlinks a:last-child {
+                border-bottom: 0;
+            }
+
+            .hero {
+                min-height: 100svh;
+            }
+
+            .hero-content {
+                width: 90%;
+                padding-top: 60px;
+            }
+
+            h1 {
+                font-size: clamp(38px, 10vw, 64px);
+                max-width: 100%;
+            }
+
+            .hero p {
+                font-size: 17px;
+                max-width: 100%;
             }
 
             .stats,
@@ -387,25 +592,148 @@
                 grid-template-columns: 1fr
             }
 
+            .spec {
+                flex-direction: column;
+                gap: 7px;
+            }
+
+            .spec span,
+            .spec strong {
+                width: 100%;
+                text-align: left;
+            }
+
+            .gallery {
+                grid-template-columns: 1fr;
+                min-height: auto;
+            }
+
+            .gallery > img {
+                height: auto;
+                aspect-ratio: 16 / 10;
+            }
+
+            .gallery .small {
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: none;
+                min-height: 220px;
+            }
+
+            .modal {
+                padding: 12px;
+            }
+
             .modal-box {
-                grid-template-columns: 1fr
+                grid-template-columns: 1fr;
+                max-height: 94vh;
+                border-radius: 18px;
             }
 
             .modal-box img {
-                min-height: 240px;
-                max-height: 350px
+                min-height: 230px;
+                max-height: 320px
+            }
+
+            .modal-info {
+                padding: 25px;
+            }
+
+            .modal-info h2 {
+                font-size: 30px;
             }
         }
 
         @media(max-width:560px) {
+            .nav {
+                padding: 12px 4vw;
+            }
+
+            .brand {
+                font-size: 10px;
+                letter-spacing: .05em;
+            }
+
+            .hero-content {
+                width: 90%;
+                padding-top: 55px;
+            }
+
+            .eyebrow {
+                font-size: 10px;
+                letter-spacing: .13em;
+            }
+
+            h1 {
+                font-size: clamp(36px, 11vw, 52px);
+                line-height: .98;
+            }
+
+            .hero p {
+                font-size: 16px;
+                line-height: 1.55;
+            }
+
+            .section {
+                padding: 60px 5vw;
+            }
 
             .stats,
             .grid {
                 grid-template-columns: 1fr
             }
 
-            .section {
-                padding: 65px 5vw
+            .search {
+                width: 100%;
+                min-width: 0;
+            }
+
+            .gallery {
+                gap: 12px;
+            }
+
+            .gallery .small {
+                grid-template-columns: 1fr;
+                gap: 12px;
+                min-height: auto;
+            }
+
+            .gallery .small img {
+                aspect-ratio: 16 / 10;
+                height: auto;
+            }
+
+            .cta {
+                padding: 65px 5vw;
+            }
+
+            .modal {
+                padding: 8px;
+            }
+
+            .modal-box {
+                max-height: 96vh;
+                border-radius: 16px;
+            }
+
+            .modal-box img {
+                min-height: 190px;
+                max-height: 260px;
+            }
+
+            .modal-info {
+                padding: 22px;
+            }
+
+            .modal-info h2 {
+                font-size: 27px;
+            }
+
+            .close {
+                width: 36px;
+                height: 36px;
+                font-size: 20px;
+                right: 10px;
+                top: 10px;
             }
         }
     </style>
@@ -414,8 +742,17 @@
 <body>
     <nav class="nav">
         <div class="brand">COMMERCIAL PICKUP SOLUTIONS</div>
-        <div class="navlinks"><a href="#overview">Overview</a><a href="#specs">Specifications</a><a
-                href="#solutions">Solutions</a><a href="#gallery">Gallery</a></div>
+
+        <button class="menu-btn" id="menuBtn"
+                aria-label="Open navigation menu"
+                aria-expanded="false">☰</button>
+
+        <div class="navlinks" id="navLinks">
+            <a href="#overview">Overview</a>
+            <a href="#specs">Specifications</a>
+            <a href="#solutions">Solutions</a>
+            <a href="#gallery">Gallery</a>
+        </div>
     </nav>
     <header class="hero"><img src="assets/page_1.jpg">
         <div class="hero-content">
@@ -618,7 +955,113 @@
             </div>
         </div>
     </div>
-    <script>const solutions = [{ "title": "Vegetable Shop Vehicle", "subtitle": "Fresh produce delivered efficiently", "details": "Attractive mobile vegetable display; Spacious storage for fresh produce; Easy customer access and serving; Ideal for roadside and mobile vegetable sales.", "image": "page_5.jpg" }, { "title": "Fish Delivery Vehicle", "subtitle": "Fresh seafood, delivered and displayed on the move", "details": "Hygienic display and storage area; Designed to maintain product freshness; Convenient customer-serving setup; Ideal for mobile fish retail businesses.", "image": "page_5.jpg" }, { "title": "Bakery Mobile Unit", "subtitle": "Freshness Delivered Anywhere", "details": "Clear glass display for better product visibility; Strong body protects products from sun and rain; Easy to drive in small roads and busy areas; Attractive branding design to catch customer attention; Designed for efficient mobile bakery operations with smart storage and customer-friendly display solutions.", "image": "page_6.jpg" }, { "title": "Gas Cylinder Carrier", "subtitle": "Built for strength and safety", "details": "Heavy-duty load capacity; Secure cylinder holding system; Safe and stable transportation; Designed for commercial distribution; Designed for safe and efficient gas cylinder transportation with secure storage and reliable delivery solutions.", "image": "page_7.jpg" }, { "title": "Milk Tankers", "subtitle": "Food-grade insulated transport", "details": "Outer Shell will be in M.S. Sheet; Inner Shell will be in SS 304 food grade; Insulation will be provided between inner & outer panels; Manhole will be provided with S.S. Lid.", "image": "page_8.jpg" }, { "title": "Egg Transport Solution", "subtitle": "Safe delivery for delicate products", "details": "Shock-resistant rack system; Safe and secure transport; Reduces egg breakage; Ideal for farms & distributors; Designed for safe and efficient egg transportation with secure storage and damage-protection solutions.", "image": "page_9.jpg" }, { "title": "Ice Cream Sales Vehicle", "subtitle": "Cool treats, anywhere you go", "details": "Heavy-duty square tube structure with flex roof, side panels, and opening doors; Foldable SS counters on LH side and rear; Side and rear doors convertible into canopies; Branding panels provided on all four sides; Two 12V tube lights and one electrical charging point; Automotive paint finish matching the vehicle color; FRP/metal aerodynamic canopy above the driver's cabin.", "image": "page_10.jpg" }, { "title": "Delivery Transport Solution", "subtitle": "Smart delivery solution for growing businesses", "details": "Spacious cargo storage; Safe and secure goods transport; Ideal for daily business deliveries; Perfect for small & medium businesses.", "image": "page_10.jpg" }, { "title": "Vacuum Emptier", "subtitle": "Efficient vacuum and sludge handling", "details": "Fresh Water Tank-In FRP/HDPE \u2013 100 Lts.; Sludge Tank-In \u2013 MS 500 Ltrs. (Wall thickness 3 mm.); Auxiliary Engine \u2013 Greaves Make, 5 HP @ 3000 RPM, Air Cooled, 4 Stroke, Diesel Engine; Suction -Through Vacuum Pump; Suction Hose-Heavy duty PVC suction hose with strainer Dia. 50mm & 15 mtrs. Long; Hose Gallows-At rear side of vehicle.", "image": "page_11.jpg" }, { "title": "Rexine Canopy Delivery Truck", "subtitle": "Smart delivery solution for growing businesses", "details": "Heavy-duty square tube frame with covered canopy body; Enclosed cargo area with rexine canopy for weather protection; Lockable rear double door for easy loading and unloading; Spacious body suitable for parcel and goods delivery; Fabricated body painted to match vehicle colour.", "image": "page_11.jpg" }, { "title": "Poultry Transport Unit", "subtitle": "Comfortable and efficient livestock movement", "details": "Ventilated structure for airflow; Animal-friendly transport design; Easy loading & unloading; Suitable for farm operations.", "image": "page_12.jpg" }, { "title": "Garbage Collection Vehicle", "subtitle": "Efficient waste management solution", "details": "Strong and durable body; Easy loading mechanism; Ideal for municipal use; Low maintenance design.", "image": "page_12.jpg" }, { "title": "Mobile Grocery Shop", "subtitle": "Efficient and accessible mobile retail solutions", "details": "Attractive mobile display; Spacious stock storage; Easy customer access; Ideal for roadside sales.", "image": "page_13.jpg" }, { "title": "Food Van", "subtitle": "Ideal for street food operations", "details": "Premium kitchen setup; Optimized storage space; Easy utility access; Ideal for street catering.", "image": "page_13.jpg" }, { "title": "Hydraulic Hopper", "subtitle": "Effortless and rapid bulk material lift", "details": "Heavy-duty hydraulic lift; High-capacity cargo hopper; Swift automated unloading; Ideal for construction materials.", "image": "page_14.jpg" }, { "title": "Soft Drink Carrier", "subtitle": "Secure and optimized beverage crate distribution", "details": "Specialized crate racking; High-capacity load layout; Quick side access; Ideal for beverage distribution.", "image": "page_14.jpg" }]; function openModal(i) { const x = solutions[i]; mimg.src = 'assets/' + x.image; mtitle.textContent = x.title; msub.textContent = x.subtitle; mlist.innerHTML = x.details.split(';').map(v => '<li>' + v + '</li>').join(''); modal.classList.add('open') } function closeModal() { modal.classList.remove('open') } modal.addEventListener('click', e => { if (e.target === modal) closeModal() }); document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal() }); search.addEventListener('input', () => { const q = search.value.toLowerCase(); document.querySelectorAll('.card').forEach(c => c.style.display = c.dataset.title.includes(q) ? 'block' : 'none') })</script>
+    <script>
+        const solutions = [{ "title": "Vegetable Shop Vehicle", "subtitle": "Fresh produce delivered efficiently", "details": "Attractive mobile vegetable display; Spacious storage for fresh produce; Easy customer access and serving; Ideal for roadside and mobile vegetable sales.", "image": "page_5.jpg" }, { "title": "Fish Delivery Vehicle", "subtitle": "Fresh seafood, delivered and displayed on the move", "details": "Hygienic display and storage area; Designed to maintain product freshness; Convenient customer-serving setup; Ideal for mobile fish retail businesses.", "image": "page_5.jpg" }, { "title": "Bakery Mobile Unit", "subtitle": "Freshness Delivered Anywhere", "details": "Clear glass display for better product visibility; Strong body protects products from sun and rain; Easy to drive in small roads and busy areas; Attractive branding design to catch customer attention; Designed for efficient mobile bakery operations with smart storage and customer-friendly display solutions.", "image": "page_6.jpg" }, { "title": "Gas Cylinder Carrier", "subtitle": "Built for strength and safety", "details": "Heavy-duty load capacity; Secure cylinder holding system; Safe and stable transportation; Designed for commercial distribution; Designed for safe and efficient gas cylinder transportation with secure storage and reliable delivery solutions.", "image": "page_7.jpg" }, { "title": "Milk Tankers", "subtitle": "Food-grade insulated transport", "details": "Outer Shell will be in M.S. Sheet; Inner Shell will be in SS 304 food grade; Insulation will be provided between inner & outer panels; Manhole will be provided with S.S. Lid.", "image": "page_8.jpg" }, { "title": "Egg Transport Solution", "subtitle": "Safe delivery for delicate products", "details": "Shock-resistant rack system; Safe and secure transport; Reduces egg breakage; Ideal for farms & distributors; Designed for safe and efficient egg transportation with secure storage and damage-protection solutions.", "image": "page_9.jpg" }, { "title": "Ice Cream Sales Vehicle", "subtitle": "Cool treats, anywhere you go", "details": "Heavy-duty square tube structure with flex roof, side panels, and opening doors; Foldable SS counters on LH side and rear; Side and rear doors convertible into canopies; Branding panels provided on all four sides; Two 12V tube lights and one electrical charging point; Automotive paint finish matching the vehicle color; FRP/metal aerodynamic canopy above the driver's cabin.", "image": "page_10.jpg" }, { "title": "Delivery Transport Solution", "subtitle": "Smart delivery solution for growing businesses", "details": "Spacious cargo storage; Safe and secure goods transport; Ideal for daily business deliveries; Perfect for small & medium businesses.", "image": "page_10.jpg" }, { "title": "Vacuum Emptier", "subtitle": "Efficient vacuum and sludge handling", "details": "Fresh Water Tank-In FRP/HDPE \u2013 100 Lts.; Sludge Tank-In \u2013 MS 500 Ltrs. (Wall thickness 3 mm.); Auxiliary Engine \u2013 Greaves Make, 5 HP @ 3000 RPM, Air Cooled, 4 Stroke, Diesel Engine; Suction -Through Vacuum Pump; Suction Hose-Heavy duty PVC suction hose with strainer Dia. 50mm & 15 mtrs. Long; Hose Gallows-At rear side of vehicle.", "image": "page_11.jpg" }, { "title": "Rexine Canopy Delivery Truck", "subtitle": "Smart delivery solution for growing businesses", "details": "Heavy-duty square tube frame with covered canopy body; Enclosed cargo area with rexine canopy for weather protection; Lockable rear double door for easy loading and unloading; Spacious body suitable for parcel and goods delivery; Fabricated body painted to match vehicle colour.", "image": "page_11.jpg" }, { "title": "Poultry Transport Unit", "subtitle": "Comfortable and efficient livestock movement", "details": "Ventilated structure for airflow; Animal-friendly transport design; Easy loading & unloading; Suitable for farm operations.", "image": "page_12.jpg" }, { "title": "Garbage Collection Vehicle", "subtitle": "Efficient waste management solution", "details": "Strong and durable body; Easy loading mechanism; Ideal for municipal use; Low maintenance design.", "image": "page_12.jpg" }, { "title": "Mobile Grocery Shop", "subtitle": "Efficient and accessible mobile retail solutions", "details": "Attractive mobile display; Spacious stock storage; Easy customer access; Ideal for roadside sales.", "image": "page_13.jpg" }, { "title": "Food Van", "subtitle": "Ideal for street food operations", "details": "Premium kitchen setup; Optimized storage space; Easy utility access; Ideal for street catering.", "image": "page_13.jpg" }, { "title": "Hydraulic Hopper", "subtitle": "Effortless and rapid bulk material lift", "details": "Heavy-duty hydraulic lift; High-capacity cargo hopper; Swift automated unloading; Ideal for construction materials.", "image": "page_14.jpg" }, { "title": "Soft Drink Carrier", "subtitle": "Secure and optimized beverage crate distribution", "details": "Specialized crate racking; High-capacity load layout; Quick side access; Ideal for beverage distribution.", "image": "page_14.jpg" }];
+
+        const modal = document.getElementById("modal");
+        const mimg = document.getElementById("mimg");
+        const mtitle = document.getElementById("mtitle");
+        const msub = document.getElementById("msub");
+        const mlist = document.getElementById("mlist");
+        const search = document.getElementById("search");
+
+        const menuBtn = document.getElementById("menuBtn");
+        const navLinks = document.getElementById("navLinks");
+
+        /* Mobile navigation */
+        menuBtn.addEventListener("click", () => {
+            const isOpen = navLinks.classList.toggle("active");
+            menuBtn.setAttribute("aria-expanded", String(isOpen));
+            menuBtn.textContent = isOpen ? "×" : "☰";
+        });
+
+        document.querySelectorAll(".navlinks a").forEach(link => {
+            link.addEventListener("click", () => {
+                navLinks.classList.remove("active");
+                menuBtn.setAttribute("aria-expanded", "false");
+                menuBtn.textContent = "☰";
+            });
+        });
+
+        /* Solution modal */
+        function openModal(i) {
+            const x = solutions[i];
+
+            mimg.src = "assets/" + x.image;
+            mimg.alt = x.title;
+            mtitle.textContent = x.title;
+            msub.textContent = x.subtitle;
+
+            mlist.innerHTML = x.details
+                .split(";")
+                .map(v => "<li>" + v.trim() + "</li>")
+                .join("");
+
+            modal.classList.add("open");
+            modal.setAttribute("aria-hidden", "false");
+            document.body.style.overflow = "hidden";
+        }
+
+        function closeModal() {
+            modal.classList.remove("open");
+            modal.setAttribute("aria-hidden", "true");
+            document.body.style.overflow = "";
+        }
+
+        modal.addEventListener("click", e => {
+            if (e.target === modal) closeModal();
+        });
+
+        document.addEventListener("keydown", e => {
+            if (e.key === "Escape" && modal.classList.contains("open")) {
+                closeModal();
+            }
+        });
+
+        /* Search */
+        search.addEventListener("input", () => {
+            const q = search.value.toLowerCase().trim();
+
+            document.querySelectorAll(".card").forEach(card => {
+                card.style.display =
+                    card.dataset.title.toLowerCase().includes(q) ? "" : "none";
+            });
+        });
+
+        /* Scroll reveal animations */
+        const animatedItems = document.querySelectorAll(
+            ".section-head, .stat, .card, .gallery, .cta, footer"
+        );
+
+        animatedItems.forEach((item, index) => {
+            item.classList.add("reveal");
+
+            if (item.classList.contains("card")) {
+                item.style.setProperty("--delay", `${(index % 3) * 0.08}s`);
+            }
+        });
+
+        if ("IntersectionObserver" in window) {
+            const observer = new IntersectionObserver(
+                entries => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add("visible");
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                },
+                {
+                    threshold: 0.12,
+                    rootMargin: "0px 0px -40px 0px"
+                }
+            );
+
+            animatedItems.forEach(item => observer.observe(item));
+        } else {
+            animatedItems.forEach(item => item.classList.add("visible"));
+        }
+    </script>
 </body>
 
 </html>
